@@ -25,6 +25,25 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    # eas build --platform ios
 ```
 
+## Firebase App Hosting (Test Local)
+```
+   # npm install -g firebase-tools
+   # firebase login
+   # firebase init
+   
+   Then select the following:
+   - Hosting (use spacebar to select, then enter)
+   - Choose "Use an existing project"
+   - Select your Firebase project from the list
+   - For "public directory", enter: web-build
+   - Configure as a single-page app? → Yes
+   - Set up automatic builds and deploys with GitHub? → No (we’ll do this manually with GitHub Actions)
+   - Overwrite index.html? → No
+
+   # npx expo export --platform web --output-dir web-public
+   # firebase serve
+```
+
 ## Get started
 
 1. Install dependencies
