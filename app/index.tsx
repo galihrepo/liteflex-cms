@@ -9,7 +9,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Ruanggratis COMING SOON by ex-ruangguru omgals.</Text>
+      <Text>Ruanggratis COMING SOON by ex-ruangguru.</Text>
     </View>
   );
 }
