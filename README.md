@@ -4,10 +4,25 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## TLDR
 ```
-   npx create-expo-app lite-flex-ic
-   cd lite-flex-ic
-   nvm use 20.18.3
-   npm run start
+   # npx create-expo-app lite-flex-ic
+   # cd lite-flex-ic
+   # nvm use 20.18.3
+   # npm run start
+```
+
+## EAS
+```
+   - enable hermes in app.json or app.config.js
+   {
+      "expo": {
+         "jsEngine": "hermes"
+      }
+   }
+   
+   # yarn global add eas-cli
+   # eas login -> register no account then register https://expo.dev/signup.
+   # eas build --platform android
+   # eas build --platform ios
 ```
 
 ## Get started
