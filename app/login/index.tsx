@@ -8,10 +8,10 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: theme.colors.primary
+        backgroundColor: theme.colors.secondary,
       }}
     >
-      <Text>Ruanggratis COMING SOON by ex-ruangguru.</Text>
+      <Text>Login PAGE</Text>
     </View>
   );
 }

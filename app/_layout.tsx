@@ -1,5 +1,10 @@
+import { ConfigProvider } from "@/core/ConfigContext";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <ConfigProvider>
+      <Stack/>
+    </ConfigProvider>
+  );
 }
