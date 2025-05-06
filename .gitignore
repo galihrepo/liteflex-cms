@@ -40,3 +40,6 @@ app-example
 
 # firebase
 web-public
+
+# config whitelabel
+.env
