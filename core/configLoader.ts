@@ -1,17 +1,17 @@
 import Constants from "expo-constants";
-// import themeA from "../../dealers/dealerA/theme";
-// import configA from "../../dealers/dealerA/config";
-// import themeB from "../../dealers/dealerB/theme";
-// import configB from "../../dealers/dealerB/config";
+import configDemoDealer from '../dealers/demodealers/config';
+import themeDemoDealer from '../dealers/demodealers/theme';
+import configOmgalsMotor from '../dealers/omgal-motors/config';
+import themeOmgalsMotor from '../dealers/omgal-motors/theme';
 
 export const configLoader = () => {
   const key = Constants.expoConfig?.extra?.dealer;
-console.log('BERAK key : ', key);
-//   switch (key) {
-//     case "omgals":
-//       return { theme: themeB, config: configB };
-//     case "dealerA":
-//     default:
-//       return { theme: themeA, config: configA };
-//   }
+  switch (key) {
+    case "omgal-motors":
+      return { theme: themeOmgalsMotor, config: configOmgalsMotor };
+    case "demodealers":
+      return { theme: themeDemoDealer, config: configDemoDealer };
+    default:
+      return { theme: themeDemoDealer, config: configDemoDealer };
+  }
 };

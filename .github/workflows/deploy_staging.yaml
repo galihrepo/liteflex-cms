@@ -13,6 +13,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      DEALER: ${{ github.event.inputs.dealer }}
+
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v3

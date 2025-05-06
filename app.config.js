@@ -1,13 +1,14 @@
 export default ({ config }) => {
     const dealer = process.env.DEALER || "omgal-motors";
   
+    console.log('BERAK APP CONFIG JS : ', dealer);
     return {
       ...config,
       name: dealer,
       slug: "lite-flex-ic",
       version: "1.0.0",
       orientation: "portrait",
-      icon: `./assets/images/dealers/${dealer}/icon.png`,
+      icon: `./assets/images/dealers/${dealer}/favicon.png`,
       scheme: "liteflexic",
       userInterfaceStyle: "automatic",
       newArchEnabled: true,
@@ -30,7 +31,7 @@ export default ({ config }) => {
       web: {
         bundler: "metro",
         output: "static",
-        favicon: `./assets/images/dealers/${dealer}/favicon.png`
+        favicon: `./assets/images/dealers/${dealer}/favicon.png`,
       },
       plugins: [
         "expo-router",
