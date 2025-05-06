@@ -12,7 +12,10 @@ on:
         dealer:
           description: 'Dealer'
           required: true
-          default: 'omgal-motors'
+          type: choice
+          options:
+            - 'omgal-motors'
+            - 'demodealers'
 
 jobs:
   deploy:
@@ -32,6 +35,9 @@ jobs:
 
       - name: 📦 Install dependencies
         run: npm install
+
+      - name: Create .env file
+        run: echo "DEALER=${{ env.DEALER }}" > .env
 
       - name: 🏗️ Build Expo web project
         run: npx expo export --platform web --output-dir web-build
