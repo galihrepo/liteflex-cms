@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "flexlite-e8436"
-  }
+  },
+  "targets": {
+    "flexlite-e8436": {
+      "hosting": {
+        "production": [
+          "flexlite-e8436"
+        ],
+        "staging": [
+          "liteflexdemo"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
