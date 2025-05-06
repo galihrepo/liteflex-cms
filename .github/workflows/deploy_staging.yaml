@@ -7,7 +7,12 @@ name: Deploy to Staging
 #      - main
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+        dealer:
+          description: 'Dealer'
+          required: true
+          default: 'omgal-motors'
 
 jobs:
   deploy:
