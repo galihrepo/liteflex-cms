@@ -1,7 +1,6 @@
 export default ({ config }) => {
     const dealer = process.env.DEALER || "omgal-motors";
-  
-    console.log('BERAK APP CONFIG JS : ', dealer);
+    
     return {
       ...config,
       name: dealer,
@@ -31,7 +30,8 @@ export default ({ config }) => {
       web: {
         bundler: "metro",
         output: "static",
-        favicon: `./assets/images/dealers/${dealer}/favicon.png`,
+        // favicon: `./assets/images/dealers/${dealer}/favicon.png`,
+        favicon: "./favicon.ico" 
       },
       plugins: [
         "expo-router",
