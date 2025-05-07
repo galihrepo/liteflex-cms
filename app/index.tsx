@@ -1,9 +1,10 @@
-import { useConfig } from "@/core/ConfigContext";
-import { Text, View } from "react-native";
+import TextThemed from "@/components/TextThemed";
+import { useConfig } from "@/config/ConfigContext";
+import { View } from "react-native";
 
 
 export default function Index() {  
-  const { theme } = useConfig();
+  const { theme, config } = useConfig();
   return (
     <View
       style={{
@@ -13,7 +14,8 @@ export default function Index() {
         backgroundColor: theme?.colors?.primary || '',
       }}
     >
-      <Text>Ruanggratis COMING SOON by ex-ruanggurus</Text>
+      <TextThemed>Ruanggratis COMING SOON by ex-ruanggurus {config.supportEmail} </TextThemed>
+      
     </View>
   );
 }

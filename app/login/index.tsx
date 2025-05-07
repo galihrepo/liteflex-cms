@@ -1,4 +1,4 @@
-import { useConfig } from "@/core/ConfigContext";
+import { useConfig } from "@/config/ConfigContext";
 import { Text, View } from "react-native";
 
 export default function Index() {

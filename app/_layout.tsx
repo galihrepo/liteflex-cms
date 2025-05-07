@@ -1,18 +1,33 @@
 import MobileHeader from "@/components/headers/MobileHeader";
 import WebHeader from "@/components/headers/WebHeader";
-import { ConfigProvider } from "@/core/ConfigContext";
+import { ConfigProvider } from "@/config/ConfigContext";
+import { configLoader } from "@/config/configLoader";
+import { AppTheme, createAppTheme } from "@/config/createTheme";
+import { ThemeProvider, useTheme } from "@shopify/restyle";
 import { Stack } from "expo-router";
 import { Platform } from "react-native";
 
-export default function RootLayout() {
-  const isWeb = Platform.OS === "web";
+const config = configLoader();
+const theme = createAppTheme(config.theme);
 
+function LayoutWithTheme() {
+  const isWeb = Platform.OS === "web";
+  const theme = useTheme<AppTheme>();
+  return (
+    <Stack
+      screenOptions={{
+      header: () => isWeb ? <WebHeader /> : <MobileHeader />,
+    }}/>
+  );
+}
+
+export default function RootLayout() {
+  
   return (
     <ConfigProvider>
-      <Stack
-        screenOptions={{
-          header: () => isWeb ? <WebHeader /> : <MobileHeader />,
-        }}/>
+      <ThemeProvider theme={theme}>
+        <LayoutWithTheme/>
+      </ThemeProvider>
     </ConfigProvider>
   );
 }
