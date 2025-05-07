@@ -30,8 +30,8 @@ export default ({ config }) => {
       web: {
         bundler: "metro",
         output: "static",
-        // favicon: `./assets/images/dealers/${dealer}/favicon.png`,
-        favicon: "./favicon.ico" 
+        favicon: `./assets/images/dealers/${dealer}/favicon.png`
+        // favicon: "./favicon.ico" 
       },
       plugins: [
         "expo-router",
