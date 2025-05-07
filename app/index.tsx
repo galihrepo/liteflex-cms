@@ -13,7 +13,7 @@ export default function Index() {
         backgroundColor: theme?.colors?.primary || '',
       }}
     >
-      <Text>Ruanggratis COMING SOON by ex-ruangguru.</Text>
+      <Text>Ruanggratis COMING SOON by ex-ruanggurus</Text>
     </View>
   );
 }
