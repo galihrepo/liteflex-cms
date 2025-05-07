@@ -31,7 +31,6 @@ export default ({ config }) => {
         bundler: "metro",
         output: "static",
         favicon: `./assets/images/dealers/${dealer}/favicon.png`
-        // favicon: "./favicon.ico" 
       },
       plugins: [
         "expo-router",
