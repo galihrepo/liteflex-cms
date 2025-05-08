@@ -4,13 +4,18 @@ export interface BaseThemeType {
       secondary?: string;
       background?: string;
       text?: string;
-      danger?: string;
+      textHint?: string;
     };
   }
   
   export interface BaseConfigType {
     appName: string;
     supportEmail: string;
+    assets: BaseConfigAssetsType;
+  }
+
+  export interface BaseConfigAssetsType {
+    logoUrl: string;
   }
 
   export interface DealerConfig {

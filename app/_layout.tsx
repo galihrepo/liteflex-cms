@@ -1,32 +1,36 @@
-import MobileHeader from "@/components/headers/MobileHeader";
-import WebHeader from "@/components/headers/WebHeader";
+import { Toolbar } from "@/components/Toolbar";
 import { ConfigProvider } from "@/config/ConfigContext";
 import { configLoader } from "@/config/configLoader";
-import { AppTheme, createAppTheme } from "@/config/createTheme";
+import { AppTheme, createAppTheme } from "@/config/theme";
+import { isWeb } from "@/utils/utils";
 import { ThemeProvider, useTheme } from "@shopify/restyle";
 import { Stack } from "expo-router";
-import { Platform } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 const config = configLoader();
 const theme = createAppTheme(config.theme);
 
 function LayoutWithTheme() {
-  const isWeb = Platform.OS === "web";
   const theme = useTheme<AppTheme>();
   return (
     <Stack
-      screenOptions={{
-      header: () => isWeb ? <WebHeader /> : <MobileHeader />,
+      screenOptions={{                
+        header: () => isWeb ? <Toolbar /> : (
+          <SafeAreaView>
+            <Toolbar />
+          </SafeAreaView>
+        ),      
     }}/>
   );
 }
 
 export default function RootLayout() {
-  
   return (
     <ConfigProvider>
       <ThemeProvider theme={theme}>
-        <LayoutWithTheme/>
+        <SafeAreaProvider>
+          <LayoutWithTheme />
+        </SafeAreaProvider>
       </ThemeProvider>
     </ConfigProvider>
   );

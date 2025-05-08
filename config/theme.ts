@@ -20,18 +20,17 @@ export const createAppTheme = (baseThemeType: BaseThemeType) =>
     },
     textVariants: {
       defaults: {
-        fontSize: 26,
-        color: 'secondary',
+        fontSize: 16,
+        color: 'text',
       },
       header: {
-        fontSize: 24,
+        fontSize: 14,
         fontWeight: 'bold',
-        color: 'primary',
-      },
+      },      
     },
     breakpoints: {
       phone: 0,
-      tablet: 768,
+      desktop: 768,
     },
   });
 

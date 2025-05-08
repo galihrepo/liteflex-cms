@@ -5,8 +5,8 @@ import demodealersTheme from '../dealers/demodealers/theme';
 import omgalMotorsConfig from '../dealers/omgal-motors/config';
 import omgalMotorsTheme from '../dealers/omgal-motors/theme';
 
-import { baseConfig } from './baseConfig';
-import { baseTheme } from './baseTheme';
+import { baseConfig } from './defaultConfig';
+import { baseTheme } from './defaultTheme';
 
 const DEALER = process.env.DEALER || 'demodealers';
 

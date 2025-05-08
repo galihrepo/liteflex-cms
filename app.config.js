@@ -23,7 +23,8 @@ export default ({ config }) => {
         edgeToEdgeEnabled: true,
         package: `com.liteflexic.${dealer}`,
         adaptiveIcon: {
-          foregroundImage: `./assets/images/dealers/${dealer}/adaptive-icon.png`,
+          // foregroundImage: `./assets/images/dealers/${dealer}/adaptive-icon.png`,
+          foregroundImage: `./assets/images/adaptive-icon.png`,
           backgroundColor: "#ffffff"
         }
       },

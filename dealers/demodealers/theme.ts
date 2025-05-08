@@ -2,8 +2,8 @@ import { BaseThemeType } from '../../config/types';
 
 const theme: Partial<BaseThemeType> = {
   colors: {
-    primary: '#34a832',
-    secondary: '#32a898',
+    primary: '#FFFFFF',
+    secondary: '#F6F7F9',
   },
 };
 

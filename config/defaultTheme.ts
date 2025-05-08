@@ -4,8 +4,8 @@ export const baseTheme: BaseThemeType = {
     colors: {
       primary: '#007AFF',
       secondary: '#888',
-      background: '#fff',
+      background: '#ED3F3F',
       text: '#000',
-      danger: '#FF3B30',
+      textHint: '#596780',
     },
   };
