@@ -14,18 +14,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-        console.log('BERAK firebaseUser : ', firebaseUser)
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {        
       setUser(firebaseUser);
       setLoading(false);
     });
 
     return unsubscribe;
   }, []);
-
-  useEffect(() => {
-    console.log('BERAK auth : ', auth);
-  }, [auth])
 
   return (
     <AuthContext.Provider value={{ user, loading }}>

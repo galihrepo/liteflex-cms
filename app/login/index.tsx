@@ -1,20 +1,19 @@
 import { auth } from "@/config/configFirebase";
-import { useGoogleLogin } from "@/hooks/useGoogleAuth";
 import { handleGoogleLogin } from "@/hooks/useGoogleLogin";
 import { signOut } from "firebase/auth";
+import { useCallback } from "react";
 import { Button, Text, View } from "react-native";
 
 export default function Index() {
-  const { promptAsync } = useGoogleLogin();
 
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     try {
-      await signOut(auth); // This signs the user out
+      await signOut(auth);
       console.log('User logged out');
     } catch (error) {
       console.error('Error during logout: ', error);
     }
-  };
+  }, []);
 
   return (
     <View
