@@ -4,8 +4,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## TLDR
 ```
-   # npx create-expo-app lite-flex-ic
-   # cd lite-flex-ic
+   # npx create-expo-app lite-flex-cms
+   # cd lite-flex-cms
    # nvm use 20.18.3
    # npm run start
 ```

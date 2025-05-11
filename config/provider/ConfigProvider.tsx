@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext } from "react";
-import { configLoader } from "./configLoader";
+import { configLoader } from "../configLoader";
 
 const ConfigContext = createContext(configLoader());
 

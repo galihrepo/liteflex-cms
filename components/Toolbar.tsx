@@ -1,5 +1,5 @@
-import { useConfig } from "@/config/ConfigContext";
-import { useIsPhone } from "@/utils/utils";
+import { useConfig } from "@/config/provider/ConfigProvider";
+import { useIsPhone } from "@/hooks/useIsPhone";
 import { Feather } from '@expo/vector-icons';
 import { memo } from "react";
 import { Box, Text } from "./componentsTheme";

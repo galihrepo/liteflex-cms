@@ -1,5 +1,5 @@
 import { Text } from "@/components/componentsTheme";
-import { useConfig } from "@/config/ConfigContext";
+import { useConfig } from "@/config/provider/ConfigProvider";
 import { View } from "react-native";
 
 
