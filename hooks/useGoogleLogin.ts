@@ -1,4 +1,5 @@
 import { auth } from '@/config/configFirebase';
+import { saveUser } from '@/services/user';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 export const handleGoogleLogin = async () => {
@@ -6,8 +7,7 @@ export const handleGoogleLogin = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    console.log('Logged in user: ', user);
-    // need redirect to home perhaps
+    saveUser(user);
   } catch (error) {
     console.error('Error during Google login: ', error);
   }
