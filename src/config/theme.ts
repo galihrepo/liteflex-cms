@@ -1,5 +1,5 @@
 import { createTheme } from '@shopify/restyle';
-import { BaseThemeType } from './types';
+import { BaseThemeType } from '../types/config/BaseThemeType';
 
 export const createAppTheme = (baseThemeType: BaseThemeType) =>
   createTheme({

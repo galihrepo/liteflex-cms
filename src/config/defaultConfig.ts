@@ -1,4 +1,5 @@
-import { BaseConfigAssetsType, BaseConfigType } from "./types";
+import { BaseConfigAssetsType } from "../types/config/BaseConfigAssetsType";
+import { BaseConfigType } from "../types/config/BaseConfigType";
 
 const baseAssets: BaseConfigAssetsType = {
   logoUrl: '',

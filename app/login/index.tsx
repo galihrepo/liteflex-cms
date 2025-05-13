@@ -1,11 +1,22 @@
-import { auth } from "@/config/configFirebase";
-import { handleGoogleLogin } from "@/hooks/useGoogleLogin";
+import { handleGoogleLogin } from "@/src/hooks/useGoogleLogin";
+import { useRouter } from "expo-router";
 import { signOut } from "firebase/auth";
 import { useCallback } from "react";
 import { Button, Text, View } from "react-native";
+import { auth } from "../../src/config/configFirebase";
 
 export default function Index() {
 
+  const router = useRouter();
+
+  const onSuccess = useCallback(() => {
+    router.back()
+  }, [router])
+
+  const onError = useCallback(() => {
+
+  }, [])
+  
   const handleLogout = useCallback(async () => {
     try {
       await signOut(auth);
@@ -24,7 +35,7 @@ export default function Index() {
       }}
     >
       <Text>Login PAGE</Text>
-      <Button title="Login" onPress={() => handleGoogleLogin()} />
+      <Button title="Login" onPress={() => handleGoogleLogin({auth, onSuccess})} />
       <Button title="Logout" onPress={() => handleLogout()} />
     </View>
   );

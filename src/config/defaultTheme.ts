@@ -1,4 +1,4 @@
-import { BaseThemeType } from "./types";
+import { BaseThemeType } from "../types/config/BaseThemeType";
 
 export const baseTheme: BaseThemeType = {
     colors: {
