@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 export default ({ config }) => {
     const dealer = process.env.DEALER || "omgal-motors";
     
@@ -53,7 +55,7 @@ export default ({ config }) => {
         eas: {
           projectId: "68603bcf-8374-493a-833b-08139626c73c"
         },
-        dealer
+        DEALER: dealer
       }
     };
   };

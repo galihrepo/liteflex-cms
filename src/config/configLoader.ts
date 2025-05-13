@@ -9,7 +9,9 @@ import { DealerConfig } from '../types/config/DealerConfig';
 import { baseConfig } from './defaultConfig';
 import { baseTheme } from './defaultTheme';
 
-const DEALER = process.env.DEALER || 'demodealers';
+import Constants from 'expo-constants';
+
+const DEALER = Constants.expoConfig?.extra?.DEALER;
 
 const mergeTheme = (themeOverride?: Partial<BaseThemeType>): BaseThemeType => ({
   colors: {

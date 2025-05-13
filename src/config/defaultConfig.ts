@@ -6,6 +6,7 @@ const baseAssets: BaseConfigAssetsType = {
 }
 
 export const baseConfig: BaseConfigType = {
+    firestoreDocIdDealers: '',
     appName: 'LiteFlex',
     supportEmail: 'support@liteflex.app',
     assets: baseAssets,

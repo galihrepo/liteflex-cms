@@ -6,6 +6,7 @@ const assets: BaseConfigAssetsType = {
 };
 
 const config: Partial<BaseConfigType> = {
+  firestoreDocIdDealers: 'demodealers',
   appName: 'Demo Dealers',
   assets: assets,
 };
