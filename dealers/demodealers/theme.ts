@@ -1,4 +1,4 @@
-import { BaseThemeType } from '../../config/types';
+import { BaseThemeType } from "@/src/types/config/BaseThemeType";
 
 const theme: Partial<BaseThemeType> = {
   colors: {
