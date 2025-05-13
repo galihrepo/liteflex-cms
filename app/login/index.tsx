@@ -1,17 +1,35 @@
+import { showAlert } from "@/src/components/componentsTheme";
+import { useConfig } from "@/src/config/provider/ConfigProvider";
 import { handleGoogleLogin } from "@/src/hooks/useGoogleLogin";
+import { saveUser } from "@/src/services/userService";
 import { useRouter } from "expo-router";
-import { signOut } from "firebase/auth";
+import { signOut, User } from "firebase/auth";
 import { useCallback } from "react";
 import { Button, Text, View } from "react-native";
 import { auth } from "../../src/config/configFirebase";
 
 export default function Index() {
 
+  const config = useConfig();
+
   const router = useRouter();
 
-  const onSuccess = useCallback(() => {
-    router.back()
-  }, [router])
+  const onRegistered = useCallback(()=>{
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace("/");
+    }
+  },[])
+
+  const onUnregistered = useCallback(()=>{
+    handleLogout()
+    showAlert('Email belum terdaftar.')
+  },[])
+
+  const onSuccess = useCallback(async (user: User) => {
+    await saveUser({user, config, onRegistered, onUnregistered})    
+  }, [])
 
   const onError = useCallback(() => {
 
@@ -34,8 +52,8 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Login PAGE</Text>
-      <Button title="Login" onPress={() => handleGoogleLogin({auth, onSuccess})} />
+      <Text>Login PAGE -- {config?.config?.firestoreDocIdDealers} </Text>
+      <Button title="Login" onPress={() => handleGoogleLogin({auth, onSuccess, onError})} />
       <Button title="Logout" onPress={() => handleLogout()} />
     </View>
   );

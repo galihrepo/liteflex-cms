@@ -1,10 +1,9 @@
 
-import { saveUser } from '@/src/services/user';
-import { Auth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { Auth, GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
 
 interface GoogleLoginProps {
   auth: Auth;
-  onSuccess: () => void;
+  onSuccess: (user: User) => void;
   onError?: (error: unknown) => void;
 }
 
@@ -14,8 +13,7 @@ export const handleGoogleLogin = async (props: GoogleLoginProps) => {
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    await saveUser(user);
-    onSuccess();
+    onSuccess(user);
   } catch (error) {
     onError?.(error)
   }
