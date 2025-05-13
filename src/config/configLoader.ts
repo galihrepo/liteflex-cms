@@ -1,9 +1,10 @@
-import { BaseConfigType, BaseThemeType, DealerConfig } from './types';
-
-import demodealersConfig from '../dealers/demodealers/config';
-import demodealersTheme from '../dealers/demodealers/theme';
-import omgalMotorsConfig from '../dealers/omgal-motors/config';
-import omgalMotorsTheme from '../dealers/omgal-motors/theme';
+import demodealersConfig from '../../dealers/demodealers/config';
+import demodealersTheme from '../../dealers/demodealers/theme';
+import omgalMotorsConfig from '../../dealers/omgal-motors/config';
+import omgalMotorsTheme from '../../dealers/omgal-motors/theme';
+import { BaseConfigType } from '../types/config/BaseConfigType';
+import { BaseThemeType } from '../types/config/BaseThemeType';
+import { DealerConfig } from '../types/config/DealerConfig';
 
 import { baseConfig } from './defaultConfig';
 import { baseTheme } from './defaultTheme';

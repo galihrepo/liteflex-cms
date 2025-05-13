@@ -1,7 +1,7 @@
 import Constants from 'expo-constants';
 import { User } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../config/configFirebase";
+import { db } from '../config/configFirebase';
 
 export const saveUser = async (user: User) => {
   if (!user) return;
