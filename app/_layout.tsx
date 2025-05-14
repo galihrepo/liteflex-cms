@@ -15,22 +15,10 @@ const theme = createAppTheme(config.theme);
 function LayoutWithTheme() {
   const { user, loading } = useAuth();
   const router = useRouter();
-
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-  //       if (firebaseUser) {
-          
-  //       } else {
-  //         router.replace('/login');
-  //       }
-  //   });
-
-  //   return unsubscribe;
-  // }, []);
   
   useEffect(() => {
     if (!loading && !user) {
-      router.replace('/login');
+      router.push('/login');
     }
   }, [loading, user, router]);
 

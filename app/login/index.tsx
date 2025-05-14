@@ -18,7 +18,7 @@ export default function Index() {
     if (router.canGoBack()) {
       router.back();
     } else {
-      router.replace("/");
+      router.replace('/');
     }
   },[])
 
@@ -53,7 +53,7 @@ export default function Index() {
       }}
     >
       <Text>Login PAGE -- {config?.config?.firestoreDocIdDealers} </Text>
-      <Button title="Login" onPress={() => handleGoogleLogin({auth, onSuccess, onError})} />
+      <Button title="Login" onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
       <Button title="Logout" onPress={() => handleLogout()} />
     </View>
   );
