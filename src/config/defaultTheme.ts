@@ -7,5 +7,6 @@ export const baseTheme: BaseThemeType = {
       background: '#ED3F3F',
       text: '#000',
       textHint: '#596780',
+      toolbar: 'red'
     },
   };

@@ -17,7 +17,7 @@ export const Toolbar = () => {
     const MemoizedImageLogo = memo(ImageLogo);
 
     return (        
-        <Box flexDirection={{ phone: 'column-reverse', desktop: 'row'}} p={{ phone: 's', desktop: 'm'}} backgroundColor={'primary'}>
+        <Box flexDirection={{ phone: 'column-reverse', desktop: 'row'}} p={{ phone: 's', desktop: 'm'}} backgroundColor={'toolbar'}>
             <Box flexDirection={"row"} flex={1} alignItems={'center'}>
                 {!isPhone && <MemoizedImageLogo />}
                 <Box 

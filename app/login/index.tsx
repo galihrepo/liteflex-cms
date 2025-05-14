@@ -1,25 +1,22 @@
 import { showAlert } from "@/src/components/componentsTheme";
+import MemoizedImage from "@/src/components/MemoizedImage";
 import { useConfig } from "@/src/config/provider/ConfigProvider";
 import { handleGoogleLogin } from "@/src/hooks/useGoogleLogin";
 import { saveUser } from "@/src/services/userService";
 import { useRouter } from "expo-router";
 import { signOut, User } from "firebase/auth";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { Button, Text, View } from "react-native";
 import { auth } from "../../src/config/configFirebase";
 
 export default function Index() {
 
-  const config = useConfig();
+  const { config}  = useConfig();
 
   const router = useRouter();
 
   const onRegistered = useCallback(()=>{
-    if (router.canGoBack()) {
-      router.back();
-    } else {
-      router.replace('/');
-    }
+    router?.push('/');
   },[])
 
   const onUnregistered = useCallback(()=>{
@@ -44,17 +41,26 @@ export default function Index() {
     }
   }, []);
 
+  const ImageLogo = () => (<MemoizedImage uri={config?.assets?.logoUrl} width={50} height={50} />);
+
+  const MemoizedImageLogo = memo(ImageLogo);
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Login PAGE -- {config?.config?.firestoreDocIdDealers} </Text>
-      <Button title="Login" onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
-      <Button title="Logout" onPress={() => handleLogout()} />
-    </View>
+    <View style={{ flex: 1, justifyContent: 'center'}}>
+
+      <View
+        style={{        
+          alignItems: "center",        
+          backgroundColor: 'white',
+          alignSelf: 'center',                
+          padding: 20,
+          borderRadius: 10
+        }}
+      >
+        <Text>Login PAGE -- {config?.firestoreDocIdDealers} </Text>
+        <Button title="Login" onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
+        <Button title="Logout" onPress={() => handleLogout()} />
+      </View>
+    </View>    
   );
 }

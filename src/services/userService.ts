@@ -2,11 +2,11 @@ import { User } from "firebase/auth";
 import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db } from '../config/configFirebase';
 import { COLLECTIONS } from '../contants/firestore';
-import { DealerConfig } from '../types/config/DealerConfig';
+import { BaseConfigType } from "../types/config/BaseConfigType";
 
 interface UserProps {
   user: User;
-  config: DealerConfig;
+  config: BaseConfigType;
   onRegistered: () => void;
   onUnregistered: () => void;
 }
@@ -17,7 +17,7 @@ export const saveUser = async (props: UserProps) => {
   if (!user) return;
 
   try {
-    const firestoreDocIdDealers = config?.config?.firestoreDocIdDealers;
+    const firestoreDocIdDealers = config?.firestoreDocIdDealers;
 
     const collectionEmployee = collection(db, COLLECTIONS.EMPLOYEE);
 

@@ -5,5 +5,6 @@ export interface BaseThemeType {
       background?: string;
       text?: string;
       textHint?: string;
+      toolbar?: string;
     };
   }
