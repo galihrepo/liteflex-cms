@@ -9,5 +9,6 @@ export interface BaseThemeType {
       textButton?: string;
       shadow?: string;
       border?: string;
+      icon?: string;
     };
   }

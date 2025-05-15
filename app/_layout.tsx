@@ -1,14 +1,13 @@
+import DrawerNavigator from "@/src/components/DrawerNavigator";
 import { createAppTheme } from "@/src/components/theme/theme";
-import { Toolbar } from "@/src/components/Toolbar";
 import { configLoader } from "@/src/config/configLoader";
 import { AuthProvider, useAuth } from "@/src/config/provider/AuthProvider";
 import { ConfigProvider } from "@/src/config/provider/ConfigProvider";
-import { isWeb } from "@/src/hooks/useIsPhone";
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from 'expo-font';
 import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const config = configLoader();
 const theme = createAppTheme(config.theme);
@@ -39,19 +38,22 @@ function LayoutWithTheme() {
     }
   }, [router, user, loading]);
 
+  if (!fontsLoaded || loading) return null;
+
+  if (!user) {
+    return  (
+      <Stack
+        screenOptions={{                
+          header: () => null,
+          contentStyle: {
+            backgroundColor: theme?.colors?.background
+          }      
+      }}/>
+    );
+  }
+
   return (
-    <Stack
-      screenOptions={{                
-        header: () => isLogin ? null :  
-        isWeb ? <Toolbar /> : (
-          <SafeAreaView>
-            <Toolbar />
-          </SafeAreaView>
-        ),
-        contentStyle: {
-          backgroundColor: theme?.colors?.background
-        }      
-    }}/>
+    <DrawerNavigator/>
   );
 }
 

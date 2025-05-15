@@ -4530,6 +4530,11 @@ hermes-parser@0.28.1:
   dependencies:
     hermes-estree "0.28.1"
 
+hoist-non-react-statics@^2.3.1:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
+
 hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz"
@@ -6237,10 +6242,10 @@ react-native-edge-to-edge@1.6.0:
   resolved "https://registry.npmjs.org/react-native-edge-to-edge/-/react-native-edge-to-edge-1.6.0.tgz"
   integrity sha512-2WCNdE3Qd6Fwg9+4BpbATUxCLcouF6YRY7K+J36KJ4l3y+tWN6XCqAC4DuoGblAAbb2sLkhEDp4FOlbOIot2Og==
 
-react-native-gesture-handler@~2.24.0:
-  version "2.24.0"
-  resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.24.0.tgz"
-  integrity sha512-ZdWyOd1C8axKJHIfYxjJKCcxjWEpUtUWgTOVY2wynbiveSQDm8X/PDyAKXSer/GOtIpjudUbACOndZXCN3vHsw==
+react-native-gesture-handler@^2.25.0:
+  version "2.25.0"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.25.0.tgz#3a5a8912ea4f5e68ab211a9fa5a191c08ad50883"
+  integrity sha512-NPjJi6mislXxvjxQPU9IYwBjb1Uejp8GvAbE1Lhh+xMIMEvmgAvVIp5cz1P+xAbV6uYcRRArm278+tEInGOqWg==
   dependencies:
     "@egjs/hammerjs" "^2.0.17"
     hoist-non-react-statics "^3.3.0"
@@ -6251,9 +6256,9 @@ react-native-is-edge-to-edge@1.1.7, react-native-is-edge-to-edge@^1.1.6:
   resolved "https://registry.npmjs.org/react-native-is-edge-to-edge/-/react-native-is-edge-to-edge-1.1.7.tgz"
   integrity sha512-EH6i7E8epJGIcu7KpfXYXiV2JFIYITtq+rVS8uEb+92naMRBdxhTuS8Wn2Q7j9sqyO0B+Xbaaf9VdipIAmGW4w==
 
-react-native-reanimated@~3.17.4:
+react-native-reanimated@^3.17.5:
   version "3.17.5"
-  resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.17.5.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-3.17.5.tgz#09ebe3c9e3379c5c0c588b7ab30c131ea29b60f0"
   integrity sha512-SxBK7wQfJ4UoWoJqQnmIC7ZjuNgVb9rcY5Xc67upXAFKftWg0rnkknTw6vgwnjRcvYThrjzUVti66XoZdDJGtw==
   dependencies:
     "@babel/plugin-transform-arrow-functions" "^7.0.0-0"
@@ -6274,14 +6279,21 @@ react-native-responsive-dimensions@^3.1.1:
   resolved "https://registry.yarnpkg.com/react-native-responsive-dimensions/-/react-native-responsive-dimensions-3.1.1.tgz#c4daf977b30a909f21164de53a8ba4c9451efefc"
   integrity sha512-Vo2OhWsphq0HgKsmeZOeyW+c+vsFn1ZaCFkGDgdeCEEiLriT76jGA1JlUjtrj27hvyo/xzeTlBZ+vBso1A84fw==
 
-react-native-safe-area-context@5.4.0:
+react-native-safe-area-context@^5.4.0:
   version "5.4.0"
-  resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-5.4.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-5.4.0.tgz#04b51940408c114f75628a12a93569d30c525454"
   integrity sha512-JaEThVyJcLhA+vU0NU8bZ0a1ih6GiF4faZ+ArZLqpYbL6j7R3caRqj+mE3lEtKCuHgwjLg3bCxLL1GPUJZVqUA==
 
-react-native-screens@~4.10.0:
+react-native-safe-area-view@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-1.1.1.tgz#9833e34c384d0513f4831afcd1e54946f13897b2"
+  integrity sha512-bbLCtF+tqECyPWlgkWbIwx4vDPb0GEufx/ZGcSS4UljMcrpwluachDXoW9DBxhbMCc6k1V0ccqHWN7ntbRdERQ==
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+
+react-native-screens@^4.10.0:
   version "4.10.0"
-  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-4.10.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-4.10.0.tgz#40634aead590c6b7034ded6a9f92465d1d611906"
   integrity sha512-Tw21NGuXm3PbiUGtZd0AnXirUixaAbPXDjNR0baBH7/WJDaDTTELLcQ7QRXuqAWbmr/EVCrKj1348ei1KFIr8A==
   dependencies:
     react-freeze "^1.0.0"

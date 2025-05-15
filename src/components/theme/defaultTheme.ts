@@ -11,5 +11,6 @@ export const baseTheme: BaseThemeType = {
       textButton: '#FFFFFF',
       shadow: 'rgba(0,0,0,0.1)',
       border: '#dadce0',
+      icon: '#64748B',
     },
   };

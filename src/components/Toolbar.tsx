@@ -6,10 +6,13 @@ import { useAuth } from "../config/provider/AuthProvider";
 import { Box, Text } from "./componentsTheme";
 import MemoizedImage from "./MemoizedImage";
 
+type ToolbarProps = {
+    onMenuPress?: () => void;  // optional prop for hamburger menu
+  };
 
-export const Toolbar = () => {
+export const Toolbar = ({ onMenuPress }: ToolbarProps) => {
 
-    const { config } = useConfig();
+    const { config, theme } = useConfig();
 
     const { user } = useAuth();
 
@@ -22,32 +25,19 @@ export const Toolbar = () => {
     const MemoizedImageLogo = memo(ImageLogo);
 
     return (        
-        <Box flexDirection={{ phone: 'column-reverse', desktop: 'row'}} paddingVertical={'s'} paddingHorizontal={'m'} backgroundColor={'toolbar'}>
-            {/* <Box flexDirection={"row"} flex={1} alignItems={'center'}>
-                {!isPhone && <MemoizedImageLogo />}
-                <Box 
-                    flexDirection={'row'}  
-                    alignItems={'center'}
-                    borderWidth={1}
-                    borderRadius={'xl'}
-                    paddingHorizontal={'m'}
-                    paddingVertical={'xs'}                    
-                    style={{
-                        borderColor: '#C3D4E9',                        
-                    }}>
-                    <Feather name="search" size={14} color='textHint' />
-                    <Text flex={1} color={'textHint'} fontSize={14} minWidth={100}>Search</Text>
-                    <Feather name="sliders" size={14} color='textHint' />
-                </Box>
-            </Box> */}
+        <Box alignItems={"center"} flexDirection={'row'} paddingVertical={'s'} paddingHorizontal={'m'} backgroundColor={'toolbar'}>
+            {onMenuPress && (
+                <Pressable onPress={onMenuPress} style={{ marginRight: 16 }}>
+                    <Ionicons name="menu" size={28} color={theme.colors.icon}/>
+                </Pressable>
+            )}            
             <Box flex={1} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                {/* {isPhone && <MemoizedImageLogo />} */}
                 <MemoizedImageLogo />
                 <Pressable>
                     <Box flexDirection={"row"} gap={"s"} alignItems={"center"}>
                         <MemoizedUserPicture/>
                         <Text variant={"s"}>{user?.displayName}</Text>
-                        <Ionicons name="chevron-down" size={14} color="#64748B" />
+                        <Ionicons name="chevron-down" size={14} color={theme.colors.icon} />
                     </Box>
                 </Pressable>                
             </Box>            
