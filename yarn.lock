@@ -2020,10 +2020,27 @@
     use-latest-callback "^0.2.3"
     use-sync-external-store "^1.5.0"
 
+"@react-navigation/drawer@^7.3.12":
+  version "7.3.12"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-7.3.12.tgz#aa19915d38f31372dd6eb596c976d6e123127b15"
+  integrity sha512-a1r1jZMEOcRUcTjT5CcHHuVLbY9unmmTnJjiRnXxWlSFi/5J2BZQWZj6nmrm16Ix1Wm1CWh0kuj7IrJ0E+Spaw==
+  dependencies:
+    "@react-navigation/elements" "^2.4.2"
+    color "^4.2.3"
+    react-native-drawer-layout "^4.1.8"
+    use-latest-callback "^0.2.3"
+
 "@react-navigation/elements@^2.3.8", "@react-navigation/elements@^2.4.1":
   version "2.4.1"
   resolved "https://registry.npmjs.org/@react-navigation/elements/-/elements-2.4.1.tgz"
   integrity sha512-L10zs15NSgx+Msd6UmUfPx8+bEe/KnhcNFKsoPbz0U49sJdU6qogcbNAPi1RUs4UDtfnnubUhbXZxfaYJTCwCA==
+  dependencies:
+    color "^4.2.3"
+
+"@react-navigation/elements@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-2.4.2.tgz#22680bcbec8d59f1aad35934beba83f9e251ed8f"
+  integrity sha512-cudKLsRtOB+i8iDzfBKypdqiHsDy1ruqCfYAtwKEclDmLsxu3/90YXoBtoPyFNyIpsn3GtsJzZsrYWQh78xSWg==
   dependencies:
     color "^4.2.3"
 
@@ -3875,14 +3892,7 @@ expo-file-system@~18.1.9:
   resolved "https://registry.npmjs.org/expo-file-system/-/expo-file-system-18.1.9.tgz"
   integrity sha512-2i8IpaXpLVSI/dmT6TBfvRkl1+YkbWI07NCsQX1Myh33AF8xaJ4jv3Hz6WK1JArqDagCmrQUB2mW9SYnWYqLHg==
 
-expo-font@^13.3.1:
-  version "13.3.1"
-  resolved "https://registry.yarnpkg.com/expo-font/-/expo-font-13.3.1.tgz#ed69ae14f263a4c447efb2615b60d9e045372e68"
-  integrity sha512-d+xrHYvSM9WB42wj8vP9OOFWyxed5R1evphfDb6zYBmC1dA9Hf89FpT7TNFtj2Bk3clTnpmVqQTCYbbA2P3CLg==
-  dependencies:
-    fontfaceobserver "^2.1.0"
-
-expo-font@~13.3.1:
+expo-font@^13.3.1, expo-font@~13.3.1:
   version "13.3.1"
   resolved "https://registry.npmjs.org/expo-font/-/expo-font-13.3.1.tgz"
   integrity sha512-d+xrHYvSM9WB42wj8vP9OOFWyxed5R1evphfDb6zYBmC1dA9Hf89FpT7TNFtj2Bk3clTnpmVqQTCYbbA2P3CLg==
@@ -6214,6 +6224,13 @@ react-is@^19.1.0:
   version "19.1.0"
   resolved "https://registry.npmjs.org/react-is/-/react-is-19.1.0.tgz"
   integrity sha512-Oe56aUPnkHyyDxxkvqtd7KkdQP5uIUfHxd5XTb3wE9d/kRnZLmKbDB0GWk919tdQ+mxxPtG6EAs6RMT6i1qtHg==
+
+react-native-drawer-layout@^4.1.8:
+  version "4.1.8"
+  resolved "https://registry.yarnpkg.com/react-native-drawer-layout/-/react-native-drawer-layout-4.1.8.tgz#a832b81a00c413f6f9040487378ba54580c18797"
+  integrity sha512-NyAvx3VknkibuaLH2zl96hvMrjCrXnjpH2H/BwTZxFV1BzzegI51+wa8TgttKW343Kd8+9DOWOLX4xhXC1LEAA==
+  dependencies:
+    use-latest-callback "^0.2.3"
 
 react-native-edge-to-edge@1.6.0:
   version "1.6.0"

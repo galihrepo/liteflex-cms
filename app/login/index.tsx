@@ -54,8 +54,7 @@ export default function Index() {
       </Box>
       
       <View
-        style={{        
-          // alignItems: "center",        
+        style={{                  
           backgroundColor: 'white',
           alignSelf: 'center',                
           paddingHorizontal: 50,
@@ -68,7 +67,7 @@ export default function Index() {
       >
         <Text textAlign={'center'} variant={'header'}>Masuk ke Akun Anda</Text>
         <ButtonGoogle onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
-        {/* <Button label="Logout" variant={"s"} onPress={() => handleLogout()} /> */}
+        {/* <Button label={"Logout"} onPress={() => handleLogout()}/> */}
       </View>
     </View>    
   );

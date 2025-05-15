@@ -5,7 +5,7 @@ export const baseTheme: BaseThemeType = {
       primary: '#007AFF',
       secondary: '#888',
       background: '#ED3F3F',
-      text: '#000',
+      text: '#475569',
       textHint: '#596780',
       toolbar: 'red',
       textButton: '#FFFFFF',

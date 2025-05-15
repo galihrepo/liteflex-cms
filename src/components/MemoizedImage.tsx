@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import React from 'react';
-import { Image, ImageStyle, StyleProp } from 'react-native';
+import { ImageStyle, StyleProp } from 'react-native';
 
 type MemoizedImageProps = {
   uri: string;
@@ -13,7 +14,6 @@ const MemoizedImage = React.memo(({ uri, width, height, style }: MemoizedImagePr
     <Image
       source={{ uri }}
       style={[{ width, height, borderRadius: 10 }, style]}
-      resizeMode="cover"
     />
   );
 }, areEqual);
