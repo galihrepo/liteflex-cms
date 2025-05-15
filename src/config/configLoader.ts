@@ -6,8 +6,8 @@ import { BaseConfigType } from '../types/config/BaseConfigType';
 import { BaseThemeType } from '../types/config/BaseThemeType';
 import { DealerConfig } from '../types/config/DealerConfig';
 
+import { baseTheme } from '../components/theme/defaultTheme';
 import { baseConfig } from './defaultConfig';
-import { baseTheme } from './defaultTheme';
 
 import Constants from 'expo-constants';
 

@@ -1,5 +1,7 @@
 import { createTheme } from '@shopify/restyle';
-import { BaseThemeType } from '../types/config/BaseThemeType';
+import { BaseThemeType } from '../../types/config/BaseThemeType';
+import buttonVariants from './buttonTheme';
+import { textVariants } from './textTheme';
 
 export const createAppTheme = (baseThemeType: BaseThemeType) =>
   createTheme({
@@ -18,20 +20,13 @@ export const createAppTheme = (baseThemeType: BaseThemeType) =>
       l: 25,
       xl: 75,
     },
-    textVariants: {
-      defaults: {
-        fontSize: 16,
-        color: 'text',
-      },
-      header: {
-        fontSize: 14,
-        fontWeight: 'bold',
-      },      
-    },
+    textVariants,
+    buttonVariants,
     breakpoints: {
       phone: 0,
       desktop: 768,
     },
+    
   });
 
 export type AppTheme = ReturnType<typeof createAppTheme>;

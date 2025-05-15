@@ -1,4 +1,4 @@
-import { AppTheme } from "@/src/config/theme";
+import { AppTheme } from "@/src/components/theme/theme";
 import { useTheme } from "@shopify/restyle";
 import { Platform, useWindowDimensions } from "react-native";
 

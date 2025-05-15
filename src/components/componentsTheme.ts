@@ -1,4 +1,4 @@
-import { AppTheme } from "@/config/theme";
+import { AppTheme } from "@/src/components/theme/theme";
 import { createBox, createText } from "@shopify/restyle";
 import { Alert, Platform } from 'react-native';
 

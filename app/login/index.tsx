@@ -1,3 +1,4 @@
+import { Button } from "@/src/components/Button";
 import { showAlert } from "@/src/components/componentsTheme";
 import MemoizedImage from "@/src/components/MemoizedImage";
 import { useConfig } from "@/src/config/provider/ConfigProvider";
@@ -6,7 +7,7 @@ import { saveUser } from "@/src/services/userService";
 import { useRouter } from "expo-router";
 import { signOut, User } from "firebase/auth";
 import { memo, useCallback } from "react";
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { auth } from "../../src/config/configFirebase";
 
 export default function Index() {
@@ -54,12 +55,13 @@ export default function Index() {
           backgroundColor: 'white',
           alignSelf: 'center',                
           padding: 20,
-          borderRadius: 10
+          borderRadius: 10,
+          gap: 5,
         }}
       >
         <Text>Login PAGE -- {config?.firestoreDocIdDealers} </Text>
-        <Button title="Login" onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
-        <Button title="Logout" onPress={() => handleLogout()} />
+        <Button label="Login" variant={"large"} onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
+        <Button label="Logout" variant={"small"} onPress={() => handleLogout()} />
       </View>
     </View>    
   );
