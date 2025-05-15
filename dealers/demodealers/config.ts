@@ -2,7 +2,7 @@ import { BaseConfigAssetsType } from "@/src/types/config/BaseConfigAssetsType";
 import { BaseConfigType } from "@/src/types/config/BaseConfigType";
 
 const assets: BaseConfigAssetsType = {
-  logoUrl: 'https://statics.olx.co.id/olxid/astra_branding/olx-indonesia-logo.png',
+  logoUrl: 'https://img.freepik.com/premium-vector/car-deal-logo-design-template-element-with-car-handshake-illustration_412311-3187.jpg',
 };
 
 const config: Partial<BaseConfigType> = {
