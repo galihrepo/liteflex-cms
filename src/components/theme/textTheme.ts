@@ -2,13 +2,14 @@ export const textVariants = {
     defaults: {
       fontSize: 16,
       color: 'text',
+      fontFamily: 'Pjs'
     },
     header: {
-      fontSize: 14,
-      fontWeight: 'bold',
+      fontSize: 16,   
+      fontFamily: 'PjsBoldSemi'
     },
     button: {
-      fontSize: 15,
+      fontSize: 14,
       color: 'textButton'
     }
   }

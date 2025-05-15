@@ -25,8 +25,7 @@ export const createAppTheme = (baseThemeType: BaseThemeType) =>
     breakpoints: {
       phone: 0,
       desktop: 768,
-    },
-    
+    },    
   });
 
 export type AppTheme = ReturnType<typeof createAppTheme>;

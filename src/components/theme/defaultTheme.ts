@@ -8,6 +8,8 @@ export const baseTheme: BaseThemeType = {
       text: '#000',
       textHint: '#596780',
       toolbar: 'red',
-      textButton: '#FFFFFF'
+      textButton: '#FFFFFF',
+      shadow: 'rgba(0,0,0,0.1)',
+      border: '#dadce0',
     },
   };

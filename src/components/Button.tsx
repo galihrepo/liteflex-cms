@@ -24,7 +24,7 @@ type ButtonProps = VariantProps<AppTheme, 'buttonVariants'> & {
     disabled?: boolean;
   };
   
-export const Button = ({ label, onPress, disabled, variant = 'medium' }: ButtonProps)  => {
+export const Button = ({ label, onPress, disabled, variant = 'm' }: ButtonProps)  => {
     return (
       <Pressable onPress={onPress} disabled={disabled}>
         {({ pressed }) => (
@@ -32,7 +32,7 @@ export const Button = ({ label, onPress, disabled, variant = 'medium' }: ButtonP
             variant={variant}
             opacity={pressed ? 0.7 : 1}
           >
-            <Text variant="button">{label}</Text>
+            <Text variant="button" textAlign={"center"}>{label}</Text>
           </ButtonBox>        
         )}
       </Pressable>

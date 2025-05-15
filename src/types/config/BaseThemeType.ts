@@ -7,5 +7,7 @@ export interface BaseThemeType {
       textHint?: string;
       toolbar?: string;
       textButton?: string;
+      shadow?: string;
+      border?: string;
     };
   }

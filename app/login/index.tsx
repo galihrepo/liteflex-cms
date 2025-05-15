@@ -1,5 +1,5 @@
-import { Button } from "@/src/components/Button";
-import { showAlert } from "@/src/components/componentsTheme";
+import { ButtonGoogle } from "@/src/components/ButtonGoogle";
+import { Box, showAlert, Text } from "@/src/components/componentsTheme";
 import MemoizedImage from "@/src/components/MemoizedImage";
 import { useConfig } from "@/src/config/provider/ConfigProvider";
 import { handleGoogleLogin } from "@/src/hooks/useGoogleLogin";
@@ -7,12 +7,12 @@ import { saveUser } from "@/src/services/userService";
 import { useRouter } from "expo-router";
 import { signOut, User } from "firebase/auth";
 import { memo, useCallback } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { auth } from "../../src/config/configFirebase";
 
 export default function Index() {
 
-  const { config}  = useConfig();
+  const { config, theme }  = useConfig();
 
   const router = useRouter();
 
@@ -42,26 +42,33 @@ export default function Index() {
     }
   }, []);
 
-  const ImageLogo = () => (<MemoizedImage uri={config?.assets?.logoUrl} width={50} height={50} />);
+  const ImageLogo = () => (<MemoizedImage uri={config?.assets?.logoUrl} width={100} height={100} />);
 
   const MemoizedImageLogo = memo(ImageLogo);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center'}}>
-
+      
+      <Box alignSelf={"center"} style={{marginBottom: -60, zIndex: 1, backgroundColor: 'white', borderRadius: 9999, padding: 20, boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',}}>
+        <MemoizedImageLogo/>  
+      </Box>
+      
       <View
         style={{        
-          alignItems: "center",        
+          // alignItems: "center",        
           backgroundColor: 'white',
           alignSelf: 'center',                
-          padding: 20,
-          borderRadius: 10,
-          gap: 5,
+          paddingHorizontal: 50,
+          paddingTop: 100,
+          paddingBottom: 50,
+          borderRadius: 20,          
+          gap: 25,
+          boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
         }}
       >
-        <Text>Login PAGE -- {config?.firestoreDocIdDealers} </Text>
-        <Button label="Login" variant={"large"} onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
-        <Button label="Logout" variant={"small"} onPress={() => handleLogout()} />
+        <Text textAlign={'center'} variant={'header'}>Masuk ke Akun Anda</Text>
+        <ButtonGoogle onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
+        {/* <Button label="Logout" variant={"s"} onPress={() => handleLogout()} /> */}
       </View>
     </View>    
   );

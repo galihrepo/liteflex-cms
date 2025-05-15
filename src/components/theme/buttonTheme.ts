@@ -3,17 +3,22 @@ const buttonVariants = {
     defaults: {
         backgroundColor: 'primary'
     },
-    large: {
+    xl: {
+        paddingVertical: 'm',
+        paddingHorizontal: 'xl',
+        borderRadius: 'm',
+      },
+    l: {
       paddingVertical: 'm',
       paddingHorizontal: 'xl',
       borderRadius: 'm',
     },
-    medium: {
+    m: {
       paddingVertical: 'm',
       paddingHorizontal: 'm',
       borderRadius: 'm',
     },
-    small: {
+    s: {
       paddingVertical: 's',
       paddingHorizontal: 'm',
       borderRadius: 's',

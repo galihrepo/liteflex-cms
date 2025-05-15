@@ -2,9 +2,10 @@ import { createAppTheme } from "@/src/components/theme/theme";
 import { Toolbar } from "@/src/components/Toolbar";
 import { configLoader } from "@/src/config/configLoader";
 import { AuthProvider, useAuth } from "@/src/config/provider/AuthProvider";
-import { ConfigProvider, useConfig } from "@/src/config/provider/ConfigProvider";
+import { ConfigProvider } from "@/src/config/provider/ConfigProvider";
 import { isWeb } from "@/src/hooks/useIsPhone";
 import { ThemeProvider } from "@shopify/restyle";
+import { useFonts } from 'expo-font';
 import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -13,11 +14,16 @@ const config = configLoader();
 const theme = createAppTheme(config.theme);
 
 function LayoutWithTheme() {
-  const { config } = useConfig();
   const { user, loading } = useAuth();
   const router = useRouter();
   const segments = useSegments();
   const isLogin = segments[0] === "login";
+
+  const [fontsLoaded] = useFonts({
+    Pjs: require('../assets/fonts/PlusJakartaSans-Regular.ttf'),
+    PjsBold: require('../assets/fonts/PlusJakartaSans-Bold.ttf'),
+    PjsBoldSemi: require('../assets/fonts/PlusJakartaSans-SemiBold.ttf'),
+  });
   
   useEffect(() => {
     if (!loading) {
@@ -62,3 +68,4 @@ export default function RootLayout() {
     </ConfigProvider>
   );
 }
+
