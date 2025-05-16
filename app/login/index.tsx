@@ -1,6 +1,6 @@
 import { ButtonGoogle } from "@/src/components/ButtonGoogle";
-import { Box, showAlert, Text } from "@/src/components/componentsTheme";
 import MemoizedImage from "@/src/components/MemoizedImage";
+import { Box, showAlert, Text } from "@/src/components/theme/componentsTheme";
 import { useConfig } from "@/src/config/provider/ConfigProvider";
 import { handleGoogleLogin } from "@/src/hooks/useGoogleLogin";
 import { saveUser } from "@/src/services/userService";

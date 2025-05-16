@@ -1,7 +1,7 @@
 import { AllProps, createRestyleComponent, createVariant, VariantProps } from "@shopify/restyle";
 import { PropsWithChildren } from "react";
 import { Pressable, View } from "react-native";
-import { Text } from "./componentsTheme";
+import { Text } from "./theme/componentsTheme";
 import { AppTheme } from "./theme/theme";
 
 const buttonVariant = createVariant<AppTheme, 'buttonVariants'>({

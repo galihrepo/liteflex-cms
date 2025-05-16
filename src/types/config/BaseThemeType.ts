@@ -10,5 +10,6 @@ export interface BaseThemeType {
       shadow?: string;
       border?: string;
       icon?: string;
+      textDrawerInactive?: string;
     };
   }
