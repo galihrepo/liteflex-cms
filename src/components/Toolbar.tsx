@@ -1,14 +1,11 @@
 import { useConfig } from "@/src/config/provider/ConfigProvider";
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
-import { signOut } from "firebase/auth";
-import React, { memo, useCallback } from "react";
+import React, { memo } from "react";
 import { Pressable } from "react-native";
-import { auth } from "../config/configFirebase";
 import { useAuth } from "../config/provider/AuthProvider";
 import { useIsPhone } from "../hooks/useIsPhone";
 import MemoizedImage from "./MemoizedImage";
-import { PressableHover } from "./PressableHover";
 import { Box, Text } from "./theme/componentsTheme";
 
 type ToolbarProps = {
@@ -33,15 +30,6 @@ export const Toolbar = ({ onMenuPress }: ToolbarProps) => {
 
     const MemoizedImageLogo = memo(ImageLogo);
 
-    const handleLogout = useCallback(async () => {
-        try {
-            await signOut(auth);
-            router.replace('/login');
-        } catch (error) {
-            console.error(error);
-        }
-    }, []);
-
     return (
         <Box alignItems={"center"} flexDirection={'row'} paddingVertical={'s'} paddingHorizontal={'m'} backgroundColor={'toolbar'}>
             {isPhone && onMenuPress && (
@@ -51,14 +39,10 @@ export const Toolbar = ({ onMenuPress }: ToolbarProps) => {
             )}
             <Box flex={1} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
                 <MemoizedImageLogo />
-
-                <PressableHover onPress={() => handleLogout()}>
-                    <Box flexDirection={"row"} gap={"s"} alignItems={"center"}>
-                        <MemoizedUserPicture />
-                        <Text variant={"s"}>{user?.displayName}</Text>
-                        {/* <Ionicons name="chevron-down" size={14} color={theme.colors.icon} /> */}
-                    </Box>
-                </PressableHover>
+                <Box flexDirection={"row"} gap={"s"} alignItems={"center"}>
+                    <MemoizedUserPicture />
+                    <Text variant={"s"}>{user?.displayName}</Text>
+                </Box>
             </Box>
         </Box>
     );

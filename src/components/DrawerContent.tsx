@@ -1,11 +1,12 @@
-import { Ionicons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { useRouter } from 'expo-router';
 import { signOut } from 'firebase/auth';
+import { LogOut } from 'lucide-react';
 import React from 'react';
 import { auth } from '../config/configFirebase';
 import { useConfig } from '../config/provider/ConfigProvider';
 import { showAlertChoice } from './Alert';
+
 
 export function DrawerContent(props: any) {
 
@@ -34,7 +35,7 @@ export function DrawerContent(props: any) {
         activeBackgroundColor='transparent'
         inactiveBackgroundColor='transparent'
         icon={({ color, size }) => (
-          <Ionicons name="log-out-outline" size={size} color={color} />
+          <LogOut size={size} color={color}/>
         )}
       />
     </DrawerContentScrollView>
