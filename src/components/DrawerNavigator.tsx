@@ -1,12 +1,8 @@
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import React from 'react';
-
-// import HomeScreen from '@/app/(drawer)/index';        // You can route these to actual files
-// import SettingsScreen from '@/app/(drawer)/settings'; // Or load lazily if needed
-// import { Toolbar } from '../components/Toolbar';
 import Index from '@/app/index';
-import { Ionicons } from '@expo/vector-icons';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native';
+import { BanknoteArrowUp, Car } from 'lucide-react';
+import React from 'react';
 import { useConfig } from '../config/provider/ConfigProvider';
 import { useIsPhone } from '../hooks/useIsPhone';
 import { DrawerContent } from './DrawerContent';
@@ -44,7 +40,7 @@ export default function DrawerNavigator() {
         options={{
           drawerLabel: 'HOME',
           drawerIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
+            <Car size={size} color={color} />
           ),
         }} />
       
@@ -54,7 +50,7 @@ export default function DrawerNavigator() {
         options={{
           drawerLabel: 'BOOKING',
           drawerIcon: ({ color, size }) => (
-            <Ionicons name="book" size={size} color={color} />
+            <BanknoteArrowUp size={size} color={color} />
           ),
         }} />
       

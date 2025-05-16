@@ -1,6 +1,6 @@
 import { useConfig } from "@/src/config/provider/ConfigProvider";
-import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
+import { Menu } from "lucide-react";
 import React, { memo } from "react";
 import { Pressable } from "react-native";
 import { useAuth } from "../config/provider/AuthProvider";
@@ -34,7 +34,7 @@ export const Toolbar = ({ onMenuPress }: ToolbarProps) => {
         <Box alignItems={"center"} flexDirection={'row'} paddingVertical={'s'} paddingHorizontal={'m'} backgroundColor={'toolbar'}>
             {isPhone && onMenuPress && (
                 <Pressable onPress={onMenuPress} style={{ marginRight: 16 }}>
-                    <Ionicons name="menu" size={28} color={theme.colors.icon} />
+                    <Menu size={28} color={theme.colors.icon} />
                 </Pressable>
             )}
             <Box flex={1} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
