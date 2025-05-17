@@ -1,6 +1,6 @@
 import { AllProps, createRestyleComponent, createVariant, VariantProps } from "@shopify/restyle";
 import { PropsWithChildren } from "react";
-import { Pressable, View } from "react-native";
+import { Pressable, StyleProp, View, ViewStyle } from "react-native";
 import { Text } from "./theme/componentsTheme";
 import { AppTheme } from "./theme/theme";
 
@@ -22,15 +22,18 @@ type ButtonProps = VariantProps<AppTheme, 'buttonVariants'> & {
     label: string;
     onPress: () => void;
     disabled?: boolean;
+    style?: StyleProp<ViewStyle>;
   };
   
-export const Button = ({ label, onPress, disabled, variant = 'm' }: ButtonProps)  => {
+export const Button = (props: ButtonProps)  => {
+  const { label, onPress, disabled, variant = 'm', style } = props;
     return (
-      <Pressable onPress={onPress} disabled={disabled}>
+      <Pressable onPress={onPress} disabled={disabled} style={style}>
         {({ pressed }) => (
           <ButtonBox
             variant={variant}
             opacity={pressed ? 0.7 : 1}
+            alignSelf="flex-start"            
           >
             <Text variant="button" textAlign={"center"}>{label}</Text>
           </ButtonBox>        

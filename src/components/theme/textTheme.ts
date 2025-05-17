@@ -12,6 +12,10 @@ export const textVariants = {
       fontSize: 16,   
       fontFamily: 'PjsBoldSemi'
     },
+    cardTitle: {
+      fontSize: 20,
+      fontFamily: 'PjsBold'
+    },
     button: {
       fontSize: 14,
       color: 'textButton'

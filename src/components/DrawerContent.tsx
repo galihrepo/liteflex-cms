@@ -23,10 +23,7 @@ export function DrawerContent(props: any) {
 
   return (
     <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} labelStyle={{
-          fontFamily: 'Pjs',
-          fontSize: 16,
-        }}/>
+      <DrawerItemList {...props}/>
       <DrawerItem
         label="KELUAR"
         onPress={handleLogout}
@@ -37,6 +34,10 @@ export function DrawerContent(props: any) {
         icon={({ color, size }) => (
           <LogOut size={size} color={color}/>
         )}
+        labelStyle={{
+          fontFamily: 'PjsMedium',
+          fontSize: 14,
+        }}
       />
     </DrawerContentScrollView>
   );

@@ -1,6 +1,7 @@
+import { showAlert } from "@/src/components/Alert";
 import { ButtonGoogle } from "@/src/components/ButtonGoogle";
 import MemoizedImage from "@/src/components/MemoizedImage";
-import { Box, showAlert, Text } from "@/src/components/theme/componentsTheme";
+import { Box, Text } from "@/src/components/theme/componentsTheme";
 import { useConfig } from "@/src/config/provider/ConfigProvider";
 import { handleGoogleLogin } from "@/src/hooks/useGoogleLogin";
 import { saveUser } from "@/src/services/userService";
@@ -12,7 +13,7 @@ import { auth } from "../../src/config/configFirebase";
 
 export default function Index() {
 
-  const { config, theme }  = useConfig();
+  const { config }  = useConfig();
 
   const router = useRouter();
 
@@ -35,10 +36,9 @@ export default function Index() {
   
   const handleLogout = useCallback(async () => {
     try {
-      await signOut(auth);
-      console.log('User logged out');
+      await signOut(auth);      
     } catch (error) {
-      console.error('Error during logout: ', error);
+      console.error(error);
     }
   }, []);
 

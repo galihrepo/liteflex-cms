@@ -20,6 +20,7 @@ function LayoutWithTheme() {
 
   const [fontsLoaded] = useFonts({
     Pjs: require('../assets/fonts/PlusJakartaSans-Regular.ttf'),
+    PjsMedium: require('../assets/fonts/PlusJakartaSans-Medium.ttf'),
     PjsBold: require('../assets/fonts/PlusJakartaSans-Bold.ttf'),
     PjsBoldSemi: require('../assets/fonts/PlusJakartaSans-SemiBold.ttf'),
   });

@@ -2,7 +2,7 @@ import { Text } from "@/src/components/theme/componentsTheme";
 import { View } from "react-native";
 
 
-export default function HomeScreen() {  
+export default function BookingScreen() {  
   return (
     <View
       style={{
@@ -11,7 +11,7 @@ export default function HomeScreen() {
         alignItems: "center",
       }}
     >
-      <Text>HOME </Text> 
+      <Text>Booking </Text> 
     </View>
   );
 }

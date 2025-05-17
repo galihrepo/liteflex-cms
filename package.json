@@ -37,6 +37,7 @@
     "react-dom": "19.0.0",
     "react-native": "0.79.2",
     "react-native-gesture-handler": "^2.25.0",
+    "react-native-paper": "^5.14.4",
     "react-native-popover-view": "^6.1.0",
     "react-native-reanimated": "^3.17.5",
     "react-native-responsive-dimensions": "^3.1.1",
@@ -51,6 +52,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
+    "depcheck": "^1.4.7",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
     "typescript": "~5.8.3"

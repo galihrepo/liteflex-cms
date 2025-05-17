@@ -1,3 +1,4 @@
+import BookingScreen from '@/app/booking';
 import Index from '@/app/index';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native';
@@ -12,7 +13,7 @@ const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator() {
   const isPhone = useIsPhone();
-  const { theme } = useConfig(); 
+  const { theme } = useConfig();
 
   return (
     <Drawer.Navigator
@@ -25,11 +26,15 @@ export default function DrawerNavigator() {
         drawerInactiveTintColor: theme.colors.textDrawerInactive,
         drawerStyle: {
           width: 220,
-          borderTopRightRadius: 0,     
+          borderTopRightRadius: 0,
           borderBottomRightRadius: 0,
           borderRightColor: theme.colors.border,
           borderRightWidth: 0.1,
-          color: 'transparent', 
+          color: 'transparent',
+        },
+        drawerLabelStyle: {
+          fontFamily: 'PjsMedium',
+          fontSize: 14,
         }
       })}
       drawerContent={(props) => <DrawerContent {...props} />}
@@ -38,22 +43,22 @@ export default function DrawerNavigator() {
         name="home"
         component={Index}
         options={{
-          drawerLabel: 'HOME',
+          drawerLabel: 'KENDARAAN',
           drawerIcon: ({ color, size }) => (
             <Car size={size} color={color} />
           ),
         }} />
-      
+
       <Drawer.Screen
         name="booking"
-        component={Index}
+        component={BookingScreen}
         options={{
           drawerLabel: 'BOOKING',
           drawerIcon: ({ color, size }) => (
             <BanknoteArrowUp size={size} color={color} />
           ),
         }} />
-      
+
     </Drawer.Navigator>
   );
 }

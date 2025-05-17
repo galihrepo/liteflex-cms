@@ -1,5 +1,4 @@
 import { useConfig } from "@/src/config/provider/ConfigProvider";
-import { useRouter } from "expo-router";
 import { Menu } from "lucide-react";
 import React, { memo } from "react";
 import { Pressable } from "react-native";
@@ -19,8 +18,6 @@ export const Toolbar = ({ onMenuPress }: ToolbarProps) => {
     const { config, theme } = useConfig();
 
     const { user } = useAuth();
-
-    const router = useRouter();
 
     const UserPicture = () => (<MemoizedImage uri={user?.photoURL || ''} width={35} height={35} style={{ borderRadius: 9999 }} />);
 
