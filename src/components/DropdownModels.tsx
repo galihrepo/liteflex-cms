@@ -9,7 +9,7 @@ type DropdownModelsProps = DropdownBrandsProps & {
 
 export const DropdownModels = (props: DropdownModelsProps) => {
     const { onSelectedItem, selectedItem, brandsId } = props;    
-    const { models } = useModels(brandsId);
+    const { models, loading } = useModels(brandsId);
 
     const items = useMemo(() => {
         return models.map(item => ({
@@ -34,7 +34,7 @@ export const DropdownModels = (props: DropdownModelsProps) => {
             value={selectedItem?.value || ''}
             onValueChange={handleChange}
             items={items}
-            disabled={items.length === 0}
+            disabled={items.length === 0 || loading}
         />
     );
 };

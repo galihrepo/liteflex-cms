@@ -6,14 +6,16 @@ import { ModelsType } from "../types/firestore/ModelsType";
 
 export const useModels = (brandsId?: string | undefined) => {
   const [models, setModels] = useState<ModelsType[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchModels = async () => {
-      if (!brandsId) {
+      if (!brandsId || loading) {
         setModels([]);
         return;
       }
 
+      setLoading(true)
       try {
         const brandRef = doc(db, COLLECTIONS.BRANDS, brandsId || "");
 
@@ -34,12 +36,14 @@ export const useModels = (brandsId?: string | undefined) => {
 
         setModels(result);
       } catch (error) {
-        console.error("Error fetching Toyota branches:", error);
+        console.error(error);
+      } finally {
+        setLoading(false)
       }
     };
 
     fetchModels();
   }, [brandsId]);
 
-  return { models };
+  return { models, loading };
 };
