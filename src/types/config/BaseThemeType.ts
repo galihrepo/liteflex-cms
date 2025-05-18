@@ -12,5 +12,6 @@ export interface BaseThemeType {
       icon?: string;
       textDrawerInactive?: string;
       buttonCancel?: string;
+      backgroundForm?: string;
     };
   }

@@ -30,7 +30,7 @@ export const DropdownModels = (props: DropdownModelsProps) => {
 
     return (
         <Dropdown            
-            label="Select Models"
+            label="Model"
             value={selectedItem?.value || ''}
             onValueChange={handleChange}
             items={items}

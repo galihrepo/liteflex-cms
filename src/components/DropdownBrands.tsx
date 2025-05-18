@@ -33,7 +33,7 @@ export const DropdownBrands = (props: DropdownBrandsProps) => {
 
     return (
         <Dropdown            
-            label="Select Brand"
+            label='Merek'
             value={selectedItem?.value || ''}
             onValueChange={handleChange}
             items={items}

@@ -14,5 +14,6 @@ export const baseTheme: BaseThemeType = {
       icon: '#64748B',
       textDrawerInactive: '#797b80',
       buttonCancel: '#9E9E9E',
+      backgroundForm: '#F6F7F9',
     },
   };

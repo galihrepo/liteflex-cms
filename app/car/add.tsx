@@ -18,7 +18,8 @@ export default function CarAddScreen() {
     <Card
       title={"Tambah Kendaraan"}
       onSave={onSave}
-      isForm={true}>
+      isForm={true} 
+      gap={'m'}>
         <DropdownBrands onSelectedItem={onSelectedBrands}/>
         <DropdownModels brandsId={brandsId} onSelectedItem={onSelectedModels}/>
     </Card>
