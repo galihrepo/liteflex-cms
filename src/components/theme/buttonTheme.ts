@@ -23,6 +23,12 @@ const buttonVariants = {
       paddingHorizontal: 'm',
       borderRadius: 's',
     },
+    sCancel: {
+      paddingVertical: 's',
+      paddingHorizontal: 'm',
+      borderRadius: 's',
+      backgroundColor: 'buttonCancel'
+    },    
   };
   
   export default buttonVariants;

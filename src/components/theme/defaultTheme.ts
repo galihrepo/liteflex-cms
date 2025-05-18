@@ -12,6 +12,7 @@ export const baseTheme: BaseThemeType = {
       shadow: 'rgba(0,0,0,0.1)',
       border: '#dadce0',
       icon: '#64748B',
-      textDrawerInactive: '#bfc1c7'
+      textDrawerInactive: '#797b80',
+      buttonCancel: '#9E9E9E',
     },
   };

@@ -7,23 +7,22 @@ import { auth } from '../config/configFirebase';
 import { useConfig } from '../config/provider/ConfigProvider';
 import { showAlertChoice } from './Alert';
 
-
 export function DrawerContent(props: any) {
 
   const { theme } = useConfig();
-  
+
   const router = useRouter();
-  
+
   const handleLogout = async () => {
     showAlertChoice('Keluar dari akun?', async () => {
       await signOut(auth);
       router.replace('/login');
     })
-  };
+  };  
 
   return (
     <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props}/>
+      <DrawerItemList {...props} />      
       <DrawerItem
         label="KELUAR"
         onPress={handleLogout}
@@ -32,7 +31,7 @@ export function DrawerContent(props: any) {
         activeBackgroundColor='transparent'
         inactiveBackgroundColor='transparent'
         icon={({ color, size }) => (
-          <LogOut size={size} color={color}/>
+          <LogOut size={size} color={color} />
         )}
         labelStyle={{
           fontFamily: 'PjsMedium',

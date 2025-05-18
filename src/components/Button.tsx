@@ -33,7 +33,7 @@ export const Button = (props: ButtonProps)  => {
           <ButtonBox
             variant={variant}
             opacity={pressed ? 0.7 : 1}
-            alignSelf="flex-start"            
+            alignSelf="flex-start"
           >
             <Text variant="button" textAlign={"center"}>{label}</Text>
           </ButtonBox>        
