@@ -4,4 +4,6 @@ export const COLLECTIONS = {
     BRANDS: 'brands',
     MODELS: 'models',
     VARIANTS: 'variants',
+    FUEL: 'fuel',
+    TRANSMISSION: 'transmission',
 }

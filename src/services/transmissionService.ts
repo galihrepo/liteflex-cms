@@ -2,23 +2,23 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../config/configFirebase";
 import { COLLECTIONS } from "../contants/firestore";
-import { BrandsType } from "../types/firestore/BrandsType";
+import { TransmissionType } from "../types/firestore/TransmissionType";
 
-export const useBrands = () => {
-  const [brands, setBrands] = useState<BrandsType[]>([]);
+export const useTransmission = () => {
+  const [transmission, setTransmission] = useState<TransmissionType[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const q = query(collection(db, COLLECTIONS.BRANDS), orderBy('name'));
+        const q = query(collection(db, COLLECTIONS.TRANSMISSION), orderBy('name'));
         const snapshot = await getDocs(q);
-        const result: BrandsType[] = snapshot.docs.map((doc) => ({
+        const result: TransmissionType[] = snapshot.docs.map((doc) => ({
           docId: doc.id,
           name: doc.data().name,
         }));
         
-        setBrands(result);
+        setTransmission(result);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -28,5 +28,5 @@ export const useBrands = () => {
     fetchBrands();
   }, []);
 
-  return { brands, loading };
+  return { transmission, loading };
 };

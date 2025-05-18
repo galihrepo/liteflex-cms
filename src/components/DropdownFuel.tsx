@@ -1,17 +1,17 @@
 import React, { useCallback, useMemo } from 'react';
-import { useBrands } from '../services/brandsService';
+import { useFuel } from '../services/fuelService';
 import { Dropdown, DropdownBaseProps } from './Dropdown';
 
-export const DropdownBrands = (props: DropdownBaseProps) => {
+export const DropdownFuel = (props: DropdownBaseProps) => {
     const { onSelectedItem, selectedItem } = props;
-    const { brands, loading } = useBrands();
+    const { fuel, loading } = useFuel();
 
     const items = useMemo(() => {
-        return brands.map(item => ({
+        return fuel.map(item => ({
             label: item.name,
             value: item.docId,
         }))
-    }, [brands])
+    }, [fuel])
 
     const handleChange = useCallback(
         (value: string) => {
@@ -27,7 +27,7 @@ export const DropdownBrands = (props: DropdownBaseProps) => {
 
     return (
         <Dropdown            
-            label='Merek'
+            label='Bahan Bakar'
             value={selectedItem?.value || ''}
             onValueChange={handleChange}
             items={items}

@@ -1,6 +1,8 @@
 import { Card } from "@/src/components/Card";
 import { DropdownBrands } from "@/src/components/DropdownBrands";
+import { DropdownFuel } from "@/src/components/DropdownFuel";
 import { DropdownModels } from "@/src/components/DropdownModels";
+import { DropdownTransmission } from "@/src/components/DropdownTransmission";
 import { DropdownVariants } from "@/src/components/DropdownVariants";
 import { useCallback, useState } from "react";
 import { Item } from "react-native-picker-select";
@@ -15,7 +17,7 @@ export default function CarAddScreen() {
     setBrandsId(data.value);
     setModelsId(undefined);
   }, [])
-  
+
   const onSelectedModels = useCallback((data: Item) => {
     setModelsId(data.value)
   }, [])
@@ -31,6 +33,8 @@ export default function CarAddScreen() {
       <DropdownBrands onSelectedItem={onSelectedBrands} />
       <DropdownModels brandsId={brandsId} onSelectedItem={onSelectedModels} />
       <DropdownVariants modelsId={modelsId} onSelectedItem={() => { }} />
+      <DropdownFuel onSelectedItem={() => { }} />
+      <DropdownTransmission  onSelectedItem={() => { }} />
     </Card>
   );
 }

@@ -1,9 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { useVariants } from '../services/variantsService';
-import { Dropdown } from './Dropdown';
-import { DropdownBrandsProps } from './DropdownBrands';
+import { Dropdown, DropdownBaseProps } from './Dropdown';
 
-type DropdownVariantsProps = DropdownBrandsProps & {
+type DropdownVariantsProps = DropdownBaseProps & {
     modelsId?: string;
   };
 

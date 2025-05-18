@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../config/configFirebase";
 import { COLLECTIONS } from "../contants/firestore";
@@ -21,7 +21,8 @@ export const useVariants = (modelsId?: string | undefined) => {
 
         const q = query(
           collection(db, COLLECTIONS.VARIANTS),
-          where("modelsId", "==", modelRef)
+          where("modelsId", "==", modelRef),
+          orderBy('name')
         );
 
         const snapshot = await getDocs(q);

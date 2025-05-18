@@ -2,23 +2,23 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../config/configFirebase";
 import { COLLECTIONS } from "../contants/firestore";
-import { BrandsType } from "../types/firestore/BrandsType";
+import { FuelType } from "../types/firestore/FuelType";
 
-export const useBrands = () => {
-  const [brands, setBrands] = useState<BrandsType[]>([]);
+export const useFuel = () => {
+  const [fuel, setFuel] = useState<FuelType[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const q = query(collection(db, COLLECTIONS.BRANDS), orderBy('name'));
+        const q = query(collection(db, COLLECTIONS.FUEL), orderBy('name'));
         const snapshot = await getDocs(q);
-        const result: BrandsType[] = snapshot.docs.map((doc) => ({
+        const result: FuelType[] = snapshot.docs.map((doc) => ({
           docId: doc.id,
           name: doc.data().name,
         }));
         
-        setBrands(result);
+        setFuel(result);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -28,5 +28,5 @@ export const useBrands = () => {
     fetchBrands();
   }, []);
 
-  return { brands, loading };
+  return { fuel, loading };
 };

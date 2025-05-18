@@ -3,6 +3,11 @@ import RNPickerSelect, { Item } from 'react-native-picker-select';
 import { useConfig } from '../config/provider/ConfigProvider';
 import { Box, Text } from './theme/componentsTheme';
 
+export type DropdownBaseProps = {
+    selectedItem?: Item;
+    onSelectedItem: (value: Item) => void;
+  };
+
 type DropdownProps = {
     label?: string;
     value: string;
@@ -10,8 +15,6 @@ type DropdownProps = {
     items: Item[];
     disabled?: boolean;
 };
-
-
 
 export const Dropdown = ({ label = 'Pilih..', value, onValueChange, items, disabled = false }: DropdownProps) => {
     const config = useConfig();
