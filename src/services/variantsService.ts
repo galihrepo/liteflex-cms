@@ -2,39 +2,39 @@ import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../config/configFirebase";
 import { COLLECTIONS } from "../contants/firestore";
-import { ModelsType } from "../types/firestore/ModelsType";
+import { VariantsType } from "../types/firestore/VariantsType";
 
-export const useModels = (brandsId?: string | undefined) => {
-  const [models, setModels] = useState<ModelsType[]>([]);
+export const useVariants = (modelsId?: string | undefined) => {
+  const [variants, setVariants] = useState<VariantsType[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchModels = async () => {
-      if (!brandsId || loading) {
-        setModels([]);
+    const fetchVariants = async () => {
+      if (!modelsId || loading) {
+        setVariants([]);
         return;
       }
 
       setLoading(true)
       try {
-        const brandRef = doc(db, COLLECTIONS.BRANDS, brandsId || "");
+        const modelRef = doc(db, COLLECTIONS.MODELS, modelsId || "");
 
         const q = query(
-          collection(db, COLLECTIONS.MODELS),
-          where("brandsId", "==", brandRef)
+          collection(db, COLLECTIONS.VARIANTS),
+          where("modelsId", "==", modelRef)
         );
 
         const snapshot = await getDocs(q);
-        const result: ModelsType[] = snapshot.docs.map((doc) => {
+        const result: VariantsType[] = snapshot.docs.map((doc) => {
           const data = doc.data();
           return {
             docId: doc.id,
             name: data.name,
-            brandsId: data.brandsId,
+            modelsId: data.modelsId,
           };
         });
 
-        setModels(result);
+        setVariants(result);
       } catch (error) {
         console.error(error);
       } finally {
@@ -42,8 +42,8 @@ export const useModels = (brandsId?: string | undefined) => {
       }
     };
 
-    fetchModels();
-  }, [brandsId]);
+    fetchVariants();
+  }, [modelsId]);
 
-  return { models, loading };
+  return { variants, loading };
 };

@@ -3,4 +3,5 @@ export const COLLECTIONS = {
     DEALERS: 'dealers',
     BRANDS: 'brands',
     MODELS: 'models',
+    VARIANTS: 'variants',
 }

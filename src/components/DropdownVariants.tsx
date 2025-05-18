@@ -1,22 +1,22 @@
 import React, { useCallback, useMemo } from 'react';
-import { useModels } from '../services/modelsService';
+import { useVariants } from '../services/variantsService';
 import { Dropdown } from './Dropdown';
 import { DropdownBrandsProps } from './DropdownBrands';
 
-type DropdownModelsProps = DropdownBrandsProps & {
-    brandsId?: string;
+type DropdownVariantsProps = DropdownBrandsProps & {
+    modelsId?: string;
   };
 
-export const DropdownModels = (props: DropdownModelsProps) => {
-    const { onSelectedItem, selectedItem, brandsId } = props;    
-    const { models, loading } = useModels(brandsId);
+export const DropdownVariants = (props: DropdownVariantsProps) => {
+    const { onSelectedItem, selectedItem, modelsId } = props;    
+    const { variants, loading } = useVariants(modelsId);
 
     const items = useMemo(() => {
-        return models.map(item => ({
+        return variants.map(item => ({
             label: item.name,
             value: item.docId
         }))
-    }, [models])
+    }, [variants])
 
     const handleChange = useCallback(
         (value: string) => {
@@ -30,7 +30,7 @@ export const DropdownModels = (props: DropdownModelsProps) => {
 
     return (
         <Dropdown            
-            label="Model"
+            label="Tipe"
             value={selectedItem?.value || ''}
             onValueChange={handleChange}
             items={items}

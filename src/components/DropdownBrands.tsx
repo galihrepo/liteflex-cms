@@ -14,7 +14,7 @@ export const DropdownBrands = (props: DropdownBrandsProps) => {
 
     const items = useMemo(() => {
         return brands.map(item => ({
-            label: item.value,
+            label: item.name,
             value: item.docId,
         }))
     }, [brands])

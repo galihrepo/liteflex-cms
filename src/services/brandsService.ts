@@ -14,9 +14,9 @@ export const useBrands = () => {
         const snapshot = await getDocs(collection(db, COLLECTIONS.BRANDS));
         const result: BrandsType[] = snapshot.docs.map((doc) => ({
           docId: doc.id,
-          value: doc.data().value,
+          name: doc.data().name,
         }));
-        console.log('BERAK brands : ', result);
+        
         setBrands(result);
         setLoading(false);
       } catch (error) {

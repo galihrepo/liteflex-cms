@@ -1,8 +1,8 @@
 import { DocumentReference } from "firebase/firestore";
 
-export interface ModelsType {
+export interface VariantsType {
     docId: string;
-    brandsId: DocumentReference;
+    modelsId: DocumentReference;
     name: string;
   }
   
