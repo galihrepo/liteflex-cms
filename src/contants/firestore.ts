@@ -6,4 +6,6 @@ export const COLLECTIONS = {
     VARIANTS: 'variants',
     FUEL: 'fuel',
     TRANSMISSION: 'transmission',
+    VEHICLE_COLORS: 'vehicleColors',
+    VEHICLE_MILEAGE: 'vehicleMileage',
 }

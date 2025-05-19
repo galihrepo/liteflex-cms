@@ -10,6 +10,7 @@ export const useTransmission = () => {
 
   useEffect(() => {
     const fetchBrands = async () => {
+      setLoading(true);
       try {
         const q = query(collection(db, COLLECTIONS.TRANSMISSION), orderBy('name'));
         const snapshot = await getDocs(q);
@@ -19,9 +20,10 @@ export const useTransmission = () => {
         }));
         
         setTransmission(result);
-        setLoading(false);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 

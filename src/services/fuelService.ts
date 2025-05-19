@@ -10,6 +10,7 @@ export const useFuel = () => {
 
   useEffect(() => {
     const fetchBrands = async () => {
+      setLoading(true);
       try {
         const q = query(collection(db, COLLECTIONS.FUEL), orderBy('name'));
         const snapshot = await getDocs(q);
@@ -19,9 +20,10 @@ export const useFuel = () => {
         }));
         
         setFuel(result);
-        setLoading(false);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
