@@ -10,19 +10,21 @@ import { Button } from './Button';
 import MemoizedImage from './MemoizedImage';
 import { PressableHover } from './PressableHover';
 import { TextLabelForm } from "./TextLabelForm";
-import { Box } from './theme/componentsTheme';
+import { Box, Text } from './theme/componentsTheme';
 
-type UploaderPictureProps = {
+type MediaType = 'images' | 'videos'
+
+type UploaderProps = {
     label: string;
+    type: MediaType;
     onSuccessUploaded: (url: string) => void;
-    onPictureRemoved: () => void;
+    onRemoved: () => void;
 };
 
-const pickImage = async () => {
+const pickImage = async (type: MediaType) => {
     const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ['images'],
+        mediaTypes: [type],
         allowsEditing: true,
-        base64: true,
     });
 
     if (!result.canceled && result.assets?.[0]) {
@@ -32,7 +34,7 @@ const pickImage = async () => {
     return null;
 };
 
-const uploadToCloudinary = async (asset: ImagePicker.ImagePickerAsset) => {
+const uploadToCloudinary = async (asset: ImagePicker.ImagePickerAsset, type: MediaType) => {
 
     const file = asset.file;
     const data = new FormData();
@@ -46,8 +48,8 @@ const uploadToCloudinary = async (asset: ImagePicker.ImagePickerAsset) => {
     } else {
         data.append('file', {
             uri: asset.uri,
-            name: `${Date.now()}.jpg`,
-            type: 'image/jpeg',
+            name: `${Date.now()}${type === 'images' ? '.jpg' : '.mp4'}`,
+            type: type === 'images' ? 'image/jpeg' : 'video/mp4',
         } as any);
     }
 
@@ -55,7 +57,7 @@ const uploadToCloudinary = async (asset: ImagePicker.ImagePickerAsset) => {
     data.append('cloud_name', CLOUDINARY.CLOUD_NAME);
 
     const res = await axios.post(
-        `https://api.cloudinary.com/v1_1/${CLOUDINARY.CLOUD_NAME}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY.CLOUD_NAME}/${type === 'images' ? 'image' : 'video'}/upload`,
         data, {
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -65,20 +67,20 @@ const uploadToCloudinary = async (asset: ImagePicker.ImagePickerAsset) => {
     return res.data.secure_url;
 };
 
-export const UploaderPicture = (props: UploaderPictureProps) => {
-    const { label, onSuccessUploaded, onPictureRemoved } = props
+export const Uploader = (props: UploaderProps) => {
+    const { label, onSuccessUploaded, onRemoved, type } = props
 
     const [imageUri, setImageUri] = useState<string | null>(null);
 
     const [loading, setLoading] = useState(false);
 
     const onUpload = useCallback(async () => {
-        const image = await pickImage();
-        if (image) {
-            setImageUri(image.uri);
+        const file = await pickImage(type);
+        if (file) {
+            setImageUri((type === 'images' ? file?.uri : file?.fileName) || '');
             setLoading(true);
             try {
-                const url = await uploadToCloudinary(image)
+                const url = await uploadToCloudinary(file, type)
                 onSuccessUploaded?.(url)
             } catch (err) {
                 console.error("Upload error", err);
@@ -86,24 +88,33 @@ export const UploaderPicture = (props: UploaderPictureProps) => {
                 setLoading(false);
             }
         }
-    }, [onSuccessUploaded])
+    }, [onSuccessUploaded, type])
 
     const onDeletePicture = useCallback(() => {
         setImageUri(null)
-        onPictureRemoved()
+        onRemoved()
     }, [])
 
     return (
         <BoxForm>
             {label && <TextLabelForm label={label} />}
             <BoxValueForm flexGrow={0}>
-                {imageUri && (
+                {imageUri && type === 'images' && (
                     <Box flexDirection={'row'}>
                         <MemoizedImage uri={imageUri} width={75} height={75} />                        
                         <PressableHover onPress={onDeletePicture}>
                             <CircleX fill='red' size={30} color='white' style={{ marginLeft: -20, marginTop: -10 }}/>
                         </PressableHover>
                     </Box>
+                )}
+                {imageUri && type === 'videos' && (
+                    <Box flexDirection={'row'} alignItems={'center'}>
+                        <Text variant={'formValue'} style={{ paddingLeft: 15, paddingRight: 5}}>{imageUri}</Text>
+                        <PressableHover onPress={onDeletePicture}>
+                            <CircleX fill='red' size={20} color='white'/>
+                        </PressableHover>
+                    </Box>
+                    
                 )}
                 {!imageUri && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}
             </BoxValueForm>

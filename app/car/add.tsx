@@ -8,7 +8,7 @@ import { DropdownVehicleColors } from "@/src/components/DropdownVehicleColors";
 import { DropdownVehicleMileage } from "@/src/components/DropdownVehicleMileage";
 import { ScrollViewLayout } from "@/src/components/ScrollviewLayout";
 import { TextInputField } from "@/src/components/TextInputField";
-import { UploaderPicture } from "@/src/components/UploaderPicture";
+import { Uploader } from "@/src/components/Uploader";
 import { useCallback, useState } from "react";
 import { Item } from "react-native-picker-select";
 
@@ -44,7 +44,8 @@ export default function CarAddScreen() {
         <DropdownVehicleColors onSelectedItem={() => { }} />
         <DropdownVehicleMileage onSelectedItem={() => { }} />
         <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'} />
-        <UploaderPicture label={'Foto Depan'} onSuccessUploaded={(url) => {}} onPictureRemoved={() => {}} />
+        <Uploader label={'Foto Depan'} onSuccessUploaded={(url) => { } } onRemoved={() => { } } type={'images'} />
+        <Uploader label={'Video'} onSuccessUploaded={(url) => { } } onRemoved={() => { } } type={'videos'} />
       </Card>
     </ScrollViewLayout>
   );

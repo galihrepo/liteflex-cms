@@ -23,5 +23,9 @@ export const textVariants = {
     formLabel: {
       fontSize: 16,
       fontFamily: 'PjsBoldSemi'
+    },
+    formValue: {
+      fontSize: 14,
+      fontFamily: 'PjsMedium'
     }
   }
