@@ -6,6 +6,7 @@ import { DropdownTransmission } from "@/src/components/DropdownTransmission";
 import { DropdownVariants } from "@/src/components/DropdownVariants";
 import { DropdownVehicleColors } from "@/src/components/DropdownVehicleColors";
 import { DropdownVehicleMileage } from "@/src/components/DropdownVehicleMileage";
+import { TextInputField } from "@/src/components/TextInput";
 import { useCallback, useState } from "react";
 import { Item } from "react-native-picker-select";
 
@@ -18,11 +19,11 @@ export default function CarAddScreen() {
   const onSelectedBrands = useCallback((data: Item) => {
     setBrandsId(data.value);
     setModelsId(undefined);
-  }, [])
+  }, [setBrandsId, setModelsId])
 
   const onSelectedModels = useCallback((data: Item) => {
     setModelsId(data.value)
-  }, [])
+  }, [setModelsId])
 
   const onSave = useCallback(() => { }, [])
 
@@ -39,6 +40,7 @@ export default function CarAddScreen() {
       <DropdownTransmission  onSelectedItem={() => { }} />
       <DropdownVehicleColors onSelectedItem={() => { }}/>
       <DropdownVehicleMileage onSelectedItem={() => { }}/>
+      <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'}/>
     </Card>
   );
 }

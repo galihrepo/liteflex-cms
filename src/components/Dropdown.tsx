@@ -1,7 +1,9 @@
 import React from 'react';
 import RNPickerSelect, { Item } from 'react-native-picker-select';
 import { useConfig } from '../config/provider/ConfigProvider';
-import { Box, Text } from './theme/componentsTheme';
+import { BoxForm } from './BoxForm';
+import { BoxValueForm } from './BoxValueForm';
+import { TextLabelForm } from './TextLabelForm';
 
 export type DropdownBaseProps = {
     selectedItem?: Item;
@@ -30,13 +32,9 @@ export const Dropdown = ({ label = 'Pilih..', value, onValueChange, items, disab
     };
 
     return (
-        <Box flexDirection={'row'} width="100%" alignItems={'center'}>
-            {label && <Text width={{ phone: '20%', desktop: '30%' }} variant="formLabel">{label}</Text>}
-            <Box
-                maxWidth={400}
-                flexShrink={1}
-                flexGrow={1}
-            >
+        <BoxForm>
+            {label && <TextLabelForm label={label}/>}
+            <BoxValueForm maxWidth={400}>
                 <RNPickerSelect        
                     value={value}
                     onValueChange={onValueChange}
@@ -50,7 +48,7 @@ export const Dropdown = ({ label = 'Pilih..', value, onValueChange, items, disab
                         inputWeb: pickerBaseStyle,                           
                     }}
                 />
-            </Box>
-        </Box>
+            </BoxValueForm>
+        </BoxForm>
     );
 };

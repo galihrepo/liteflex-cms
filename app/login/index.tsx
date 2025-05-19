@@ -13,13 +13,13 @@ import { auth } from "../../src/config/configFirebase";
 
 export default function Index() {
 
-  const { config }  = useConfig();
+  const { config, theme }  = useConfig();
 
   const router = useRouter();
 
   const onRegistered = useCallback(()=>{
     router?.push('/');
-  },[])
+  },[router])
 
   const onUnregistered = useCallback(()=>{
     handleLogout()
@@ -67,7 +67,6 @@ export default function Index() {
       >
         <Text textAlign={'center'} variant={'header'}>Masuk ke Akun Anda</Text>
         <ButtonGoogle onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
-        {/* <Button label={"Logout"} onPress={() => handleLogout()}/> */}
       </View>
     </View>    
   );
