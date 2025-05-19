@@ -70,14 +70,14 @@ const uploadToCloudinary = async (asset: ImagePicker.ImagePickerAsset, type: Med
 export const Uploader = (props: UploaderProps) => {
     const { label, onSuccessUploaded, onRemoved, type } = props
 
-    const [imageUri, setImageUri] = useState<string | null>(null);
+    const [fileUri, setFileUri] = useState<string | null>(null);
 
     const [loading, setLoading] = useState(false);
 
     const onUpload = useCallback(async () => {
         const file = await pickImage(type);
         if (file) {
-            setImageUri((type === 'images' ? file?.uri : file?.fileName) || '');
+            setFileUri((type === 'images' ? file?.uri : file?.fileName) || '');
             setLoading(true);
             try {
                 const url = await uploadToCloudinary(file, type)
@@ -91,32 +91,35 @@ export const Uploader = (props: UploaderProps) => {
     }, [onSuccessUploaded, type])
 
     const onDeletePicture = useCallback(() => {
-        setImageUri(null)
+        setFileUri(null)
         onRemoved()
     }, [])
+
+    const Picture = () => (
+        <Box flexDirection={'row'}>
+            <MemoizedImage uri={fileUri || ''} width={75} height={75} />
+            <PressableHover onPress={onDeletePicture}>
+                <CircleX fill='red' size={30} color='white' style={{ marginLeft: -20, marginTop: -10 }} />
+            </PressableHover>
+        </Box>
+    )
+
+    const Video = () => (
+        <Box flexDirection={'row'} alignItems={'center'}>
+            <Text variant={'formValue'} style={{ paddingLeft: 15, paddingRight: 5 }}>{fileUri}</Text>
+            <PressableHover onPress={onDeletePicture}>
+                <CircleX fill='red' size={20} color='white' />
+            </PressableHover>
+        </Box>
+    )
 
     return (
         <BoxForm>
             {label && <TextLabelForm label={label} />}
             <BoxValueForm flexGrow={0}>
-                {imageUri && type === 'images' && (
-                    <Box flexDirection={'row'}>
-                        <MemoizedImage uri={imageUri} width={75} height={75} />                        
-                        <PressableHover onPress={onDeletePicture}>
-                            <CircleX fill='red' size={30} color='white' style={{ marginLeft: -20, marginTop: -10 }}/>
-                        </PressableHover>
-                    </Box>
-                )}
-                {imageUri && type === 'videos' && (
-                    <Box flexDirection={'row'} alignItems={'center'}>
-                        <Text variant={'formValue'} style={{ paddingLeft: 15, paddingRight: 5}}>{imageUri}</Text>
-                        <PressableHover onPress={onDeletePicture}>
-                            <CircleX fill='red' size={20} color='white'/>
-                        </PressableHover>
-                    </Box>
-                    
-                )}
-                {!imageUri && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}
+                {fileUri && type === 'images' && <Picture />}
+                {fileUri && type === 'videos' && <Video/>}
+                {!fileUri && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}
             </BoxValueForm>
         </BoxForm>
     );
