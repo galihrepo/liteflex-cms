@@ -44,8 +44,7 @@ export default function CarAddScreen() {
         <DropdownVehicleColors onSelectedItem={() => { }} />
         <DropdownVehicleMileage onSelectedItem={() => { }} />
         <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'} />
-        <UploaderPicture label={'Foto Depan'} />
-        <UploaderPicture label={'Foto Belakang'} />
+        <UploaderPicture label={'Foto Depan'} onSuccessUploaded={(url) => {}} onPictureRemoved={() => {}} />
       </Card>
     </ScrollViewLayout>
   );
