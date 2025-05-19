@@ -6,7 +6,9 @@ import { DropdownTransmission } from "@/src/components/DropdownTransmission";
 import { DropdownVariants } from "@/src/components/DropdownVariants";
 import { DropdownVehicleColors } from "@/src/components/DropdownVehicleColors";
 import { DropdownVehicleMileage } from "@/src/components/DropdownVehicleMileage";
-import { TextInputField } from "@/src/components/TextInput";
+import { ScrollViewLayout } from "@/src/components/ScrollviewLayout";
+import { TextInputField } from "@/src/components/TextInputField";
+import { UploaderPicture } from "@/src/components/UploaderPicture";
 import { useCallback, useState } from "react";
 import { Item } from "react-native-picker-select";
 
@@ -28,19 +30,23 @@ export default function CarAddScreen() {
   const onSave = useCallback(() => { }, [])
 
   return (
-    <Card
-      title={"Tambah Kendaraan"}
-      onSave={onSave}
-      isForm={true}
-      gap={'m'}>
-      <DropdownBrands onSelectedItem={onSelectedBrands} />
-      <DropdownModels brandsId={brandsId} onSelectedItem={onSelectedModels} />
-      <DropdownVariants modelsId={modelsId} onSelectedItem={() => { }} />
-      <DropdownFuel onSelectedItem={() => { }} />
-      <DropdownTransmission  onSelectedItem={() => { }} />
-      <DropdownVehicleColors onSelectedItem={() => { }}/>
-      <DropdownVehicleMileage onSelectedItem={() => { }}/>
-      <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'}/>
-    </Card>
+    <ScrollViewLayout>
+      <Card
+        title={"Tambah Kendaraan"}
+        onSave={onSave}
+        isForm={true}
+        gap={'m'}>
+        <DropdownBrands onSelectedItem={onSelectedBrands} />
+        <DropdownModels brandsId={brandsId} onSelectedItem={onSelectedModels} />
+        <DropdownVariants modelsId={modelsId} onSelectedItem={() => { }} />
+        <DropdownFuel onSelectedItem={() => { }} />
+        <DropdownTransmission onSelectedItem={() => { }} />
+        <DropdownVehicleColors onSelectedItem={() => { }} />
+        <DropdownVehicleMileage onSelectedItem={() => { }} />
+        <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'} />
+        <UploaderPicture label={'Foto Depan'} />
+        <UploaderPicture label={'Foto Belakang'} />
+      </Card>
+    </ScrollViewLayout>
   );
 }
