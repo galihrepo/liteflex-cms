@@ -26,6 +26,11 @@ export const textVariants = {
       fontFamily: 'Pjs',
       color: 'formTextLabel'
     },
+    formSubLabel: {
+      fontSize: 12,
+      fontFamily: 'Pjs',
+      color: 'formTextHint'
+    },
     formValue: {
       fontSize: 14,
       fontFamily: 'Pjs'

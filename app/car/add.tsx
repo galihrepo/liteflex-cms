@@ -261,6 +261,7 @@ export default function CarAddScreen() {
           render={({ field }) => (
             <Uploader
               label={'Foto'}
+              sublabel={'Maksimal 4'}
               urls={field.value}              
               onChoosenFile={onSelectedPictureUrls}
               type={'images'}
@@ -274,6 +275,7 @@ export default function CarAddScreen() {
           render={({ field }) => (
             <Uploader
               label={'Video'}
+              sublabel={'Maksimal 1'}
               urls={[field.value]}
               onChoosenFile={onSelectedVideoUrls}
               type={'videos'}
@@ -286,7 +288,8 @@ export default function CarAddScreen() {
           name="price"
           render={({ field }) => (
             <TextInputField
-              label={'Harga (Rp.)'}
+              label={'Harga'}
+              sublabel={'Rp.'}
               variant="price"              
               value={field.value}
               onChangeText={onChangeTextPrice}

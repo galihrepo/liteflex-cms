@@ -8,12 +8,13 @@ import { Box, Text } from './theme/componentsTheme';
 
 type InputProps = TextInputProps & {
   label: string;
+  sublabel?: string;
   hint?: string;
   error?: string;
   variant?: 'default' | 'price';
 };
 
-export const TextInputField = ({ label, error, hint, variant = 'default', value, onChangeText, ...props }: InputProps) => {
+export const TextInputField = ({ label, sublabel, error, hint, variant = 'default', value, onChangeText, ...props }: InputProps) => {
   const { theme } = useConfig();
 
   // Format number as IDR currency string, e.g. "Rp 1.000.000"
@@ -52,7 +53,7 @@ export const TextInputField = ({ label, error, hint, variant = 'default', value,
 
   return (
     <BoxForm>
-      {label && <TextLabelForm label={label} />}
+      {label && <TextLabelForm label={label} subLabel={sublabel}/>}
       <BoxValueForm>
         <Box>
           <TextInput

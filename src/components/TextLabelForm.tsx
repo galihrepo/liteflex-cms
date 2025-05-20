@@ -1,11 +1,16 @@
-import { Text } from './theme/componentsTheme';
+import { Box, Text } from './theme/componentsTheme';
 
 type TextLabelFormProps = {    
     label: string;
+    subLabel?: string;
 };
 
-export const TextLabelForm = ({label}: TextLabelFormProps) => {
+export const TextLabelForm = ({label, subLabel}: TextLabelFormProps) => {
     return (
-        <Text width={{ phone: '20%', desktop: '30%' }} variant="formLabel">{label}</Text>
+        <Box width={{ phone: '20%', desktop: '30%' }}>
+            <Text variant="formLabel">{label}</Text>
+            {subLabel && <Text variant="formSubLabel">{subLabel}</Text>}
+        </Box>
+        
     )
 }

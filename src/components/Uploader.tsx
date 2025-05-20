@@ -14,6 +14,7 @@ import { Box, Text } from './theme/componentsTheme';
 
 type UploaderProps = {
     label: string;
+    sublabel?: string;
     error?: string;
     urls?: string[];
     type: MediaType;
@@ -21,7 +22,7 @@ type UploaderProps = {
 };
 
 export const Uploader = (props: UploaderProps) => {
-    const { label, onChoosenFile, type, error, urls = [] } = props
+    const { label, sublabel, onChoosenFile, type, error, urls = [] } = props
 
     const isPicture = type === 'images'
 
@@ -89,7 +90,7 @@ export const Uploader = (props: UploaderProps) => {
 
     return (
         <BoxForm>
-            <TextLabelForm label={label} />
+            <TextLabelForm label={label} subLabel={sublabel}/>
             <BoxValueForm flexGrow={0} flexDirection={'row'} alignItems={'center'} gap={'m'}>
                 {loading && <LoadingUpload style={{ width: 60, height: 'auto' }} />}
                 {isVideo && noFiles && !loading && (
