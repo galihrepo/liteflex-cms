@@ -23,7 +23,7 @@ jobs:
           node-version: '20'
 
       - name: 📦 Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: 🏗️ Build Expo web project
         run: npx expo export --platform web --output-dir web-build

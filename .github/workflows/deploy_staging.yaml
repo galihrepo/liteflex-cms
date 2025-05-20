@@ -34,7 +34,7 @@ jobs:
           node-version: '20'
 
       - name: 📦 Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Create .env file
         run: echo "DEALER=${{ env.DEALER }}" > .env
