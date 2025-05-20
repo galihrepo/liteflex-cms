@@ -31,23 +31,6 @@ export const TextInputField = ({ label, error, hint, variant = 'default', value,
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   };
 
-  // Handle text change for price variant: format and send only digits to onChangeText
-  const handleChangeText = (text: string) => {
-    if (variant === 'price') {
-      // Format display value
-      const formatted = formatIDR(text);
-      if (onChangeText) {
-        // Send only digits to parent (or you can send formatted text if you prefer)
-        onChangeText(text.replace(/[^\d]/g, ''));
-      }
-      return formatted;
-    } else {
-      if (onChangeText) {
-        onChangeText(text);
-      }
-      return text;
-    }
-  };
 
   // To control displayed value formatted (for price variant)
   // We'll keep an internal state for display value when variant is price
