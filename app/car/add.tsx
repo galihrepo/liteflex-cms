@@ -28,6 +28,10 @@ export default function CarAddScreen() {
     setModelsId(data.value)
   }, [setModelsId])
 
+  const onChangeTextPlateNumber = useCallback((value: string) => { console.log('BERAK PLATE : ', value) }, [])
+
+  const onChangeTextPrice = useCallback((value: string) => {console.log('BERAK PRICE : ', value)}, [])
+
   const onSave = useCallback(() => { }, [])
 
   return (
@@ -51,11 +55,13 @@ export default function CarAddScreen() {
         <Separator />
         <DropdownVehicleMileage onSelectedItem={() => { }} />
         <Separator />
-        <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'}/>
+        <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'} onChangeText={onChangeTextPlateNumber}/>
         <Separator />
         <Uploader label={'Foto'} onSuccessUploaded={(url) => { }} onRemoved={() => { }} type={'images'} />
         <Separator />
         <Uploader label={'Video'} onSuccessUploaded={(url) => { }} onRemoved={() => { }} type={'videos'} />
+        <Separator />
+        <TextInputField label={'Harga (Rp.)'} variant="price" onChangeText={onChangeTextPrice}/>
         <Separator />
       </Card>
     </ScrollViewLayout>

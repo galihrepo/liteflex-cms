@@ -1,3 +1,4 @@
+import React from "react";
 import { TextInput, TextInputProps } from "react-native";
 import { useConfig } from "../config/provider/ConfigProvider";
 import { BoxForm } from "./BoxForm";
@@ -6,35 +7,105 @@ import { TextLabelForm } from "./TextLabelForm";
 import { Text } from './theme/componentsTheme';
 
 type InputProps = TextInputProps & {
-    label: string;
-    hint: string;
-    error?: string;
+  label: string;
+  hint?: string;
+  error?: string;
+  variant?: 'default' | 'price';
 };
 
-export const TextInputField = ({ label, error, hint, ...props }: InputProps) => {
-    const { theme } = useConfig();
-    return (
-        <BoxForm>
-            {label && <TextLabelForm label={label} />}
-            <BoxValueForm>
-                <TextInput
-                    placeholder={hint}
-                    placeholderTextColor={theme.colors.formTextHint}
-                    style={{
-                        paddingVertical: 10,
-                        paddingHorizontal: 16,
-                        borderWidth: 0,
-                        borderRadius: 8,
-                        fontFamily: 'Pjs',
-                        color: theme.colors.formTextLabel,
-                        backgroundColor: theme.colors.formBackground,
-                        fontSize: 14,
-                    }}
-                    {...props}
-                />
-                {error && <Text variant={'header'}>{error}</Text>}
-            </BoxValueForm>
+export const TextInputField = ({ label, error, hint, variant = 'default', value, onChangeText, ...props }: InputProps) => {
+  const { theme } = useConfig();
 
-        </BoxForm>
-    );
+  // Format number as IDR currency string, e.g. "Rp 1.000.000"
+  const formatIDR = (numStr: string) => {
+    // Remove non-digit characters (except comma/dot if you want decimals)
+    const cleanStr = numStr.replace(/[^\d]/g, '');
+
+    if (cleanStr === '') return '';
+
+    // Parse number
+    const num = parseInt(cleanStr, 10);
+    if (isNaN(num)) return '';
+
+    // Format with thousand separators (dot in IDR style)
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  };
+
+  // Handle text change for price variant: format and send only digits to onChangeText
+  const handleChangeText = (text: string) => {
+    if (variant === 'price') {
+      // Format display value
+      const formatted = formatIDR(text);
+      if (onChangeText) {
+        // Send only digits to parent (or you can send formatted text if you prefer)
+        onChangeText(text.replace(/[^\d]/g, ''));
+      }
+      return formatted;
+    } else {
+      if (onChangeText) {
+        onChangeText(text);
+      }
+      return text;
+    }
+  };
+
+  // To control displayed value formatted (for price variant)
+  // We'll keep an internal state for display value when variant is price
+
+  const [displayValue, setDisplayValue] = React.useState(() => {
+    if (variant === 'price' && typeof value === 'string') {
+      return formatIDR(value);
+    }
+    return value || '';
+  });
+
+  React.useEffect(() => {
+    if (variant === 'price' && typeof value === 'string') {
+      setDisplayValue(formatIDR(value));
+    } else if (variant !== 'price') {
+      setDisplayValue(value || '');
+    }
+  }, [value, variant]);
+
+  return (
+    <BoxForm>
+      {label && <TextLabelForm label={label} />}
+      <BoxValueForm>
+        <TextInput
+          placeholder={hint}
+          placeholderTextColor={theme.colors.formTextHint}
+          style={{
+            flex: 1,
+            paddingVertical: 10,
+            paddingHorizontal: 16,
+            borderWidth: 0,
+            borderRadius: 8,
+            fontFamily: 'Pjs',
+            color: theme.colors.formTextLabel,
+            backgroundColor: theme.colors.formBackground,
+            fontSize: 14,
+          }}
+          keyboardType={variant === 'price' ? 'numeric' : props.keyboardType}
+          value={displayValue}
+          onChangeText={(text) => {
+            if (variant === 'price') {
+              // Update displayValue with formatted text
+              const digitsOnly = text.replace(/[^\d]/g, '');
+              const formatted = formatIDR(digitsOnly);
+              setDisplayValue(formatted);
+
+              if (onChangeText) {
+                onChangeText(digitsOnly);
+              }
+            } else {
+              if (onChangeText) onChangeText(text);
+              setDisplayValue(text);
+            }
+          }}
+          {...props}
+        />
+      </BoxValueForm>
+      {error && <Text variant={'header'}>{error}</Text>}
+    </BoxForm>
+  );
 };
