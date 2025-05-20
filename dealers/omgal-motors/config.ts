@@ -6,6 +6,7 @@ const assets: BaseConfigAssetsType = {
 };
 
 const config: Partial<BaseConfigType> = {
+  id: 'omgal-motors',
   firestoreDocIdDealers: 'omgal-motors',
   appName: 'Oms Gal Motors',
   assets: assets,

@@ -5,15 +5,17 @@ import { MediaType, pickMedia } from '../utils/mediaPicker';
 import { BoxForm } from "./BoxForm";
 import { BoxValueForm } from "./BoxValueForm";
 import { Button } from './Button';
+import { LinkText } from './LinkText';
+import { LoadingUpload } from './LoadingUpload';
 import MemoizedImage from './MemoizedImage';
 import { PressableHover } from './PressableHover';
 import { TextLabelForm } from "./TextLabelForm";
-import { Box, Text } from './theme/componentsTheme';
+import { Box } from './theme/componentsTheme';
 
 type UploaderProps = {
     label: string;
     type: MediaType;
-    onSuccessUploaded: (url: string) => void;
+    onSuccessUploaded: (urls: string[]) => void;
     onRemoved: () => void;
 };
 
@@ -24,7 +26,7 @@ export const Uploader = (props: UploaderProps) => {
 
     const isVideo = type === 'videos'
 
-    const [listFileUri, setListFileUri] = useState<string[]>([]);
+    const [listPath, setListPath] = useState<string[]>([]);
 
     const [loading, setLoading] = useState(false);
 
@@ -32,20 +34,20 @@ export const Uploader = (props: UploaderProps) => {
 
     const MAX_PICTURE = 4;
 
-    const hasFiles = listFileUri.length > 0;
+    const hasFiles = listPath.length > 0;
 
-    const isShowUploadPicture = listFileUri.length < MAX_PICTURE;
+    const isShowUploadPicture = listPath.length < MAX_PICTURE;
     
     const noFiles = !hasFiles;
 
     const onUpload = useCallback(async () => {
         const file = await pickMedia(type);
         if (file) {
-            setListFileUri(prevItems => [...prevItems, (type === 'images' ? file?.uri : file?.fileName) || '']);
             setLoading(true);
             try {
                 const url = await uploadToCloudinary(file, type)
-                onSuccessUploaded?.(url)
+                setListPath(prev => [...prev, url])
+                onSuccessUploaded?.(listPath)
             } catch (err) {
                 console.error("Upload error", err);
             } finally {
@@ -55,13 +57,13 @@ export const Uploader = (props: UploaderProps) => {
     }, [onSuccessUploaded, type])
 
     const onDeletePicture = useCallback((data: string) => {
-        setListFileUri(prev => prev.filter(item => item !== data))
+        setListPath(prev => prev.filter(item => item !== data))
         onRemoved()
     }, [])
 
     const Picture = () => {
         return (<Box flexDirection={'row'}>
-            {listFileUri.map((item, index) => (
+            {listPath.map((item, index) => (
                 <Box key={index} flexDirection={'row'}>
                     <MemoizedImage uri={item || ''} width={75} height={75} />
                     
@@ -74,9 +76,9 @@ export const Uploader = (props: UploaderProps) => {
     }
 
     const Video = () => (
-        <Box flexDirection={'row'} alignItems={'center'}>
-            <Text variant={'formValue'} style={{ paddingLeft: 15, paddingRight: 5 }}>{listFileUri[0]}</Text>
-            <PressableHover onPress={() => onDeletePicture(listFileUri[0])}>
+        <Box flexDirection={'row'} alignItems={'center'} gap={'xs'}>
+            <LinkText label={'preview_video'} url={listPath[0]}/>
+            <PressableHover onPress={() => onDeletePicture(listPath[0])}>
                 <CircleX fill='red' size={20} color='white' />
             </PressableHover>
         </Box>
@@ -84,12 +86,13 @@ export const Uploader = (props: UploaderProps) => {
 
     return (
         <BoxForm>
-            {label && <TextLabelForm label={label} />}
-            <BoxValueForm flexGrow={0} flexDirection={'row-reverse'} alignItems={'center'} gap={'m'}>                
+            <TextLabelForm label={label}/>
+            <BoxValueForm flexGrow={0} flexDirection={'row'} alignItems={'center'} gap={'m'}>                                
+                {loading && <LoadingUpload style={{ width: 60, height: 'auto'}}/>}                
+                {isVideo && noFiles && !loading && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}
+                {isPicture && isShowUploadPicture && !loading && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}                
                 {isPicture && hasFiles && <Picture />}
-                {isPicture && isShowUploadPicture && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}
-                {isVideo && hasFiles &&<Video />}
-                {isVideo && noFiles && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}
+                {isVideo && hasFiles && <Video />}                
             </BoxValueForm>
         </BoxForm>
     );
