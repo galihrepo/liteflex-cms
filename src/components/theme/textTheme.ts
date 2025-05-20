@@ -14,7 +14,8 @@ export const textVariants = {
     },
     cardTitle: {
       fontSize: 20,
-      fontFamily: 'PjsBold'
+      fontFamily: 'PjsBoldSemi',
+      color: 'formTextLabel'
     },
     button: {
       fontSize: 14,
@@ -22,10 +23,11 @@ export const textVariants = {
     },
     formLabel: {
       fontSize: 16,
-      fontFamily: 'PjsBoldSemi'
+      fontFamily: 'Pjs',
+      color: 'formTextLabel'
     },
     formValue: {
       fontSize: 14,
-      fontFamily: 'PjsMedium'
+      fontFamily: 'Pjs'
     }
   }

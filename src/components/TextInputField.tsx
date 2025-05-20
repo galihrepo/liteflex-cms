@@ -19,14 +19,15 @@ export const TextInputField = ({ label, error, hint, ...props }: InputProps) => 
             <BoxValueForm>
                 <TextInput
                     placeholder={hint}
-                    placeholderTextColor={theme.colors.textHint}
+                    placeholderTextColor={theme.colors.formTextHint}
                     style={{
                         paddingVertical: 10,
                         paddingHorizontal: 16,
                         borderWidth: 0,
                         borderRadius: 8,
-                        fontFamily: 'PjsMedium',
-                        backgroundColor: theme.colors.backgroundForm,
+                        fontFamily: 'Pjs',
+                        color: theme.colors.formTextLabel,
+                        backgroundColor: theme.colors.formBackground,
                         fontSize: 14,
                     }}
                     {...props}

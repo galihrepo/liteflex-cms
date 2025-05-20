@@ -7,6 +7,7 @@ import { DropdownVariants } from "@/src/components/DropdownVariants";
 import { DropdownVehicleColors } from "@/src/components/DropdownVehicleColors";
 import { DropdownVehicleMileage } from "@/src/components/DropdownVehicleMileage";
 import { ScrollViewLayout } from "@/src/components/ScrollviewLayout";
+import { Separator } from "@/src/components/Separator";
 import { TextInputField } from "@/src/components/TextInputField";
 import { Uploader } from "@/src/components/Uploader";
 import { useCallback, useState } from "react";
@@ -34,18 +35,28 @@ export default function CarAddScreen() {
       <Card
         title={"Tambah Kendaraan"}
         onSave={onSave}
-        isForm={true}
-        gap={'m'}>
+        isForm={true}>
+        <Separator />
         <DropdownBrands onSelectedItem={onSelectedBrands} />
+        <Separator />
         <DropdownModels brandsId={brandsId} onSelectedItem={onSelectedModels} />
+        <Separator />
         <DropdownVariants modelsId={modelsId} onSelectedItem={() => { }} />
+        <Separator />
         <DropdownFuel onSelectedItem={() => { }} />
+        <Separator />
         <DropdownTransmission onSelectedItem={() => { }} />
+        <Separator />
         <DropdownVehicleColors onSelectedItem={() => { }} />
+        <Separator />
         <DropdownVehicleMileage onSelectedItem={() => { }} />
-        <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'} />
-        <Uploader label={'Foto Depan'} onSuccessUploaded={(url) => { } } onRemoved={() => { } } type={'images'} />
-        <Uploader label={'Video'} onSuccessUploaded={(url) => { } } onRemoved={() => { } } type={'videos'} />
+        <Separator />
+        <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'}/>
+        <Separator />
+        <Uploader label={'Foto'} onSuccessUploaded={(url) => { }} onRemoved={() => { }} type={'images'} />
+        <Separator />
+        <Uploader label={'Video'} onSuccessUploaded={(url) => { }} onRemoved={() => { }} type={'videos'} />
+        <Separator />
       </Card>
     </ScrollViewLayout>
   );

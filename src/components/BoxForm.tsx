@@ -10,7 +10,7 @@ type BoxFormProps = BoxProps<AppTheme> & {
 export const BoxForm = ({children}: BoxFormProps) => {
 
     return (
-        <Box flexDirection={'row'} width="100%" alignItems={'center'}>
+        <Box flexDirection={'row'} width="100%" alignItems={'center'} p={'l'}>
             {children}            
         </Box>
     );

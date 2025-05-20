@@ -26,9 +26,10 @@ export const Dropdown = ({ label = 'Pilih..', value, onValueChange, items, disab
         paddingHorizontal: 16,
         borderWidth: 0,
         borderRadius: 8,
-        fontFamily: 'PjsMedium',
-        backgroundColor: config.theme.colors.backgroundForm,
-        fontSize: 14,        
+        fontFamily: 'Pjs',
+        backgroundColor: config.theme.colors.formBackground,
+        fontSize: 14,
+        color: config.theme.colors.formTextLabel,
     };
 
     return (

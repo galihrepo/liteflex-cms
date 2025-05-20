@@ -70,14 +70,26 @@ const uploadToCloudinary = async (asset: ImagePicker.ImagePickerAsset, type: Med
 export const Uploader = (props: UploaderProps) => {
     const { label, onSuccessUploaded, onRemoved, type } = props
 
-    const [fileUri, setFileUri] = useState<string | null>(null);
+    const isPicture = type === 'images'
+
+    const isVideo = type === 'videos'
+
+    const [listFileUri, setListFileUri] = useState<string[]>([]);
 
     const [loading, setLoading] = useState(false);
+
+    const MAX_PICTURE = 2;
+
+    const hasFiles = listFileUri.length > 0;
+
+    const isShowUploadPicture = listFileUri.length < MAX_PICTURE;
+    
+    const noFiles = !hasFiles;
 
     const onUpload = useCallback(async () => {
         const file = await pickImage(type);
         if (file) {
-            setFileUri((type === 'images' ? file?.uri : file?.fileName) || '');
+            setListFileUri(prevItems => [...prevItems, (type === 'images' ? file?.uri : file?.fileName) || '']);
             setLoading(true);
             try {
                 const url = await uploadToCloudinary(file, type)
@@ -90,24 +102,29 @@ export const Uploader = (props: UploaderProps) => {
         }
     }, [onSuccessUploaded, type])
 
-    const onDeletePicture = useCallback(() => {
-        setFileUri(null)
+    const onDeletePicture = useCallback((data: string) => {
+        setListFileUri(prev => prev.filter(item => item !== data))
         onRemoved()
     }, [])
 
-    const Picture = () => (
-        <Box flexDirection={'row'}>
-            <MemoizedImage uri={fileUri || ''} width={75} height={75} />
-            <PressableHover onPress={onDeletePicture}>
-                <CircleX fill='red' size={30} color='white' style={{ marginLeft: -20, marginTop: -10 }} />
-            </PressableHover>
-        </Box>
-    )
+    const Picture = () => {
+        return (<Box flexDirection={'row'}>
+            {listFileUri.map((item, index) => (
+                <Box key={index} flexDirection={'row'}>
+                    <MemoizedImage uri={item || ''} width={75} height={75} />
+                    
+                    <PressableHover onPress={() => onDeletePicture(item)}>
+                        <CircleX fill='red' size={30} color='white' style={{ marginLeft: -20, marginTop: -10 }} />
+                    </PressableHover>
+                </Box>
+            ))}
+        </Box>)
+    }
 
     const Video = () => (
         <Box flexDirection={'row'} alignItems={'center'}>
-            <Text variant={'formValue'} style={{ paddingLeft: 15, paddingRight: 5 }}>{fileUri}</Text>
-            <PressableHover onPress={onDeletePicture}>
+            <Text variant={'formValue'} style={{ paddingLeft: 15, paddingRight: 5 }}>{listFileUri[0]}</Text>
+            <PressableHover onPress={() => onDeletePicture(listFileUri[0])}>
                 <CircleX fill='red' size={20} color='white' />
             </PressableHover>
         </Box>
@@ -116,10 +133,11 @@ export const Uploader = (props: UploaderProps) => {
     return (
         <BoxForm>
             {label && <TextLabelForm label={label} />}
-            <BoxValueForm flexGrow={0}>
-                {fileUri && type === 'images' && <Picture />}
-                {fileUri && type === 'videos' && <Video/>}
-                {!fileUri && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}
+            <BoxValueForm flexGrow={0} flexDirection={'row-reverse'} alignItems={'center'} gap={'m'}>                
+                {isPicture && hasFiles && <Picture />}
+                {isPicture && isShowUploadPicture && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}
+                {isVideo && hasFiles &&<Video />}
+                {isVideo && noFiles && <Button variant={'s'} label={'Pilih'} onPress={onUpload} />}
             </BoxValueForm>
         </BoxForm>
     );

@@ -27,15 +27,15 @@ export const Card = ({ title, isForm = true, children, onSave = () => { }, ...pr
             alignItems={'baseline'}
             borderRadius={'m'}
             m={'xl'}
-            p={'l'}
             style={{ backgroundColor: 'white' }}
             {...props}>
-            <Text variant={'cardTitle'}>{title}</Text>
+            <Text variant={'cardTitle'} p={'l'}>{title}</Text>
             <Box height={10}/>
             {children}
             <Box height={10}/>
             {isForm && (
                 <Box
+                    p={'l'}
                     flexDirection={'row'}
                     gap={'s'}
                     alignSelf={'flex-end'}>
