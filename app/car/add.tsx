@@ -260,7 +260,8 @@ export default function CarAddScreen() {
           name="pictureUrls"
           render={({ field }) => (
             <Uploader
-              label={'Foto'}              
+              label={'Foto'}
+              urls={field.value}              
               onChoosenFile={onSelectedPictureUrls}
               type={'images'}
               error={errors?.pictureUrls?.message} />
@@ -273,6 +274,7 @@ export default function CarAddScreen() {
           render={({ field }) => (
             <Uploader
               label={'Video'}
+              urls={[field.value]}
               onChoosenFile={onSelectedVideoUrls}
               type={'videos'}
               error={errors?.videoUrl?.message} />

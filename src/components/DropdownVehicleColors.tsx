@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { useVehicleColors } from '../services/vehicleColorsService';
+import { useVehicleColors } from '../hooks/useVehicleColors';
 import { Dropdown, DropdownBaseProps } from './Dropdown';
 
 export const DropdownVehicleColors = (props: DropdownBaseProps) => {

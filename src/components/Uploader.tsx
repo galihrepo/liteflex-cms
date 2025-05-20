@@ -56,12 +56,13 @@ export const Uploader = (props: UploaderProps) => {
                 setLoading(false);
             }
         }
-    }, [onChoosenFile, type])
+    }, [onChoosenFile, type, listPath, uploadToCloudinary])
 
     const onDeletePicture = useCallback((data: string) => {
-        setListPath(prev => prev.filter(item => item !== data))
-        onChoosenFile(listPath)
-    }, [])
+        const filteredList = listPath.filter(item => item !== data);
+        setListPath(filteredList);
+        onChoosenFile(filteredList);
+    }, [listPath, onChoosenFile])
 
     const Picture = () => {
         return (<Box flexDirection={'row'}>

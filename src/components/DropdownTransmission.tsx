@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { useTransmission } from '../services/transmissionService';
+import { useTransmission } from '../hooks/useTransmission';
 import { Dropdown, DropdownBaseProps } from './Dropdown';
 
 export const DropdownTransmission = (props: DropdownBaseProps) => {

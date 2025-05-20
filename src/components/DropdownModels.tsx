@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { useModels } from '../services/modelsService';
+import { useModels } from '../hooks/useModels';
 import { Dropdown, DropdownBaseProps } from './Dropdown';
 
 type DropdownModelsProps = DropdownBaseProps & {

@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { useBrands } from '../services/brandsService';
+import { useBrands } from '../hooks/useBrands';
 import { Dropdown, DropdownBaseProps } from './Dropdown';
 
 export const DropdownBrands = (props: DropdownBaseProps) => {

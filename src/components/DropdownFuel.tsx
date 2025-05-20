@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { useFuel } from '../services/fuelService';
+import { useFuel } from '../hooks/useFuel';
 import { Dropdown, DropdownBaseProps } from './Dropdown';
 
 export const DropdownFuel = (props: DropdownBaseProps) => {

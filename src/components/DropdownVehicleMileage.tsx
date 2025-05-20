@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { useVehicleMileage } from '../services/vehicleMileageService';
+import { useVehicleMileage } from '../hooks/useVehicleMileage';
 import { Dropdown, DropdownBaseProps } from './Dropdown';
 
 export const DropdownVehicleMileage = (props: DropdownBaseProps) => {

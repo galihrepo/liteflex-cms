@@ -1,34 +1,13 @@
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { db } from "../config/configFirebase";
 import { COLLECTIONS } from "../contants/firestore";
 import { BrandsType } from "../types/firestore/BrandsType";
 
-export const useBrands = () => {
-  const [brands, setBrands] = useState<BrandsType[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchBrands = async () => {
-      setLoading(true);
-      try {
-        const q = query(collection(db, COLLECTIONS.BRANDS), orderBy('name'));
-        const snapshot = await getDocs(q);
-        const result: BrandsType[] = snapshot.docs.map((doc) => ({
-          docId: doc.id,
-          name: doc.data().name,
-        }));
-        
-        setBrands(result);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBrands();
-  }, []);
-
-  return { brands, loading };
+export const getBrands = async (): Promise<BrandsType[]> => {
+  const q = query(collection(db, COLLECTIONS.BRANDS), orderBy("name"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((doc) => ({
+    docId: doc.id,
+    name: doc.data().name,
+  }));
 };

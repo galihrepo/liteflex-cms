@@ -1,50 +1,23 @@
 import { collection, doc, getDocs, orderBy, query, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { db } from "../config/configFirebase";
 import { COLLECTIONS } from "../contants/firestore";
 import { ModelsType } from "../types/firestore/ModelsType";
 
-export const useModels = (brandsId?: string | undefined) => {
-  const [models, setModels] = useState<ModelsType[]>([]);
-  const [loading, setLoading] = useState(false);
+export const getModelsByBrand = async (brandId: string): Promise<ModelsType[]> => {
+  if (!brandId.trim()) return [];
 
-  useEffect(() => {
-    const fetchModels = async () => {
-      if (!brandsId?.trim() || loading) {
-        setModels([]);
-        return;
-      }
+  const brandRef = doc(db, COLLECTIONS.BRANDS, brandId);
+  const q = query(
+    collection(db, COLLECTIONS.MODELS),
+    where("brandsId", "==", brandRef),
+    orderBy("name")
+  );
 
-      setLoading(true)
-      try {
-        const brandRef = doc(db, COLLECTIONS.BRANDS, brandsId || "");
+  const snapshot = await getDocs(q);
 
-        const q = query(
-          collection(db, COLLECTIONS.MODELS),
-          where("brandsId", "==", brandRef),
-          orderBy('name')
-        );
-
-        const snapshot = await getDocs(q);
-        const result: ModelsType[] = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            docId: doc.id,
-            name: data.name,
-            brandsId: data.brandsId,
-          };
-        });
-
-        setModels(result);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false)
-      }
-    };
-
-    fetchModels();
-  }, [brandsId]);
-
-  return { models, loading };
+  return snapshot.docs.map((doc) => ({
+    docId: doc.id,
+    name: doc.data().name,
+    brandsId: doc.data().brandsId,
+  }));
 };
