@@ -7,7 +7,7 @@ type DropdownModelsProps = DropdownBaseProps & {
   };
 
 export const DropdownModels = (props: DropdownModelsProps) => {
-    const { onSelectedItem, selectedItem, brandsId } = props;    
+    const { onSelectedItem, selectedItem, brandsId, error } = props;    
     const { models, loading } = useModels(brandsId);
 
     const items = useMemo(() => {
@@ -20,9 +20,7 @@ export const DropdownModels = (props: DropdownModelsProps) => {
     const handleChange = useCallback(
         (value: string) => {
           const data = items.find(item => item.value === value);
-          if (data) {
-            onSelectedItem(data);            
-          }
+          onSelectedItem(data);
         },
         [items]
       );
@@ -34,6 +32,7 @@ export const DropdownModels = (props: DropdownModelsProps) => {
             onValueChange={handleChange}
             items={items}
             disabled={items.length === 0 || loading}
+            error={error}
         />
     );
 };

@@ -3,7 +3,7 @@ import { useFuel } from '../services/fuelService';
 import { Dropdown, DropdownBaseProps } from './Dropdown';
 
 export const DropdownFuel = (props: DropdownBaseProps) => {
-    const { onSelectedItem, selectedItem } = props;
+    const { onSelectedItem, selectedItem, error } = props;
     const { fuel, loading } = useFuel();
 
     const items = useMemo(() => {
@@ -16,9 +16,7 @@ export const DropdownFuel = (props: DropdownBaseProps) => {
     const handleChange = useCallback(
         (value: string) => {
           const data = items.find(item => item.value === value);
-          if (data) {
-            onSelectedItem(data);            
-          }
+          onSelectedItem(data);
         },
         [items]
       );    
@@ -31,6 +29,7 @@ export const DropdownFuel = (props: DropdownBaseProps) => {
             value={selectedItem?.value || ''}
             onValueChange={handleChange}
             items={items}
+            error={error}
         />
     );
 };

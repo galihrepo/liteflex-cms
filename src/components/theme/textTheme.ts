@@ -29,5 +29,10 @@ export const textVariants = {
     formValue: {
       fontSize: 14,
       fontFamily: 'Pjs'
+    },
+    formError: {
+      fontSize: 12,
+      fontFamily: 'Pjs',
+      color: 'formTextError'
     }
   }

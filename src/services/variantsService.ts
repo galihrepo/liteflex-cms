@@ -10,7 +10,7 @@ export const useVariants = (modelsId?: string | undefined) => {
 
   useEffect(() => {
     const fetchVariants = async () => {
-      if (!modelsId || loading) {
+      if (!modelsId?.trim() || loading) {
         setVariants([]);
         return;
       }

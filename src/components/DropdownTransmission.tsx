@@ -3,7 +3,7 @@ import { useTransmission } from '../services/transmissionService';
 import { Dropdown, DropdownBaseProps } from './Dropdown';
 
 export const DropdownTransmission = (props: DropdownBaseProps) => {
-    const { onSelectedItem, selectedItem } = props;
+    const { onSelectedItem, selectedItem, error } = props;
     const { transmission, loading } = useTransmission();
 
     const items = useMemo(() => {
@@ -16,9 +16,7 @@ export const DropdownTransmission = (props: DropdownBaseProps) => {
     const handleChange = useCallback(
         (value: string) => {
           const data = items.find(item => item.value === value);
-          if (data) {
-            onSelectedItem(data);            
-          }
+          onSelectedItem(data);
         },
         [items]
       );    
@@ -31,6 +29,7 @@ export const DropdownTransmission = (props: DropdownBaseProps) => {
             value={selectedItem?.value || ''}
             onValueChange={handleChange}
             items={items}
+            error={error}
         />
     );
 };

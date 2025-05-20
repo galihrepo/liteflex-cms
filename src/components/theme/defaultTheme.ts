@@ -17,6 +17,7 @@ export const baseTheme: BaseThemeType = {
       formBackground: '#F6F7F9',
       formTextLabel: '#1A202C',
       formTextHint: '#90A3BF',
+      formTextError: 'red',
       separator: '#C3D4E966',
     },
   };

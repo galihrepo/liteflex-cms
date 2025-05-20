@@ -10,58 +10,287 @@ import { ScrollViewLayout } from "@/src/components/ScrollviewLayout";
 import { Separator } from "@/src/components/Separator";
 import { TextInputField } from "@/src/components/TextInputField";
 import { Uploader } from "@/src/components/Uploader";
-import { useCallback, useState } from "react";
+import { carSchema } from "@/src/schemas/carSchema";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useCallback } from "react";
+import { Controller, useForm } from 'react-hook-form';
 import { Item } from "react-native-picker-select";
+import { z } from 'zod';
 
+type CarForm = z.infer<typeof carSchema>;
+
+const emptyDropdown = { value: '', label: '' };
 
 export default function CarAddScreen() {
 
-  const [brandsId, setBrandsId] = useState<string | undefined>(undefined);
-  const [modelsId, setModelsId] = useState<string | undefined>(undefined);
+  const { control, handleSubmit, formState: { errors }, setValue, clearErrors, getValues, watch } = useForm<CarForm>({
+    resolver: zodResolver(carSchema),
+    defaultValues: {
+      brands: emptyDropdown,
+      models: emptyDropdown,
+      variants: emptyDropdown,
+      fuel: emptyDropdown,
+      transmission: emptyDropdown,
+      vehicleColors: emptyDropdown,
+      vehicleMilage: emptyDropdown,
+      pictureUrls: [],
+      videoUrl: '',
+      plateNumber: '',
+      price: '',
+    }
+  })
 
-  const onSelectedBrands = useCallback((data: Item) => {
-    setBrandsId(data.value);
-    setModelsId(undefined);
-  }, [setBrandsId, setModelsId])
+  const onSelectedBrands = useCallback((data: Item | undefined) => {
+    if (data) {
+      setValue('brands', data)
+      clearErrors('brands')
+    } else {
+      setValue('brands', emptyDropdown)
+      setValue('models', emptyDropdown)
+      setValue('variants', emptyDropdown)
+    }
+  }, [clearErrors, setValue])
 
-  const onSelectedModels = useCallback((data: Item) => {
-    setModelsId(data.value)
-  }, [setModelsId])
+  const onSelectedModels = useCallback((data: Item | undefined) => {
+    if (data) {
+      setValue('models', data)
+      clearErrors('models')
+    } else {
+      setValue('models', emptyDropdown)
+      setValue('variants', emptyDropdown)
+    }
 
-  const onChangeTextPlateNumber = useCallback((value: string) => { console.log('BERAK PLATE : ', value) }, [])
+  }, [clearErrors, setValue])
 
-  const onChangeTextPrice = useCallback((value: string) => {console.log('BERAK PRICE : ', value)}, [])
+  const onSelectedVariants = useCallback((data: Item | undefined) => {
+    if (data) {
+      setValue('variants', data)
+      clearErrors('variants')
+    } else {
+      setValue('variants', emptyDropdown)
+    }
+  }, [clearErrors, setValue])
 
-  const onSave = useCallback(() => { }, [])
+  const onSelectedFuel = useCallback((data: Item | undefined) => {
+    if (data) {
+      setValue('fuel', data)
+      clearErrors('fuel')
+    } else {
+      setValue('fuel', emptyDropdown)
+    }
+  }, [clearErrors, setValue])
+
+  const onSelectedTransmission = useCallback((data: Item | undefined) => {
+    if (data) {
+      setValue('transmission', data)
+      clearErrors('transmission')
+    } else {
+      setValue('transmission', emptyDropdown)
+    }
+  }, [clearErrors, setValue])
+
+  const onSelectedVehicleColor = useCallback((data: Item | undefined) => {
+    if (data) {
+      setValue('vehicleColors', data)
+      clearErrors('vehicleColors')
+    } else {
+      setValue('vehicleColors', emptyDropdown)
+    }
+  }, [clearErrors, setValue])
+
+  const onSelectedVehicleMilage = useCallback((data: Item | undefined) => {
+    if (data) {
+      setValue('vehicleMilage', data)
+      clearErrors('vehicleMilage')
+    } else {
+      setValue('vehicleMilage', emptyDropdown)
+    }
+  }, [clearErrors, setValue])
+
+  const onChangeTextPlateNumber = useCallback((value: string) => {
+    if (value) {
+      setValue('plateNumber', value)
+      clearErrors('plateNumber')
+    } else {
+      setValue('plateNumber', '')
+    }
+  }, [clearErrors, setValue])
+
+  const onSelectedPictureUrls = useCallback((urls: string[]) => {
+    setValue('pictureUrls', urls)
+    clearErrors('pictureUrls')
+  }, [clearErrors, setValue])
+
+  const onSelectedVideoUrls = useCallback((urls: string[]) => {
+    if (urls.length > 0) {
+      setValue('videoUrl', urls[0])
+    } else {
+      setValue('videoUrl', '')
+    }
+    clearErrors('videoUrl')
+  }, [clearErrors, setValue])
+
+  const onChangeTextPrice = useCallback((value: string) => {
+    if (value) {
+      setValue('price', value)
+      clearErrors('price')
+    } else {
+      setValue('price', '')
+    }
+   }, [clearErrors, setValue])
+
+  const onSave = useCallback((data: CarForm) => {
+    console.log('BERAK ONSAVE')
+  }, [])
+
+  // useEffect(() => {
+  //   console.log('BERAK VALUE:', watch());
+  //   console.log('BERAK Errors:', errors);
+  // }, [errors]);
 
   return (
     <ScrollViewLayout>
       <Card
         title={"Tambah Kendaraan"}
-        onSave={onSave}
+        onSave={handleSubmit(onSave)}
         isForm={true}>
+
         <Separator />
-        <DropdownBrands onSelectedItem={onSelectedBrands} />
+        <Controller
+          control={control}
+          name="brands"
+          render={({ field }) => (
+            <DropdownBrands
+              selectedItem={field.value}
+              onSelectedItem={onSelectedBrands}
+              error={errors?.brands?.value?.message}
+            />
+          )}
+        />
+
         <Separator />
-        <DropdownModels brandsId={brandsId} onSelectedItem={onSelectedModels} />
+        <Controller
+          control={control}
+          name="models"
+          render={({ field }) => (
+            <DropdownModels
+              brandsId={getValues('brands.value')}
+              selectedItem={field.value}
+              onSelectedItem={onSelectedModels}
+              error={errors?.models?.value?.message} />
+          )}
+        />
+
         <Separator />
-        <DropdownVariants modelsId={modelsId} onSelectedItem={() => { }} />
+        <Controller
+          control={control}
+          name="variants"
+          render={({ field }) => (
+            <DropdownVariants
+              modelsId={getValues('models.value')}
+              selectedItem={field.value}
+              onSelectedItem={onSelectedVariants}
+              error={errors?.variants?.value?.message} />
+          )}
+        />
+
         <Separator />
-        <DropdownFuel onSelectedItem={() => { }} />
+        <Controller
+          control={control}
+          name="fuel"
+          render={({ field }) => (
+            <DropdownFuel
+              selectedItem={field.value}
+              onSelectedItem={onSelectedFuel}
+              error={errors?.fuel?.value?.message} />
+          )}
+        />
+
         <Separator />
-        <DropdownTransmission onSelectedItem={() => { }} />
+        <Controller
+          control={control}
+          name="transmission"
+          render={({ field }) => (
+            <DropdownTransmission
+              selectedItem={field.value}
+              onSelectedItem={onSelectedTransmission}
+              error={errors?.transmission?.value?.message} />
+          )}
+        />
+
         <Separator />
-        <DropdownVehicleColors onSelectedItem={() => { }} />
+
+        <Controller
+          control={control}
+          name="vehicleColors"
+          render={({ field }) => (
+            <DropdownVehicleColors
+              selectedItem={field.value}
+              onSelectedItem={onSelectedVehicleColor}
+              error={errors?.vehicleColors?.value?.message} />
+          )}
+        />
         <Separator />
-        <DropdownVehicleMileage onSelectedItem={() => { }} />
+        <Controller
+          control={control}
+          name="vehicleMilage"
+          render={({ field }) => (
+            <DropdownVehicleMileage
+              selectedItem={field.value}
+              onSelectedItem={onSelectedVehicleMilage}
+              error={errors?.vehicleMilage?.value?.message} />
+          )}
+        />
         <Separator />
-        <TextInputField label={'Nomor Kendaraan'} hint={'format: B9999HYZ'} onChangeText={onChangeTextPlateNumber}/>
+        <Controller
+          control={control}
+          name="plateNumber"
+          render={({ field }) => (
+            <TextInputField
+              label={'Nomor Kendaraan'}
+              hint={'format: B9999CD'}
+              value={field.value}
+              onChangeText={onChangeTextPlateNumber}
+              error={errors?.plateNumber?.message} />
+          )}
+        />
         <Separator />
-        <Uploader label={'Foto'} onSuccessUploaded={(url) => { }} onRemoved={() => { }} type={'images'} />
+        <Controller
+          control={control}
+          name="pictureUrls"
+          render={({ field }) => (
+            <Uploader
+              label={'Foto'}              
+              onChoosenFile={onSelectedPictureUrls}
+              type={'images'}
+              error={errors?.pictureUrls?.message} />
+          )}
+        />
         <Separator />
-        <Uploader label={'Video'} onSuccessUploaded={(url) => { }} onRemoved={() => { }} type={'videos'} />
+        <Controller
+          control={control}
+          name="videoUrl"
+          render={({ field }) => (
+            <Uploader
+              label={'Video'}
+              onChoosenFile={onSelectedVideoUrls}
+              type={'videos'}
+              error={errors?.videoUrl?.message} />
+          )}
+        />
         <Separator />
-        <TextInputField label={'Harga (Rp.)'} variant="price" onChangeText={onChangeTextPrice}/>
+        <Controller
+          control={control}
+          name="price"
+          render={({ field }) => (
+            <TextInputField
+              label={'Harga (Rp.)'}
+              variant="price"              
+              value={field.value}
+              onChangeText={onChangeTextPrice}
+              error={errors?.price?.message} />
+          )}
+        />
         <Separator />
       </Card>
     </ScrollViewLayout>

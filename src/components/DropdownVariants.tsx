@@ -7,7 +7,7 @@ type DropdownVariantsProps = DropdownBaseProps & {
   };
 
 export const DropdownVariants = (props: DropdownVariantsProps) => {
-    const { onSelectedItem, selectedItem, modelsId } = props;    
+    const { onSelectedItem, selectedItem, modelsId, error } = props;    
     const { variants, loading } = useVariants(modelsId);
 
     const items = useMemo(() => {
@@ -20,9 +20,7 @@ export const DropdownVariants = (props: DropdownVariantsProps) => {
     const handleChange = useCallback(
         (value: string) => {
           const data = items.find(item => item.value === value);
-          if (data) {
-            onSelectedItem(data);            
-          }
+          onSelectedItem(data);
         },
         [items]
       );
@@ -34,6 +32,7 @@ export const DropdownVariants = (props: DropdownVariantsProps) => {
             onValueChange={handleChange}
             items={items}
             disabled={items.length === 0 || loading}
+            error={error}
         />
     );
 };

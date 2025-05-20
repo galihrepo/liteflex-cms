@@ -15,6 +15,7 @@ export interface BaseThemeType {
       formBackground?: string;
       formTextLabel?: string;
       formTextHint?: string;
+      formTextError?: string;
       separator?: string;
     };
   }

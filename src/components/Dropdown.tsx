@@ -4,21 +4,24 @@ import { useConfig } from '../config/provider/ConfigProvider';
 import { BoxForm } from './BoxForm';
 import { BoxValueForm } from './BoxValueForm';
 import { TextLabelForm } from './TextLabelForm';
+import { Box, Text } from './theme/componentsTheme';
 
 export type DropdownBaseProps = {
     selectedItem?: Item;
-    onSelectedItem: (value: Item) => void;
+    error?: string;
+    onSelectedItem: (value: Item | undefined) => void;
   };
 
 type DropdownProps = {
     label?: string;
     value: string;
+    error?: string;
     onValueChange: (value: string) => void;
     items: Item[];
     disabled?: boolean;
 };
 
-export const Dropdown = ({ label = 'Pilih..', value, onValueChange, items, disabled = false }: DropdownProps) => {
+export const Dropdown = ({ label = 'Pilih..', value, error, onValueChange, items, disabled = false }: DropdownProps) => {
     const config = useConfig();
 
     const pickerBaseStyle = {
@@ -36,7 +39,8 @@ export const Dropdown = ({ label = 'Pilih..', value, onValueChange, items, disab
         <BoxForm>
             {label && <TextLabelForm label={label}/>}
             <BoxValueForm maxWidth={400}>
-                <RNPickerSelect        
+                <Box>
+                <RNPickerSelect
                     value={value}
                     onValueChange={onValueChange}
                     items={items}
@@ -49,6 +53,8 @@ export const Dropdown = ({ label = 'Pilih..', value, onValueChange, items, disab
                         inputWeb: pickerBaseStyle,                           
                     }}
                 />
+                {error && <Text variant={'formError'}>{error}</Text>}
+                </Box>
             </BoxValueForm>
         </BoxForm>
     );

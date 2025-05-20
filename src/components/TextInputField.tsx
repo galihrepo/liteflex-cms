@@ -4,7 +4,7 @@ import { useConfig } from "../config/provider/ConfigProvider";
 import { BoxForm } from "./BoxForm";
 import { BoxValueForm } from "./BoxValueForm";
 import { TextLabelForm } from "./TextLabelForm";
-import { Text } from './theme/componentsTheme';
+import { Box, Text } from './theme/componentsTheme';
 
 type InputProps = TextInputProps & {
   label: string;
@@ -54,41 +54,44 @@ export const TextInputField = ({ label, error, hint, variant = 'default', value,
     <BoxForm>
       {label && <TextLabelForm label={label} />}
       <BoxValueForm>
-        <TextInput
-          placeholder={hint}
-          placeholderTextColor={theme.colors.formTextHint}
-          style={{
-            flex: 1,
-            paddingVertical: 10,
-            paddingHorizontal: 16,
-            borderWidth: 0,
-            borderRadius: 8,
-            fontFamily: 'Pjs',
-            color: theme.colors.formTextLabel,
-            backgroundColor: theme.colors.formBackground,
-            fontSize: 14,
-          }}
-          keyboardType={variant === 'price' ? 'numeric' : props.keyboardType}
-          value={displayValue}
-          onChangeText={(text) => {
-            if (variant === 'price') {
-              // Update displayValue with formatted text
-              const digitsOnly = text.replace(/[^\d]/g, '');
-              const formatted = formatIDR(digitsOnly);
-              setDisplayValue(formatted);
+        <Box>
+          <TextInput
+            placeholder={hint}
+            placeholderTextColor={theme.colors.formTextHint}
+            style={{
+              flex: 1,
+              paddingVertical: 10,
+              paddingHorizontal: 16,
+              borderWidth: 0,
+              borderRadius: 8,
+              fontFamily: 'Pjs',
+              color: theme.colors.formTextLabel,
+              backgroundColor: theme.colors.formBackground,
+              fontSize: 14,
+            }}
+            keyboardType={variant === 'price' ? 'numeric' : props.keyboardType}
+            value={displayValue}
+            onChangeText={(text) => {
+              if (variant === 'price') {
+                // Update displayValue with formatted text
+                const digitsOnly = text.replace(/[^\d]/g, '');
+                const formatted = formatIDR(digitsOnly);
+                setDisplayValue(formatted);
 
-              if (onChangeText) {
-                onChangeText(digitsOnly);
+                if (onChangeText) {
+                  onChangeText(digitsOnly);
+                }
+              } else {
+                if (onChangeText) onChangeText(text);
+                setDisplayValue(text);
               }
-            } else {
-              if (onChangeText) onChangeText(text);
-              setDisplayValue(text);
-            }
-          }}
-          {...props}
-        />
+            }}
+            {...props}
+          />
+          {error && <Text variant={'formError'}>{error}</Text>}
+        </Box>
       </BoxValueForm>
-      {error && <Text variant={'header'}>{error}</Text>}
+
     </BoxForm>
   );
 };

@@ -10,7 +10,7 @@ export const useModels = (brandsId?: string | undefined) => {
 
   useEffect(() => {
     const fetchModels = async () => {
-      if (!brandsId || loading) {
+      if (!brandsId?.trim() || loading) {
         setModels([]);
         return;
       }
