@@ -9,7 +9,7 @@ type LoadingUploadProps = {
 export const LoadingUpload = ({ style }: LoadingUploadProps) => {
     return (
         <Box style={style}>
-            <LottieView source={require('../../assets/lottie/dealers/demodealers/loading_upload.json')} autoPlay loop resizeMode='cover'/>
+            <LottieView source={require('../../assets/lottie/loading_upload.json')} autoPlay loop resizeMode='cover'/>
         </Box>
       );
 }
