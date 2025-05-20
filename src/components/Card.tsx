@@ -26,16 +26,20 @@ export const Card = ({ title, isForm = true, children, onSave = () => { }, ...pr
         <Box
             alignItems={'baseline'}
             borderRadius={'m'}
-            m={'xl'}
+            m={{phone: 'm', desktop: 'xl'}}
             style={{ backgroundColor: 'white' }}
             {...props}>
-            <Text variant={'cardTitle'} p={'l'}>{title}</Text>
-            <Box height={10}/>
+            <Text
+                variant={'cardTitle'}
+                paddingVertical={{ phone: 'm', desktop: 'l' }}
+                paddingHorizontal={{ phone: 'l', desktop: 'xl' }}>{title}</Text>
+            <Box height={10} />
             {children}
-            <Box height={10}/>
+            <Box height={10} />
             {isForm && (
                 <Box
-                    p={'l'}
+                    paddingVertical={{ phone: 'm', desktop: 'l' }}
+                    paddingHorizontal={{ phone: 'l', desktop: 'xl' }}
                     flexDirection={'row'}
                     gap={'s'}
                     alignSelf={'flex-end'}>

@@ -12,7 +12,7 @@ export const baseTheme: BaseThemeType = {
       shadow: 'rgba(0,0,0,0.1)',
       border: '#dadce0',
       icon: '#64748B',
-      textDrawerInactive: '#797b80',
+      textDrawerInactive: '#90A3BF',
       buttonCancel: '#9E9E9E',
       formBackground: '#F6F7F9',
       formTextLabel: '#1A202C',

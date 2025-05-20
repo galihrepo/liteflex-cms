@@ -1,9 +1,7 @@
-import axios from 'axios';
-import * as ImagePicker from 'expo-image-picker';
 import { CircleX } from 'lucide-react';
 import { useCallback, useState } from "react";
-import { Platform } from 'react-native';
-import { CLOUDINARY } from '../contants/cloudinary';
+import { useCloudinary } from '../hooks/useCloudinary';
+import { MediaType, pickMedia } from '../utils/mediaPicker';
 import { BoxForm } from "./BoxForm";
 import { BoxValueForm } from "./BoxValueForm";
 import { Button } from './Button';
@@ -12,59 +10,11 @@ import { PressableHover } from './PressableHover';
 import { TextLabelForm } from "./TextLabelForm";
 import { Box, Text } from './theme/componentsTheme';
 
-type MediaType = 'images' | 'videos'
-
 type UploaderProps = {
     label: string;
     type: MediaType;
     onSuccessUploaded: (url: string) => void;
     onRemoved: () => void;
-};
-
-const pickImage = async (type: MediaType) => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: [type],
-        allowsEditing: true,
-    });
-
-    if (!result.canceled && result.assets?.[0]) {
-        return result.assets[0];
-    }
-
-    return null;
-};
-
-const uploadToCloudinary = async (asset: ImagePicker.ImagePickerAsset, type: MediaType) => {
-
-    const file = asset.file;
-    const data = new FormData();
-
-    if (Platform.OS === 'web') {
-        if (file) {
-            data.append('file', file);
-        } else {
-            console.error('Error upload file cloudinary UploaderPicture.tsx')
-        }
-    } else {
-        data.append('file', {
-            uri: asset.uri,
-            name: `${Date.now()}${type === 'images' ? '.jpg' : '.mp4'}`,
-            type: type === 'images' ? 'image/jpeg' : 'video/mp4',
-        } as any);
-    }
-
-    data.append('upload_preset', CLOUDINARY.UPLOAD_PRESET);
-    data.append('cloud_name', CLOUDINARY.CLOUD_NAME);
-
-    const res = await axios.post(
-        `https://api.cloudinary.com/v1_1/${CLOUDINARY.CLOUD_NAME}/${type === 'images' ? 'image' : 'video'}/upload`,
-        data, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    });
-
-    return res.data.secure_url;
 };
 
 export const Uploader = (props: UploaderProps) => {
@@ -78,7 +28,9 @@ export const Uploader = (props: UploaderProps) => {
 
     const [loading, setLoading] = useState(false);
 
-    const MAX_PICTURE = 2;
+    const { uploadToCloudinary } = useCloudinary();
+
+    const MAX_PICTURE = 4;
 
     const hasFiles = listFileUri.length > 0;
 
@@ -87,7 +39,7 @@ export const Uploader = (props: UploaderProps) => {
     const noFiles = !hasFiles;
 
     const onUpload = useCallback(async () => {
-        const file = await pickImage(type);
+        const file = await pickMedia(type);
         if (file) {
             setListFileUri(prevItems => [...prevItems, (type === 'images' ? file?.uri : file?.fileName) || '']);
             setLoading(true);

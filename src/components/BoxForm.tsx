@@ -3,15 +3,21 @@ import { ReactNode } from "react";
 import { Box } from "./theme/componentsTheme";
 import { AppTheme } from "./theme/theme";
 
-type BoxFormProps = BoxProps<AppTheme> & {    
+type BoxFormProps = BoxProps<AppTheme> & {
     children?: ReactNode;
 };
 
-export const BoxForm = ({children}: BoxFormProps) => {
+export const BoxForm = ({ children }: BoxFormProps) => {
 
     return (
-        <Box flexDirection={'row'} width="100%" alignItems={'center'} p={'l'}>
-            {children}            
+        <Box
+            flexDirection={'row'}
+            width="100%"
+            alignItems={'center'}
+            paddingVertical={{ phone: 'm', desktop: 'l' }}
+            paddingHorizontal={{ phone: 'l', desktop: 'xl' }}
+            gap={{phone: 's', desktop: 'm'}}>
+            {children}
         </Box>
     );
 }

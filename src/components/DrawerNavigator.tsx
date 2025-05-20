@@ -34,7 +34,7 @@ export default function DrawerNavigator() {
           color: 'transparent',
         },
         drawerLabelStyle: {
-          fontFamily: 'PjsMedium',
+          fontFamily: 'Pjs',
           fontSize: 14,
         }
       })}
