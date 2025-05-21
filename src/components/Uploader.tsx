@@ -28,7 +28,11 @@ export const Uploader = (props: UploaderProps) => {
 
     const isVideo = type === 'videos'
 
-    const [listPath, setListPath] = useState<string[]>(urls);
+    // if [''] then convert to it to [] due to will show media but empty string url
+    const urlsChecker = (urls?: string[]) =>
+        urls?.length === 1 && urls[0] === '' ? [] : urls ?? [];
+
+    const [listPath, setListPath] = useState<string[]>(urlsChecker(urls));
 
     const [loading, setLoading] = useState(false);
 
