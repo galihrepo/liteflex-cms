@@ -9,7 +9,7 @@ export default function CarScreen() {
   const router = useRouter();
 
   const redirectAddCar = useCallback(() => {
-    router.push('/car/add')
+    router.replace('/car/add')
   }, [router])
 
   return (

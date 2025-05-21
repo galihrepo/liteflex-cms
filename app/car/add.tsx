@@ -23,9 +23,9 @@ export default function CarAddScreen() {
 
   const router = useRouter();
 
-  const { saveCar, loading, error, successMessage } = useCars();
+  const { saveCar, loading } = useCars();
 
-  const { control, handleSubmit, formState: { errors }, setValue, clearErrors, getValues, watch } = useForm<CarForm>({
+  const { control, handleSubmit, formState: { errors }, setValue, clearErrors, getValues, reset } = useForm<CarForm>({
     resolver: zodResolver(carSchema),
     defaultValues: {
       brands: emptyDropdown,
@@ -154,6 +154,7 @@ export default function CarAddScreen() {
   const onSave = useCallback(async (data: CarForm) => {
     const response = await saveCar(data);
     if (response.success) {
+      reset()
       showAlertChoice(response.message, () => router.push('/home'))      
     } else {
       showAlert(response.message)
