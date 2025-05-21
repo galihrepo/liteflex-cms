@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
+import { ResponsePaginationType } from "../types/firestore/ResponsePaginationType";
 
-type FetchFunction<T> = (page: number, perPage: number) => Promise<{ data: T[]; total: number }>;
+type FetchFunction<T> = (page: number, perPage: number) => Promise<ResponsePaginationType<T>>;
 
 export function usePagination<T>(fetchFunction: FetchFunction<T>, perPage = 15) {
   const [page, setPage] = useState(1);
