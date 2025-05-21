@@ -1,3 +1,4 @@
+import { showAlert } from "@/src/components/Alert";
 import { Card } from "@/src/components/Card";
 import { DropdownBrands } from "@/src/components/DropdownBrands";
 import { DropdownFuel } from "@/src/components/DropdownFuel";
@@ -10,18 +11,19 @@ import { ScrollViewLayout } from "@/src/components/ScrollviewLayout";
 import { Separator } from "@/src/components/Separator";
 import { TextInputField } from "@/src/components/TextInputField";
 import { Uploader } from "@/src/components/Uploader";
-import { carSchema } from "@/src/schemas/carSchema";
+import { useCars } from "@/src/hooks/useCars";
+import { CarForm, carSchema, emptyDropdown } from "@/src/schemas/carSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCallback } from "react";
+import { useRouter } from "expo-router";
+import { useCallback, useEffect } from "react";
 import { Controller, useForm } from 'react-hook-form';
 import { Item } from "react-native-picker-select";
-import { z } from 'zod';
-
-type CarForm = z.infer<typeof carSchema>;
-
-const emptyDropdown = { value: '', label: '' };
 
 export default function CarAddScreen() {
+
+  const router = useRouter();
+
+  const { saveCar, loading, error, successMessage } = useCars();
 
   const { control, handleSubmit, formState: { errors }, setValue, clearErrors, getValues, watch } = useForm<CarForm>({
     resolver: zodResolver(carSchema),
@@ -137,23 +139,35 @@ export default function CarAddScreen() {
     } else {
       setValue('price', '')
     }
-   }, [clearErrors, setValue])
+  }, [clearErrors, setValue])
 
   const onSave = useCallback((data: CarForm) => {
-    console.log('BERAK ONSAVE')
-  }, [])
+    saveCar(data);    
+  }, [saveCar])
 
   // useEffect(() => {
   //   console.log('BERAK VALUE:', watch());
   //   console.log('BERAK Errors:', errors);
   // }, [errors]);
 
+  useEffect(() => {
+    if (error) {
+      showAlert(error);
+    }
+
+    if (successMessage) {
+      showAlert(successMessage);
+      router.push('/');      
+    }
+  }, [error, router, successMessage])
+
   return (
     <ScrollViewLayout>
       <Card
         title={"Tambah Kendaraan"}
         onSave={handleSubmit(onSave)}
-        isForm={true}>
+        isForm={true}
+        loading={loading}>
 
         <Separator />
         <Controller
@@ -247,7 +261,7 @@ export default function CarAddScreen() {
           name="plateNumber"
           render={({ field }) => (
             <TextInputField
-              label={'Nomor Kendaraan'}
+              label={'Nomor Plat'}
               hint={'format: B9999CD'}
               value={field.value}
               onChangeText={onChangeTextPlateNumber}
@@ -262,7 +276,7 @@ export default function CarAddScreen() {
             <Uploader
               label={'Foto'}
               sublabel={'Maksimal 4'}
-              urls={field.value}              
+              urls={field.value}
               onChoosenFile={onSelectedPictureUrls}
               type={'images'}
               error={errors?.pictureUrls?.message} />
@@ -290,7 +304,7 @@ export default function CarAddScreen() {
             <TextInputField
               label={'Harga'}
               sublabel={'Rp.'}
-              variant="price"              
+              variant="price"
               value={field.value}
               onChangeText={onChangeTextPrice}
               error={errors?.price?.message} />

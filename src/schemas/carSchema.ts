@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+export type CarForm = z.infer<typeof carSchema>;
+
+export const emptyDropdown = { value: '', label: '' };
+
 const createDropdownSchema = (fieldName: string) =>
   z.object({
     value: z.string().min(1, `${fieldName} harus di isi`),

@@ -8,11 +8,12 @@ import { AppTheme } from "./theme/theme";
 type CardProps = BoxProps<AppTheme> & {
     title: string;
     isForm?: boolean;
+    loading?: boolean;
     onSave?: () => void;
     children?: ReactNode;
 };
 
-export const Card = ({ title, isForm = true, children, onSave = () => { }, ...props }: CardProps) => {
+export const Card = ({ loading, title, isForm = true, children, onSave = () => { }, ...props }: CardProps) => {
 
     const router = useRouter();
 
@@ -44,7 +45,7 @@ export const Card = ({ title, isForm = true, children, onSave = () => { }, ...pr
                     gap={'s'}
                     alignSelf={'flex-end'}>
                     <Button label={"Batal"} variant={'sCancel'} onPress={onCancel} />
-                    <Button label={"Simpan"} variant={'s'} onPress={onSave} />
+                    {!loading && (<Button label={"Simpan"} variant={'s'} onPress={onSave} />)}
                 </Box>
             )}
         </Box>
