@@ -26,17 +26,11 @@ function LayoutWithTheme() {
     PjsBoldSemi: require('../assets/fonts/PlusJakartaSans-SemiBold.ttf'),
   });
 
-  useEffect(() => {
+  useEffect(() => {    
     if (!loading) {
       if (!user) {
         router.push('/login');
-      } else if (isLogin) {
-        // if (router.canGoBack()) {
-        //   router.back()
-        // } else {
-        //   router.push('/')
-        // }
-      }
+      } 
     }
   }, [router, user, loading, isLogin]);
 

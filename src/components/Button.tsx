@@ -20,7 +20,7 @@ const ButtonBox = createRestyleComponent<ButtonBoxProps, AppTheme>(
 
 type ButtonProps = VariantProps<AppTheme, 'buttonVariants'> & {
     label: string;
-    onPress: () => void;
+    onPress?: () => void;
     disabled?: boolean;
     style?: StyleProp<ViewStyle>;
   };

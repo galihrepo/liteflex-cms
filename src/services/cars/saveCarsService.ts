@@ -8,10 +8,10 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
-import { db } from "../config/configFirebase";
-import { COLLECTIONS } from "../contants/firestore";
-import { CarForm } from "../schemas/carSchema";
-import { ResponseType } from "../types/firestore/ResponseType";
+import { db } from "../../config/configFirebase";
+import { COLLECTIONS } from "../../contants/firestore";
+import { CarForm } from "../../schemas/carSchema";
+import { ResponseType } from "../../types/firestore/ResponseType";
 
 const createDocRef = (path: string, id: string) => doc(db, path, id);
 
