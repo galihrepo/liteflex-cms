@@ -30,11 +30,11 @@ function LayoutWithTheme() {
       if (!user) {
         router.push('/login');
       } else if (isLogin) {
-        if (router.canGoBack()) {
-          router.back()
-        } else {
-          router.push('/')
-        }
+        // if (router.canGoBack()) {
+        //   router.back()
+        // } else {
+        //   router.push('/')
+        // }
       }
     }
   }, [router, user, loading, isLogin]);

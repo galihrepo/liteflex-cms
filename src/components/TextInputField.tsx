@@ -11,7 +11,7 @@ type InputProps = TextInputProps & {
   sublabel?: string;
   hint?: string;
   error?: string;
-  variant?: 'default' | 'price';
+  variant?: 'default' | 'price' | 'year';
 };
 
 export const TextInputField = ({ label, sublabel, error, hint, variant = 'default', value, onChangeText, ...props }: InputProps) => {
@@ -70,8 +70,9 @@ export const TextInputField = ({ label, sublabel, error, hint, variant = 'defaul
               backgroundColor: theme.colors.formBackground,
               fontSize: 14,
             }}
-            keyboardType={variant === 'price' ? 'numeric' : props.keyboardType}
+            keyboardType={variant === 'price' || variant === 'year' ? 'numeric' : props.keyboardType}
             value={displayValue}
+            maxLength={variant === 'year' ? 4 : props.maxLength}
             onChangeText={(text) => {
               if (variant === 'price') {
                 // Update displayValue with formatted text
@@ -82,6 +83,10 @@ export const TextInputField = ({ label, sublabel, error, hint, variant = 'defaul
                 if (onChangeText) {
                   onChangeText(digitsOnly);
                 }
+              } else if (variant === 'year') {
+                const digitsOnly = text.replace(/[^\d]/g, '').slice(0, 4); // Keep max 4 digits
+                setDisplayValue(digitsOnly);
+                onChangeText?.(digitsOnly);
               } else {
                 if (onChangeText) onChangeText(text);
                 setDisplayValue(text);

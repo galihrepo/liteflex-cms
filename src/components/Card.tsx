@@ -2,6 +2,7 @@ import { BoxProps } from "@shopify/restyle";
 import { useRouter } from "expo-router";
 import { ReactNode, useCallback } from "react";
 import { Button } from "./Button";
+import { LoadingButton } from "./LoadingButton";
 import { Box, Text } from "./theme/componentsTheme";
 import { AppTheme } from "./theme/theme";
 
@@ -43,8 +44,10 @@ export const Card = ({ loading, title, isForm = true, children, onSave = () => {
                     paddingHorizontal={{ phone: 'l', desktop: 'xl' }}
                     flexDirection={'row'}
                     gap={'s'}
-                    alignSelf={'flex-end'}>
-                    <Button label={"Batal"} variant={'sCancel'} onPress={onCancel} />
+                    alignSelf={'flex-end'}
+                    alignItems={'center'}>
+                    <Button label={"Batal"} variant={'sCancel'} onPress={onCancel} />                    
+                    {loading && (<LoadingButton style={{ height: 40}}/>)}
                     {!loading && (<Button label={"Simpan"} variant={'s'} onPress={onSave} />)}
                 </Box>
             )}

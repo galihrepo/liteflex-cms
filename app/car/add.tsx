@@ -39,6 +39,7 @@ export default function CarAddScreen() {
       videoUrl: '',
       plateNumber: '',
       price: '',
+      year: '',
     }
   })
 
@@ -118,6 +119,15 @@ export default function CarAddScreen() {
     }
   }, [clearErrors, setValue])
 
+  const onChangeTextYear = useCallback((value: string) => {
+    if (value) {
+      setValue('year', value)
+      clearErrors('year')
+    } else {
+      setValue('year', '')
+    }
+  }, [clearErrors, setValue])
+
   const onSelectedPictureUrls = useCallback((urls: string[]) => {
     setValue('pictureUrls', urls)
     clearErrors('pictureUrls')
@@ -142,7 +152,7 @@ export default function CarAddScreen() {
   }, [clearErrors, setValue])
 
   const onSave = useCallback((data: CarForm) => {
-    saveCar(data);    
+    saveCar(data);
   }, [saveCar])
 
   // useEffect(() => {
@@ -150,14 +160,23 @@ export default function CarAddScreen() {
   //   console.log('BERAK Errors:', errors);
   // }, [errors]);
 
+  // const onRedirectHome = useCallback(async () => {
+  //   await new Promise((r) => setTimeout(r, 100));
+  //   router.replace('/');
+  // }, [router])
+
   useEffect(() => {
     if (error) {
       showAlert(error);
     }
 
     if (successMessage) {
-      showAlert(successMessage);
-      router.push('/');      
+      showAlert(successMessage)
+      const timeout = setTimeout(() => {
+        router.replace('/');
+      }, 500);
+
+      return () => clearTimeout(timeout);
     }
   }, [error, router, successMessage])
 
@@ -253,6 +272,20 @@ export default function CarAddScreen() {
               selectedItem={field.value}
               onSelectedItem={onSelectedVehicleMilage}
               error={errors?.vehicleMilage?.value?.message} />
+          )}
+        />
+        <Separator />
+        <Controller
+          control={control}
+          name="year"
+          render={({ field }) => (
+            <TextInputField
+              label={'Tahun'}
+              variant="year"
+              hint={'format: 2025'}
+              value={field.value}
+              onChangeText={onChangeTextYear}
+              error={errors?.year?.message} />
           )}
         />
         <Separator />

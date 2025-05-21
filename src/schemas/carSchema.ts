@@ -19,7 +19,7 @@ export const carSchema = z.object({
   vehicleColors: createDropdownSchema("Warna"),
   vehicleMilage: createDropdownSchema("Jarak tempuh"),
   pictureUrls: z.array(z.string()).min(1, "Foto minimal 1"),
-  videoUrl: z.string().min(1, "Video harus di isi"),
+  videoUrl: z.string(),
   plateNumber: z
     .string()
     .min(1, "Nomor kendaraan harus di isi")
@@ -27,4 +27,5 @@ export const carSchema = z.object({
       message: "Tidak boleh ada spasi dan simbol, hanya abjad dan angka contoh: B9217HYZ",
     }),
   price: z.string().min(1, "Harga harus di isi"),
+  year: z.string().min(4, "Tahun harus di isi"),
 });

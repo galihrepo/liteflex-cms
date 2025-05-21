@@ -72,6 +72,7 @@ const buildPayload = (form: CarForm, firestoreDocIdDealers: string, user: User |
     dateTimeCreatedBy: user?.email,
     dateTimeUpdatedAt: serverTimestamp(),
     dateTimeUpdatedBy: "",
+    year: Number(form.year || 0),
   };
 };
 

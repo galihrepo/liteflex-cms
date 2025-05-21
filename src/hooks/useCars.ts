@@ -28,7 +28,7 @@ export const useCars = () => {
 
       return response;
     } catch (err: any) {
-      const message = err?.message || "Unexpected error";
+      const message = err?.message || "Sistem bermasalah, silakan coba beberapa saat lagi.";
       setError(message);
       return { success: false, message };
     } finally {

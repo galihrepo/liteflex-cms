@@ -11,7 +11,7 @@ export const BoxValueForm = (props: BoxValueFormProps) => {
     const { children } = props;
     return (
         <Box
-            width={{ phone: '80%', desktop: '70%' }}
+            width={'70%'}
             flexShrink={1}
             flexGrow={1}
             {...props}>
