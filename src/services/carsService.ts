@@ -100,7 +100,7 @@ export const saveCars = async (
     if (await checkPlateNumberExists(form.plateNumber, firestoreDocIdDealers)) {
       return {
         success: false,
-        message: `Kendaraan dengan nomor plat "${form.plateNumber}" sudah terdaftar.`,
+        message: `Kendaraan dengan nomor plat '${form.plateNumber}' sudah terdaftar.`,
       };
     }
 

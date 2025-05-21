@@ -1,4 +1,4 @@
-import { showAlert } from "@/src/components/Alert";
+import { showAlert, showAlertChoice } from "@/src/components/Alert";
 import { Card } from "@/src/components/Card";
 import { DropdownBrands } from "@/src/components/DropdownBrands";
 import { DropdownFuel } from "@/src/components/DropdownFuel";
@@ -15,7 +15,7 @@ import { useCars } from "@/src/hooks/useCars";
 import { CarForm, carSchema, emptyDropdown } from "@/src/schemas/carSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "expo-router";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { Controller, useForm } from 'react-hook-form';
 import { Item } from "react-native-picker-select";
 
@@ -151,34 +151,14 @@ export default function CarAddScreen() {
     }
   }, [clearErrors, setValue])
 
-  const onSave = useCallback((data: CarForm) => {
-    saveCar(data);
-  }, [saveCar])
-
-  // useEffect(() => {
-  //   console.log('BERAK VALUE:', watch());
-  //   console.log('BERAK Errors:', errors);
-  // }, [errors]);
-
-  // const onRedirectHome = useCallback(async () => {
-  //   await new Promise((r) => setTimeout(r, 100));
-  //   router.replace('/');
-  // }, [router])
-
-  useEffect(() => {
-    if (error) {
-      showAlert(error);
+  const onSave = useCallback(async (data: CarForm) => {
+    const response = await saveCar(data);
+    if (response.success) {
+      showAlertChoice(response.message, () => router.push('/home'))      
+    } else {
+      showAlert(response.message)
     }
-
-    if (successMessage) {
-      showAlert(successMessage)
-      const timeout = setTimeout(() => {
-        router.replace('/');
-      }, 500);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [error, router, successMessage])
+  }, [router, saveCar])
 
   return (
     <ScrollViewLayout>

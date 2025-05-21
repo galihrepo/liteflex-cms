@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { useCallback } from "react";
 
 
-export default function Index() {
+export default function CarScreen() {
 
   const router = useRouter();
 

@@ -1,6 +1,6 @@
 import BookingScreen from '@/app/booking';
 import CarAddScreen from '@/app/car/add';
-import Index from '@/app/index';
+import CarScreen from '@/app/home';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native';
 import { BanknoteArrowUp, Car } from 'lucide-react';
@@ -41,8 +41,8 @@ export default function DrawerNavigator() {
       drawerContent={(props) => <DrawerContent {...props} />}
     >
       <Drawer.Screen
-        name="car"
-        component={Index}        
+        name="home"
+        component={CarScreen}        
         options={{          
           drawerLabel: 'KENDARAAN',          
           drawerIcon: ({ color, size }) => (
