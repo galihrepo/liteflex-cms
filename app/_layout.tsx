@@ -7,6 +7,7 @@ import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from 'expo-font';
 import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
+import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const config = configLoader();
@@ -24,7 +25,7 @@ function LayoutWithTheme() {
     PjsBold: require('../assets/fonts/PlusJakartaSans-Bold.ttf'),
     PjsBoldSemi: require('../assets/fonts/PlusJakartaSans-SemiBold.ttf'),
   });
-  
+
   useEffect(() => {
     if (!loading) {
       if (!user) {
@@ -42,19 +43,19 @@ function LayoutWithTheme() {
   if (!fontsLoaded || loading) return null;
 
   if (!user) {
-    return  (
+    return (
       <Stack
-        screenOptions={{                
+        screenOptions={{
           header: () => null,
           contentStyle: {
             backgroundColor: theme?.colors?.background
-          }      
-      }}/>
+          }
+        }} />
     );
   }
 
   return (
-    <DrawerNavigator/>
+    <DrawerNavigator />
   );
 }
 
@@ -63,9 +64,11 @@ export default function RootLayout() {
     <ConfigProvider>
       <AuthProvider>
         <ThemeProvider theme={theme}>
-          <SafeAreaProvider>
-            <LayoutWithTheme />
-          </SafeAreaProvider>
+          <PaperProvider>
+            <SafeAreaProvider>
+              <LayoutWithTheme />
+            </SafeAreaProvider>
+          </PaperProvider>
         </ThemeProvider>
       </AuthProvider>
     </ConfigProvider>

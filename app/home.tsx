@@ -1,26 +1,3 @@
-import { Button } from "@/src/components/Button";
-import { Card } from "@/src/components/Card";
-import { useRouter } from "expo-router";
-import { useCallback } from "react";
+import { CarScreen } from "@/src/screens/car/CarScreen";
 
-
-export default function CarScreen() {
-
-  const router = useRouter();
-
-  const redirectAddCar = useCallback(() => {
-    router.replace('/car/add')
-  }, [router])
-
-  return (
-    <Card
-      title={"Daftar Kendaraan"}
-      isForm={false}>
-      <Button
-        variant={"s"}
-        label={"Tambah"}
-        onPress={redirectAddCar}
-        style={{ alignSelf: 'flex-end' }} />
-    </Card>
-  );
-}
+export default CarScreen

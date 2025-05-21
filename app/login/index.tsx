@@ -13,12 +13,12 @@ import { auth } from "../../src/config/configFirebase";
 
 export default function Index() {
 
-  const { config, theme }  = useConfig();
+  const { config }  = useConfig();
 
   const router = useRouter();
 
   const onRegistered = useCallback(()=>{
-    router?.push('/');
+    router?.push('/home');
   },[router])
 
   const onUnregistered = useCallback(()=>{
