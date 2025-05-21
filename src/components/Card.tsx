@@ -1,6 +1,7 @@
 import { BoxProps } from "@shopify/restyle";
 import { useRouter } from "expo-router";
 import { ReactNode, useCallback } from "react";
+import { useConfig } from "../config/provider/ConfigProvider";
 import { Button } from "./Button";
 import { LoadingButton } from "./LoadingButton";
 import { Box, Text } from "./theme/componentsTheme";
@@ -18,6 +19,8 @@ export const Card = ({ loading, title, isForm = true, children, onSave = () => {
 
     const router = useRouter();
 
+    const { theme } = useConfig();
+
     const onCancel = useCallback(() => {
         if (router.canGoBack()) {
             router.back()
@@ -28,16 +31,20 @@ export const Card = ({ loading, title, isForm = true, children, onSave = () => {
         <Box
             alignItems={'baseline'}
             borderRadius={'m'}
-            m={{phone: 'm', desktop: 'xl'}}
-            style={{ backgroundColor: 'white' }}
+            m={{ phone: 'm', desktop: 'xl' }}
+            style={{
+                backgroundColor: 'white',
+                shadowColor: theme.colors.shadow,
+                shadowOpacity: 0.1,
+                shadowRadius: 4,
+                shadowOffset: { width: 0, height: 2 },
+            }}
             {...props}>
-            <Text
+            {title && (<Text
                 variant={'cardTitle'}
                 paddingVertical={{ phone: 'm', desktop: 'l' }}
-                paddingHorizontal={{ phone: 'l', desktop: 'xl' }}>{title}</Text>
-            <Box height={10} />
-            {children}
-            <Box height={10} />
+                paddingHorizontal={{ phone: 'l', desktop: 'xl' }}>{title}</Text>)}
+            {children}            
             {isForm && (
                 <Box
                     paddingVertical={{ phone: 'm', desktop: 'l' }}
@@ -46,8 +53,8 @@ export const Card = ({ loading, title, isForm = true, children, onSave = () => {
                     gap={'s'}
                     alignSelf={'flex-end'}
                     alignItems={'center'}>
-                    <Button label={"Batal"} variant={'sCancel'} onPress={onCancel} />                    
-                    {loading && (<LoadingButton style={{ height: 40}}/>)}
+                    <Button label={"Batal"} variant={'sCancel'} onPress={onCancel} />
+                    {loading && (<LoadingButton style={{ height: 40 }} />)}
                     {!loading && (<Button label={"Simpan"} variant={'s'} onPress={onSave} />)}
                 </Box>
             )}

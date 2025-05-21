@@ -10,7 +10,7 @@ export type DropdownBaseProps = {
     selectedItem?: Item;
     error?: string;
     onSelectedItem: (value: Item | undefined) => void;
-  };
+};
 
 type DropdownProps = {
     label?: string;
@@ -37,23 +37,23 @@ export const Dropdown = ({ label = 'Pilih..', value, error, onValueChange, items
 
     return (
         <BoxForm>
-            {label && <TextLabelForm label={label}/>}
+            {label && <TextLabelForm label={label} />}
             <BoxValueForm maxWidth={400}>
                 <Box>
-                <RNPickerSelect
-                    value={value}
-                    onValueChange={onValueChange}
-                    items={items}
-                    disabled={disabled}
-                    placeholder={{ label: 'Pilih', value: null }}
-                    useNativeAndroidPickerStyle={false}
-                    style={{
-                        inputIOS: pickerBaseStyle,
-                        inputAndroid: pickerBaseStyle,
-                        inputWeb: pickerBaseStyle,                           
-                    }}
-                />
-                {error && <Text variant={'formError'}>{error}</Text>}
+                    <RNPickerSelect
+                        value={value}
+                        onValueChange={onValueChange}
+                        items={items}
+                        disabled={disabled}
+                        placeholder={{ label: 'Pilih', value: null }}
+                        useNativeAndroidPickerStyle={false}
+                        style={{
+                            inputIOS: pickerBaseStyle,
+                            inputAndroid: pickerBaseStyle,
+                            inputWeb: pickerBaseStyle,
+                        }}
+                    />
+                    {error && <Text variant={'formError'}>{error}</Text>}
                 </Box>
             </BoxValueForm>
         </BoxForm>

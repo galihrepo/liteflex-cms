@@ -13,12 +13,18 @@ export const textVariants = {
       fontFamily: 'PjsBoldSemi'
     },
     cardTitle: {
-      fontSize: 20,
+      fontSize: {
+        phone: 14,
+        desktop: 20,
+      },
       fontFamily: 'PjsBoldSemi',
       color: 'formTextLabel'
     },
     button: {
-      fontSize: 14,
+      fontSize: {
+        phone: 12,
+        desktop: 14,
+      },
       color: 'textButton'
     },
     formLabel: {
@@ -39,5 +45,21 @@ export const textVariants = {
       fontSize: 12,
       fontFamily: 'Pjs',
       color: 'formTextError'
+    },
+    tableHeader: {
+      fontSize: {
+        phone: 12,
+        desktop: 14,
+      },
+      fontFamily: 'PjsMedium',
+      color: 'formTextLabel'
+    },
+    tableContent: {
+      fontSize: {
+        phone: 10,
+        desktop: 12,
+      },
+      fontFamily: 'Pjs',
+      color: 'textHint'
     }
   }

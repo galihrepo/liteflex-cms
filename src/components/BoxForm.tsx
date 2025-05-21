@@ -8,13 +8,12 @@ type BoxFormProps = BoxProps<AppTheme> & {
 };
 
 export const BoxForm = ({ children }: BoxFormProps) => {
-
     return (
         <Box
             flexDirection={'row'}
             width="100%"
             alignItems={'center'}
-            paddingVertical={{ phone: 'm', desktop: 'l' }}
+            paddingVertical={{ phone: 's', desktop: 'm' }}
             paddingHorizontal={{ phone: 'l', desktop: 'xl' }}
             gap={{phone: 's', desktop: 'm'}}>
             {children}

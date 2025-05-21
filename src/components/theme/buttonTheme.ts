@@ -1,7 +1,7 @@
 
 const buttonVariants = {    
     defaults: {
-        backgroundColor: 'primary'
+        backgroundColor: 'primary',        
     },
     xl: {
         paddingVertical: 'm',

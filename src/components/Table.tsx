@@ -1,13 +1,14 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import { PaginationType } from '../types/firestore/PaginationType';
 import { Button } from './Button';
+import { Card } from './Card';
 import { Box, Text } from './theme/componentsTheme';
 
 export type Column<T> = {
   key: keyof T;
   header: string;
+  flex?: number;
   render?: (value: any, row: T) => React.ReactNode;
 };
 
@@ -54,67 +55,63 @@ export function Table<T extends PaginationType>({
   }
 
   return (
-    <Box padding="m" flex={1}>
-      <ScrollView horizontal>
-        <Box borderWidth={1} minWidth={600} style={{ borderColor: 'gray', borderRadius: 8 }}>
-          {/* Table Header */}
-          <Box flexDirection="row" style={{ backgroundColor: "#6200ee", borderTopLeftRadius:8, borderTopRightRadius:8 }} padding="s" >
+    <Box width={'100%'}>
+      {/* <ScrollView horizontal style={{ width: '100%', backgroundColor: "yellow"}}> */}
+      <Card title={''} borderWidth={0.1} borderRadius={'s'} borderColor={'separator'} isForm={false} marginTop={'m'} marginBottom={'xl'}>
+        {/* Table Header */}
+        <Box flexDirection="row" padding="s" width={'100%'} backgroundColor={'background'}>
+          {columns.map((col) => (
+            <Box flex={col.flex || 1} key={col.key.toString()} padding={'xs'} >
+              <Text
+                variant="tableHeader"
+                textAlign={'center'}
+              >
+                {col.header}
+              </Text>
+            </Box>
+          ))}
+        </Box>
+
+        {/* Table Rows */}
+        {data.map((row, idx) => (
+          <Box
+            width={'100%'}
+            key={row.id}
+            flexDirection="row"
+            paddingVertical="s"
+            borderBottomWidth={0.1}
+            borderBottomColor={'separator'}
+          >
             {columns.map((col) => (
-              <Box flex={1} key={col.key.toString()}>
-                <Text
-                  variant="header"                  
-                  style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}
-                >
-                  {col.header}
+              <Box flex={col.flex || 1} key={col.key.toString()} justifyContent="center" paddingVertical={'s'} paddingHorizontal={'xs'}>
+                <Text textAlign={'center'} variant={'tableContent'}>
+                  {col.render ? col.render(row[col.key], row) : String(row[col.key])}
                 </Text>
               </Box>
             ))}
           </Box>
+        ))}
 
-          {/* Table Rows */}
-          {data.map((row, idx) => (
-            <Box
-              key={row.id}
-              flexDirection="row"
-              paddingVertical="s"
-              borderBottomWidth={1}
-              style={{
-                borderColor:'gray',
-                backgroundColor: idx % 2 === 0 ? 'white' : '#f2e7fe'
-              }}
-              
-              
-            >
-              {columns.map((col) => (
-                <Box flex={1} key={col.key.toString()} justifyContent="center" paddingHorizontal="s">
-                  <Text style={{ textAlign: 'center', color: 'black' }}>
-                    {col.render ? col.render(row[col.key], row) : String(row[col.key])}
-                  </Text>
-                </Box>
-              ))}
-            </Box>
-          ))}
-
-          {/* Pagination Controls */}
-          <Box flexDirection="row" justifyContent="space-between" padding="m" style={{ backgroundColor: 'red', borderBottomLeftRadius:8, borderBottomRightRadius:8 }} >
-            <Text>Page {page} / {totalPages}</Text>
-            <Box flexDirection="row" gap="m">
-              <Button label={'prev'}
-                              // mode="text" 
-                disabled={page === 1} 
-                onPress={onPrevPage}
-              />
-              <Button 
+        {/* Pagination Controls */}
+        <Box width={'100%'} gap={"m"} flexDirection="row" alignItems={'center'} justifyContent="flex-end" padding="m" style={{ borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }} >
+          <Text variant={'tableContent'}>Page {page} / {totalPages}</Text>
+          <Box flexDirection="row" gap="s">
+            <Button
+              label={'prev'}
+              disabled={page === 1}
+              onPress={onPrevPage}
+              variant={'s'}
+            />
+            <Button
               label={'next'}
-                // mode="text" 
-                disabled={page === totalPages} 
-                onPress={onNextPage}
-                // compact
-              />               
-            </Box>
+              variant={'s'} 
+              disabled={page === totalPages}
+              onPress={onNextPage}
+            />
           </Box>
         </Box>
-      </ScrollView>
+      </Card>
+      {/* </ScrollView> */}
     </Box>
   );
 }
