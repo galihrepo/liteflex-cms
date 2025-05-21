@@ -24,7 +24,7 @@ export const carSchema = z.object({
     .string()
     .min(1, "Nomor kendaraan harus di isi")
     .refine((val) => /^[A-Za-z0-9]+$/.test(val.trim()), {
-      message: "Tidak boleh ada spasi dan simbol, hanya abjad dan angka contoh: B9217HYZ",
+      message: "Tidak boleh simbol, hanya abjad dan angka tanpa spasi.",
     }),
   price: z.string().min(1, "Harga harus di isi"),
   year: z.string().min(4, "Tahun harus di isi"),

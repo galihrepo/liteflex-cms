@@ -1,6 +1,7 @@
 import React from "react";
 import { TextInput, TextInputProps } from "react-native";
 import { useConfig } from "../config/provider/ConfigProvider";
+import { useIsPhone } from "../hooks/useIsPhone";
 import { BoxForm } from "./BoxForm";
 import { BoxValueForm } from "./BoxValueForm";
 import { TextLabelForm } from "./TextLabelForm";
@@ -16,6 +17,8 @@ type InputProps = TextInputProps & {
 
 export const TextInputField = ({ label, sublabel, error, hint, variant = 'default', value, onChangeText, ...props }: InputProps) => {
   const { theme } = useConfig();
+
+  const isPhone = useIsPhone();
 
   // Format number as IDR currency string, e.g. "Rp 1.000.000"
   const formatIDR = (numStr: string) => {
@@ -68,7 +71,7 @@ export const TextInputField = ({ label, sublabel, error, hint, variant = 'defaul
               fontFamily: 'Pjs',
               color: theme.colors.formTextLabel,
               backgroundColor: theme.colors.formBackground,
-              fontSize: 14,
+              fontSize: isPhone ? 12 : 14,
             }}
             keyboardType={variant === 'price' || variant === 'year' ? 'numeric' : props.keyboardType}
             value={displayValue}

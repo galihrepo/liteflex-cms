@@ -57,7 +57,7 @@ export function Table<T extends PaginationType>({
   return (
     <Box width={'100%'}>
       {/* <ScrollView horizontal style={{ width: '100%', backgroundColor: "yellow"}}> */}
-      <Card title={''} borderWidth={0.1} borderRadius={'s'} borderColor={'separator'} isForm={false} marginTop={'m'} marginBottom={'xl'}>
+      <Card title={''} borderWidth={0.1} borderRadius={'s'} borderColor={'separator'} isForm={false} marginTop={{ phone: 's', desktop: 'm' }} marginBottom={'xl'}>
         {/* Table Header */}
         <Box flexDirection="row" padding="s" width={'100%'} backgroundColor={'background'}>
           {columns.map((col) => (

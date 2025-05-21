@@ -35,7 +35,7 @@ export default function DrawerNavigator() {
         },
         drawerLabelStyle: {
           fontFamily: 'Pjs',
-          fontSize: 14,
+          fontSize: isPhone ? 12 : 14,
         }
       })}
       drawerContent={(props) => <DrawerContent {...props} />}

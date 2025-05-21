@@ -1,6 +1,7 @@
 import React from 'react';
 import RNPickerSelect, { Item } from 'react-native-picker-select';
 import { useConfig } from '../config/provider/ConfigProvider';
+import { useIsPhone } from '../hooks/useIsPhone';
 import { BoxForm } from './BoxForm';
 import { BoxValueForm } from './BoxValueForm';
 import { TextLabelForm } from './TextLabelForm';
@@ -24,6 +25,8 @@ type DropdownProps = {
 export const Dropdown = ({ label = 'Pilih..', value, error, onValueChange, items, disabled = false }: DropdownProps) => {
     const config = useConfig();
 
+    const isPhone = useIsPhone();
+
     const pickerBaseStyle = {
         paddingVertical: 10,
         paddingHorizontal: 16,
@@ -31,7 +34,7 @@ export const Dropdown = ({ label = 'Pilih..', value, error, onValueChange, items
         borderRadius: 8,
         fontFamily: 'Pjs',
         backgroundColor: config.theme.colors.formBackground,
-        fontSize: 14,
+        fontSize: isPhone ? 12 : 14,
         color: disabled ? config.theme.colors.formTextHint : config.theme.colors.formTextLabel,
     };
 

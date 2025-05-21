@@ -1,6 +1,7 @@
 import { CircleX } from 'lucide-react';
 import { useCallback, useState } from "react";
 import { useCloudinary } from '../hooks/useCloudinary';
+import { useIsPhone } from '../hooks/useIsPhone';
 import { MediaType, pickMedia } from '../utils/mediaPicker';
 import { BoxForm } from "./BoxForm";
 import { BoxValueForm } from "./BoxValueForm";
@@ -23,6 +24,8 @@ type UploaderProps = {
 
 export const Uploader = (props: UploaderProps) => {
     const { label, sublabel, onChoosenFile, type, error, urls = [] } = props
+
+    const isPhone = useIsPhone();
 
     const isPicture = type === 'images'
 
@@ -70,10 +73,11 @@ export const Uploader = (props: UploaderProps) => {
     }, [listPath, onChoosenFile])
 
     const Picture = () => {
-        return (<Box flexDirection={'row'}>
+        return (<Box flexDirection={{ phone: 'column', desktop: 'row' }} gap={{ phone: 'm', desktop: 'xs'}}>
             {listPath.map((item, index) => (
                 <Box key={index} flexDirection={'row'}>
-                    <MemoizedImage uri={item || ''} width={75} height={75} />
+                    {/* <MemoizedImage uri={item || ''} width={isPhone ? 55 : 75} height={isPhone ? 55 : 75}/> */}
+                    <MemoizedImage uri={item || ''} width={55} height={55}/>
 
                     <PressableHover onPress={() => onDeletePicture(item)}>
                         <CircleX fill='red' size={30} color='white' style={{ marginLeft: -20, marginTop: -10 }} />

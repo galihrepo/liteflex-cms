@@ -28,12 +28,18 @@ export const textVariants = {
       color: 'textButton'
     },
     formLabel: {
-      fontSize: 16,
+      fontSize: {
+        phone: 12,
+        desktop: 16,
+      },
       fontFamily: 'Pjs',
       color: 'formTextLabel'
     },
     formSubLabel: {
-      fontSize: 12,
+      fontSize: {
+        phone: 10,
+        desktop: 12
+      },
       fontFamily: 'Pjs',
       color: 'formTextHint'
     },

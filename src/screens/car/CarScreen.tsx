@@ -56,7 +56,7 @@ export const CarScreen = () => {
                 isForm={false}>
                 <Separator />
 
-                <Box alignSelf={'flex-end'} marginRight={{ phone: 'm', desktop: 'xl' }} marginTop={'m'}>
+                <Box alignSelf={'flex-end'} marginRight={{ phone: 'm', desktop: 'xl' }} marginTop={{ phone: 's', desktop: 'm' }}>
                     <Button
                         variant={"s"}
                         label={"Tambah"}

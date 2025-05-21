@@ -5,6 +5,7 @@ import { LogOut } from 'lucide-react';
 import React from 'react';
 import { auth } from '../config/configFirebase';
 import { useConfig } from '../config/provider/ConfigProvider';
+import { useIsPhone } from '../hooks/useIsPhone';
 import { showAlertChoice } from './Alert';
 
 export function DrawerContent(props: any) {
@@ -12,6 +13,8 @@ export function DrawerContent(props: any) {
   const { theme } = useConfig();
 
   const router = useRouter();
+
+  const isPhone = useIsPhone();
 
   const handleLogout = async () => {
     showAlertChoice('Keluar dari akun?', async () => {
@@ -35,7 +38,7 @@ export function DrawerContent(props: any) {
         )}
         labelStyle={{
           fontFamily: 'PjsMedium',
-          fontSize: 14,
+          fontSize: isPhone ? 12 : 14,
         }}
       />
     </DrawerContentScrollView>
