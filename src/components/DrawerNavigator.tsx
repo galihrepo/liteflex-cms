@@ -1,5 +1,6 @@
 import BookingScreen from '@/app/booking';
 import CarAddScreen from '@/app/car/add';
+import CarEditScreen from '@/app/car/edit/[id]';
 import CarScreen from '@/app/home';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native';
@@ -42,12 +43,12 @@ export default function DrawerNavigator() {
     >
       <Drawer.Screen
         name="home"
-        component={CarScreen}        
-        options={{          
-          drawerLabel: 'KENDARAAN',          
+        component={CarScreen}
+        options={{
+          drawerLabel: 'KENDARAAN',
           drawerIcon: ({ color, size }) => (
             <Car size={size} color={color} />
-          ),          
+          ),
         }} />
 
       <Drawer.Screen
@@ -57,12 +58,21 @@ export default function DrawerNavigator() {
           drawerLabel: 'BOOKING',
           drawerIcon: ({ color, size }) => (
             <BanknoteArrowUp size={size} color={color} />
-          ),          
+          ),
         }} />
 
       <Drawer.Screen
         name="car/add"
-        component={CarAddScreen}        
+        component={CarAddScreen}
+        options={{
+          drawerItemStyle: {
+            display: 'none'
+          }
+        }} />
+      
+      <Drawer.Screen
+        name="car/edit/[id]"
+        component={CarEditScreen}
         options={{
           drawerItemStyle: {
             display: 'none'
