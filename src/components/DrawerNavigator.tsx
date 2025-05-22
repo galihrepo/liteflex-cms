@@ -26,7 +26,7 @@ export default function DrawerNavigator() {
         drawerActiveTintColor: theme.colors.primary,
         drawerInactiveTintColor: theme.colors.textDrawerInactive,
         drawerStyle: {
-          width: 220,
+          width: 200,
           borderTopRightRadius: 0,
           borderBottomRightRadius: 0,
           borderRightColor: theme.colors.border,

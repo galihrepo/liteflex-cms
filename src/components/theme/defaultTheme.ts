@@ -19,5 +19,11 @@ export const baseTheme: BaseThemeType = {
       formTextHint: '#90A3BF',
       formTextError: 'red',
       separator: '#C3D4E966',
+      legendGreen: '#DCFCE7',
+      legendRed: '#FEE2E2',
+      legendGray: '#F1F5F9',
+      legendGreenText: '#16A34A',
+      legendRedText: '#DC2626',
+      legendGrayText: '#475569'
     },
   };

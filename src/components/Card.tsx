@@ -31,7 +31,7 @@ export const Card = ({ loading, title, isForm = true, children, onSave = () => {
         <Box
             alignItems={'baseline'}
             borderRadius={'m'}
-            m={{ phone: 'm', desktop: 'xl' }}
+            m={{ phone: 's', desktop: 'l' }}
             style={{
                 backgroundColor: 'white',
                 shadowColor: theme.colors.shadow,

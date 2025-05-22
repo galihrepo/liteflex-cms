@@ -19,7 +19,8 @@ export function usePagination<T>(fetchFunction: FetchFunction<T>, perPage = 15) 
       setTotal(res.total);
       setPage(pageNum);
     } catch (e) {
-      setError("Failed to fetch data");
+      console.error(e);
+      setError("Sistem bermasalah, coba beberapa saat lagi.");
     } finally {
       setLoading(false);
     }
@@ -41,5 +42,5 @@ export function usePagination<T>(fetchFunction: FetchFunction<T>, perPage = 15) 
     }
   };
 
-  return { data, page, total, perPage, loading, error, nextPage, prevPage };
+  return { loadPage, data, page, total, perPage, loading, error, nextPage, prevPage };
 }

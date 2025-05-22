@@ -17,5 +17,11 @@ export interface BaseThemeType {
       formTextHint?: string;
       formTextError?: string;
       separator?: string;
+      legendGreen?: string;
+      legendRed?: string;
+      legendGray?: string;
+      legendGreenText?: string;
+      legendRedText?: string;
+      legendGrayText?: string;
     };
   }

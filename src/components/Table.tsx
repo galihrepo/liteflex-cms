@@ -1,8 +1,12 @@
-import React from 'react';
+import { SquarePen } from 'lucide-react';
+import React, { useCallback } from 'react';
 import { ActivityIndicator } from 'react-native-paper';
+import { useConfig } from '../config/provider/ConfigProvider';
+import { useIsPhone } from '../hooks/useIsPhone';
 import { PaginationType } from '../types/firestore/PaginationType';
 import { Button } from './Button';
 import { Card } from './Card';
+import { PressableHover } from './PressableHover';
 import { Box, Text } from './theme/componentsTheme';
 
 export type Column<T> = {
@@ -22,6 +26,7 @@ type TableProps<T> = {
   error?: string;
   onNextPage?: () => void;
   onPrevPage?: () => void;
+  onClickDetail?: (row: T) => void;
 };
 
 export function Table<T extends PaginationType>({
@@ -34,8 +39,18 @@ export function Table<T extends PaginationType>({
   error,
   onNextPage,
   onPrevPage,
+  onClickDetail,
 }: TableProps<T>) {
+
+  const isPhone = useIsPhone();
+
+  const { theme } = useConfig();
+
   const totalPages = Math.ceil(total / perPage);
+
+  const onPressDetail = useCallback((item: T) => {
+    onClickDetail?.(item)
+  }, [onClickDetail])
 
   if (loading) {
     return (
@@ -59,7 +74,7 @@ export function Table<T extends PaginationType>({
       {/* <ScrollView horizontal style={{ width: '100%', backgroundColor: "yellow"}}> */}
       <Card title={''} borderWidth={0.1} borderRadius={'s'} borderColor={'separator'} isForm={false} marginTop={{ phone: 's', desktop: 'm' }} marginBottom={'xl'}>
         {/* Table Header */}
-        <Box flexDirection="row" padding="s" width={'100%'} backgroundColor={'background'}>
+        <Box flexDirection="row" paddingVertical="s" width={'100%'} backgroundColor={'background'}>
           {columns.map((col) => (
             <Box flex={col.flex || 1} key={col.key.toString()} padding={'xs'} >
               <Text
@@ -70,6 +85,7 @@ export function Table<T extends PaginationType>({
               </Text>
             </Box>
           ))}
+          {onClickDetail && (<Box flex={0.5} padding={'xs'} />)}
         </Box>
 
         {/* Table Rows */}
@@ -84,11 +100,20 @@ export function Table<T extends PaginationType>({
           >
             {columns.map((col) => (
               <Box flex={col.flex || 1} key={col.key.toString()} justifyContent="center" paddingVertical={'s'} paddingHorizontal={'xs'}>
-                <Text textAlign={'center'} variant={'tableContent'}>
+                <Text
+                  textAlign={'center'}
+                  variant={'tableContent'}>
                   {col.render ? col.render(row[col.key], row) : String(row[col.key])}
-                </Text>
+                </Text>                
               </Box>
             ))}
+            {onClickDetail && (
+              <Box flex={0.5} padding={'none'} justifyContent={'center'} alignItems={'center'}>
+                <PressableHover onPress={() => onPressDetail(row)}>
+                  <SquarePen size={isPhone ? 14 : 18} color={theme.colors.icon} />
+                </PressableHover>
+              </Box>
+            )}
           </Box>
         ))}
 
@@ -104,7 +129,7 @@ export function Table<T extends PaginationType>({
             />
             <Button
               label={'next'}
-              variant={'s'} 
+              variant={'s'}
               disabled={page === totalPages}
               onPress={onNextPage}
             />

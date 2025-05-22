@@ -1,13 +1,16 @@
+import { showAlert } from "@/src/components/Alert";
 import { Button } from "@/src/components/Button";
 import { Card } from "@/src/components/Card";
 import { ScrollViewLayout } from "@/src/components/ScrollviewLayout";
 import { Separator } from "@/src/components/Separator";
 import { Column, Table } from "@/src/components/Table";
-import { Box } from "@/src/components/theme/componentsTheme";
+import { Box, Text } from "@/src/components/theme/componentsTheme";
+import { useConfig } from "@/src/config/provider/ConfigProvider";
 import { useCarsPagination } from "@/src/hooks/useCarsPagination";
 import { useIsPhone } from "@/src/hooks/useIsPhone";
 import { CarsType } from "@/src/types/firestore/CarsType";
 import { formatDateTimeHuman } from "@/src/utils/dateTime";
+import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import { useCallback } from "react";
 
@@ -15,7 +18,10 @@ export const CarScreen = () => {
 
     const router = useRouter();
 
+    const { theme } = useConfig();
+
     const {
+        loadPage,
         data: cars,
         page,
         total,
@@ -26,11 +32,41 @@ export const CarScreen = () => {
         prevPage,
     } = useCarsPagination();
 
+    const colorStatusBackground: Record<string, string> = {
+        Tersedia: theme.colors.legendGreen || '',
+        Terbooking: theme.colors.legendRed || '',
+        Terjual: theme.colors.legendGray || '',
+    };
+
+    const colorStatusText: Record<string, string> = {
+        Tersedia: theme.colors.legendGreenText || '',
+        Terbooking: theme.colors.legendRedText || '',
+        Terjual: theme.colors.legendGrayText || '',
+    };
+
+    const renderStatus = (status: string) => (
+        <Text
+            variant="tableContent"
+            paddingVertical={'s'}
+            paddingHorizontal={{ phone: 's', desktop: 'm' }}
+            style={{
+                color: colorStatusText[status],
+                backgroundColor: colorStatusBackground[status],
+                borderRadius: 9999,
+            }}
+        >
+            {status}
+        </Text>
+    );
+
+    const renderPrice = (value: number) => value.toLocaleString("id-ID");
+
     const columnsPhone: Column<CarsType>[] = [
         { key: "dateTimeCreatedAt", header: "Tanggal", render: formatDateTimeHuman },
         { key: "modelsValue", header: "Model" },
         { key: "plateNumber", header: "Nomor Plat" },
-        { key: "price", header: "Price (Rp)", render: (value: number) => value.toLocaleString("id-ID") },
+        { key: "vehicleStatusValue", header: "Status", render: renderStatus },
+        { key: "price", header: "Price (Rp)", render: renderPrice },
     ];
     const columnsDesktop: Column<CarsType>[] = [
         { key: "dateTimeCreatedAt", header: "Tanggal", render: formatDateTimeHuman },
@@ -38,9 +74,10 @@ export const CarScreen = () => {
         { key: "variantsValue", header: "Tipe" },
         { key: "fuelValue", header: "Bahan Bakar" },
         { key: "transmissionValue", header: "Transmisi" },
-        { key: "year", header: "Year" },
+        { key: "year", header: "Tahun" },
         { key: "plateNumber", header: "Nomor Plat" },
-        { key: "price", header: "Price (Rp)", render: (value: number) => value.toLocaleString("id-ID") },
+        { key: "vehicleStatusValue", header: "Status", render: renderStatus },
+        { key: "price", header: "Price (Rp)", render: renderPrice },
     ];
 
     const columns: Column<CarsType>[] = useIsPhone() ? columnsPhone : columnsDesktop;
@@ -48,6 +85,12 @@ export const CarScreen = () => {
     const redirectAddCar = useCallback(() => {
         router.replace('/car/add')
     }, [router])
+
+    useFocusEffect(
+        useCallback(() => {
+            loadPage(1);
+        }, [loadPage])
+    );
 
     return (
         <ScrollViewLayout>
@@ -73,6 +116,7 @@ export const CarScreen = () => {
                     error={error || undefined}
                     onNextPage={nextPage}
                     onPrevPage={prevPage}
+                    onClickDetail={(item) => { showAlert(item.id) }}
                 />
             </Card>
         </ScrollViewLayout>
