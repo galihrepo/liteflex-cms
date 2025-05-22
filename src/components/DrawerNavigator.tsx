@@ -69,9 +69,17 @@ export default function DrawerNavigator() {
             display: 'none'
           }
         }} />
-      
+
       <Drawer.Screen
         name="car/edit/[id]"
+        component={CarEditScreen}
+        options={{
+          drawerItemStyle: {
+            display: 'none'
+          }
+        }} />
+      <Drawer.Screen
+        name="car/edit"
         component={CarEditScreen}
         options={{
           drawerItemStyle: {

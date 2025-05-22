@@ -1,4 +1,3 @@
-import { showAlert } from "@/src/components/Alert";
 import { Button } from "@/src/components/Button";
 import { Card } from "@/src/components/Card";
 import { ScrollViewLayout } from "@/src/components/ScrollviewLayout";
@@ -116,7 +115,7 @@ export const CarScreen = () => {
                     error={error || undefined}
                     onNextPage={nextPage}
                     onPrevPage={prevPage}
-                    onClickDetail={(item) => { showAlert(item.id) }}
+                    onClickDetail={(item) => { router.replace(`/car/edit/${item.id}`) }}
                 />
             </Card>
         </ScrollViewLayout>
