@@ -1,4 +1,4 @@
-import { CircleX } from 'lucide-react';
+import { CircleX } from 'lucide-react-native';
 import { useCallback, useState } from "react";
 import { useCloudinary } from '../hooks/useCloudinary';
 import { useIsPhone } from '../hooks/useIsPhone';

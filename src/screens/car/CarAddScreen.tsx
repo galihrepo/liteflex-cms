@@ -11,7 +11,7 @@ export const CarAddScreen = () => {
   const handleSave = async (data: CarForm) => {
     const response = await saveCar(data);
     if (response.success) {
-      showAlertChoice(response.message, () => router.push('/home'));
+      showAlertChoice(response.message, () => router.push('/'));
     } else {
       showAlert(response.message);
     }

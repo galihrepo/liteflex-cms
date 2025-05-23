@@ -1,5 +1,5 @@
 import { useConfig } from "@/src/config/provider/ConfigProvider";
-import { Menu } from "lucide-react";
+import { Menu } from "lucide-react-native";
 import React, { memo } from "react";
 import { Pressable } from "react-native";
 import { useAuth } from "../config/provider/AuthProvider";

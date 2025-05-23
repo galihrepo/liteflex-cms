@@ -1,3 +1,5 @@
 import { CarAddScreen } from "@/src/screens/car/CarAddScreen";
 
-export default CarAddScreen
+export default function Add() {
+    return <CarAddScreen/>
+} 

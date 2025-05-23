@@ -1,4 +1,4 @@
-import { SquarePen } from 'lucide-react';
+import { SquarePen } from 'lucide-react-native';
 import React, { useCallback } from 'react';
 import { ActivityIndicator } from 'react-native-paper';
 import { useConfig } from '../config/provider/ConfigProvider';

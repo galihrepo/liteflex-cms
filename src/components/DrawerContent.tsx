@@ -1,7 +1,7 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { useRouter } from 'expo-router';
 import { signOut } from 'firebase/auth';
-import { LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react-native';
 import React from 'react';
 import { auth } from '../config/configFirebase';
 import { useConfig } from '../config/provider/ConfigProvider';

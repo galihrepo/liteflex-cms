@@ -47,7 +47,7 @@ export const CarEditScreen = () => {
   const handleUpdate = async (data: CarForm) => {
     // const response = await updateCar(id, data);
     // if (response.success) {
-    //   showAlertChoice(response.message, () => router.push('/home'));
+    //   showAlertChoice(response.message, () => router.push('/'));
     // } else {
     //   showAlert(response.message);
     // }

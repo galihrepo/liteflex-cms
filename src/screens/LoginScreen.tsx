@@ -18,7 +18,7 @@ export const LoginScreen = () => {
   const router = useRouter();
 
   const onRegistered = useCallback(()=>{
-    router?.push('/home');
+    router?.push('/');
   },[router])
 
   const onUnregistered = useCallback(()=>{

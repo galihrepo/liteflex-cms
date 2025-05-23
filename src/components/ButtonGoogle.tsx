@@ -39,7 +39,7 @@ export function ButtonGoogle({ onPress }: Props) {
                     style={{ width: 24, height: 24, marginRight: 12 }}
                     resizeMode="contain"
                 />
-                <Text variant="button" style={{ color: 'textColor' }}>Masuk dengan Google</Text>
+                <Text variant="button" style={{ color: theme.colors.text }}>Masuk dengan Google</Text>
             </Box>
 
         </PressableHover>

@@ -4,6 +4,7 @@
     "strict": true,
     "types": ["react", "react-native", "@shopify/restyle"],
     "paths": {
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"],
       "@/*": [
         "./*",
         "./src/*",

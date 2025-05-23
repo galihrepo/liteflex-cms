@@ -1,10 +1,10 @@
+import Index from '@/app/';
 import BookingScreen from '@/app/booking';
 import CarAddScreen from '@/app/car/add';
 import CarEditScreen from '@/app/car/edit/[id]';
-import CarScreen from '@/app/home';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native';
-import { BanknoteArrowUp, Car } from 'lucide-react';
+import { BanknoteArrowUp, Car } from 'lucide-react-native';
 import React from 'react';
 import { useConfig } from '../config/provider/ConfigProvider';
 import { useIsPhone } from '../hooks/useIsPhone';
@@ -42,8 +42,8 @@ export default function DrawerNavigator() {
       drawerContent={(props) => <DrawerContent {...props} />}
     >
       <Drawer.Screen
-        name="home"
-        component={CarScreen}
+        name="index"
+        component={Index}
         options={{
           drawerLabel: 'KENDARAAN',
           drawerIcon: ({ color, size }) => (
