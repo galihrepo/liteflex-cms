@@ -6,9 +6,14 @@ import { ConfigProvider } from "@/src/config/provider/ConfigProvider";
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from 'expo-font';
 import { Stack, useRouter, useSegments } from "expo-router";
+
 import { useEffect } from "react";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
+// // Allow returning to the app after browser login
+// import * as WebBrowser from 'expo-web-browser';
+// WebBrowser.maybeCompleteAuthSession();
 
 const config = configLoader();
 const theme = createAppTheme(config.theme);
@@ -29,7 +34,7 @@ function LayoutWithTheme() {
   useEffect(() => {    
     if (!loading) {
       if (!user) {
-        router.push('/login');
+        router.replace('/login');
       } 
     }
   }, [router, user, loading, isLogin]);

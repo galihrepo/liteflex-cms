@@ -3,15 +3,17 @@ import { ButtonGoogle } from "@/src/components/ButtonGoogle";
 import MemoizedImage from "@/src/components/MemoizedImage";
 import { Box, Text } from "@/src/components/theme/componentsTheme";
 import { useConfig } from "@/src/config/provider/ConfigProvider";
-import { handleGoogleLogin } from "@/src/hooks/useGoogleLogin";
 import { saveUser } from "@/src/services/userService";
 import { useRouter } from "expo-router";
-import { signOut, User } from "firebase/auth";
-import { memo, useCallback } from "react";
+import { signOut, UserCredential } from "firebase/auth";
+import { memo, useCallback, useEffect } from "react";
 import { View } from "react-native";
 import { auth } from "../../src/config/configFirebase";
+import { useGoogleLogin } from "../hooks/useGoogleLogin";
 
 export const LoginScreen = () => {
+
+  const { promptAsync, user, error } = useGoogleLogin();
 
   const { config }  = useConfig();
 
@@ -26,7 +28,7 @@ export const LoginScreen = () => {
     showAlert('Email belum terdaftar.')
   },[])
 
-  const onSuccess = useCallback(async (user: User) => {
+  const onSuccess = useCallback(async (user: UserCredential) => {
     await saveUser({user, config, onRegistered, onUnregistered})    
   }, [])
 
@@ -45,6 +47,14 @@ export const LoginScreen = () => {
   const ImageLogo = () => (<MemoizedImage uri={config?.assets?.logoUrl} width={100} height={100} />);
 
   const MemoizedImageLogo = memo(ImageLogo);
+
+  useEffect(() => {
+    if (user) {
+      onSuccess(user)
+    }
+  }, [user])
+
+  useEffect(() => {}, [error])
 
   return (
     <View style={{ flex: 1, justifyContent: 'center'}}>
@@ -66,7 +76,7 @@ export const LoginScreen = () => {
         }}
       >
         <Text textAlign={'center'} variant={'header'}>Masuk ke Akun Anda</Text>
-        <ButtonGoogle onPress={() => handleGoogleLogin({auth, onSuccess, onError})}/>
+        <ButtonGoogle onPress={() => promptAsync()}/>
       </View>
     </View>    
   );

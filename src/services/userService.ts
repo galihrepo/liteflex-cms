@@ -1,11 +1,11 @@
-import { User } from "firebase/auth";
+import { UserCredential } from "firebase/auth";
 import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db } from '../config/configFirebase';
 import { COLLECTIONS } from '../contants/firestore';
 import { BaseConfigType } from "../types/config/BaseConfigType";
 
 interface UserProps {
-  user: User;
+  user: UserCredential;
   config: BaseConfigType;
   onRegistered: () => void;
   onUnregistered: () => void;
@@ -26,7 +26,7 @@ export const saveUser = async (props: UserProps) => {
     const queryEmployee = query(
       collectionEmployee, 
       where('dealersId', '==', dealersId), 
-      where('email', '==', user.email || '')
+      where('email', '==', user.user.email || '')
     );
 
     const snapshot = await getDocs(queryEmployee);
@@ -34,8 +34,8 @@ export const saveUser = async (props: UserProps) => {
       // registered
       const docRef = snapshot.docs[0].ref;
       await updateDoc(docRef, {
-        name: user.displayName || '',
-        pictureUrl: user.photoURL || '',
+        name: user.user.displayName || '',
+        pictureUrl: user.user.photoURL || '',
       })
       onRegistered()
     } else {
